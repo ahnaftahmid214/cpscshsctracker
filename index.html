@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CpscsHsc - Progress Tracker</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --accent: #e11d48;
+            --original-blue: #0052cc;
+            --purple-bar: #6b21a8;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 600px; padding-bottom: 20px; }
+        .logo-container { text-align: center; margin-bottom: 25px; }
+        .main-title { font-size: 26px; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; }
+        .sub-title { font-size: 18px; font-weight: 700; color: var(--accent); margin: 0 0 15px 0; }
+        .card { background: var(--card-bg); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; border: 1px solid #e2e8f0; position: relative; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .stat-box { background: #f1f5f9; padding: 12px 8px; border-radius: 12px; text-align: center; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .stat-box span { display: block; font-size: 20px; font-weight: bold; color: var(--primary); margin-top: 3px; }
+        .stat-box small { display: block; font-size: 11px; color: #64748b; margin-top: 3px; }
+
+        .analysis-title { font-size: 14px; font-weight: 700; color: #475569; margin: 15px 0 5px 0; text-transform: uppercase; border-top: 1px solid #e2e8f0; padding-top: 15px; }
+        .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+        .analysis-box { background: #fff; border: 1px solid #e2e8f0; padding: 10px; border-radius: 10px; text-align: center; font-size: 11px; font-weight: 600; }
+        .analysis-box span { display: block; font-size: 16px; font-weight: bold; color: var(--success); margin-top: 3px; }
+        
+        .tab-buttons { display: flex; gap: 10px; margin-bottom: 25px; width: 100%; }
+        .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
+        .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+        .tab-content { display: none; width: 100%; }
+        .tab-content.active { display: block; }
+        
+        .section-title { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
+        .section-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .section-header { font-size: 20px; font-weight: 700; color: #1e293b; margin: 0 0 12px 0; }
+        .progress-info { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; }
+        .progress-container { background: #e2e8f0; border-radius: 9999px; height: 10px; margin: 10px 0 5px 0; overflow: hidden; }
+        .progress-bar { background: var(--success); height: 100%; width: 0%; transition: width 0.4s ease; }
+        .percentage-text { font-weight: bold; color: var(--success); font-size: 16px; }
+        .click-notice { text-align: right; font-size: 12px; color: var(--primary); font-weight: 600; margin-top: 8px; cursor: pointer; }
+
+        .subject-container { display: none; margin-top: 20px; padding-top: 15px; border-top: 2px dashed #e2e8f0; }
+        .subject-block { margin-bottom: 15px; background: #fff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; }
+        .subject-clickable-header { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .subject-title { font-size: 16px; font-weight: 700; color: var(--original-blue); margin: 0; display: flex; justify-content: space-between; align-items: center; }
+        .subject-title::after { content: ' ▾'; font-size: 14px; color: #64748b; }
+        .subject-block.open-sub .subject-title::after { content: ' ▴'; }
+        
+        .topic-list { display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f1f5f9; padding-left: 5px; }
+        .topic-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; background: #f8fafc; border-radius: 6px; margin-bottom: 6px; border: 1px solid #f1f5f9; }
+        .topic-left { display: flex; align-items: center; color: #000000; font-weight: 500; font-size: 14px; }
+        .topic-left input { margin-right: 10px; width: 16px; height: 16px; cursor: pointer; }
+        .status-badge { font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+        .status-pending { background: #fee2e2; color: #ef4444; }
+        .status-covered { background: #d1fae5; color: #10b981; }
+        
+        .login-box { text-align: center; padding: 30px 20px; }
+        .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box; }
+        .login-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; margin-top: 10px; }
+        .logout-btn { background: #f1f5f9; color: #e11d48; border: 1px solid #fca5a5; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; float: right; margin-top: -5px; }
+        .logout-btn:hover { background: #ffe4e6; }
+        
+        .footer-note { text-align: center; margin: 40px auto 10px auto; padding-top: 20px; border-top: 1px solid #e2e8f0; width: 100%; max-width: 600px; box-sizing: border-box; }
+        .footer-rhyme { font-style: italic; color: #4b5563; font-size: 15px; font-weight: 500; margin: 0 0 12px 0; }
+        .footer-author { font-weight: 700; color: #4f46e5; font-size: 16px; margin: 0 0 5px 0; }
+        .footer-powered { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; font-size: 13px; color: #8e9ca2; text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 0 0; font-weight: 700; opacity: 2.5; }
+        
+        .purple-info-bar { background: var(--purple-bar); padding: 10px 15px; border-radius: 10px; color: white; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; margin-top: 15px; box-shadow: 0 4px 10px rgba(107, 33, 168, 0.2); }
+        .purple-info-bar a { color: #f3e8ff; text-decoration: none; border-bottom: 1px dashed #d8b4fe; transition: 0.2s; }
+        .purple-info-bar a:hover { color: #ffffff; border-bottom-style: solid; }
+        .purple-info-bar span { background: rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 20px; font-size: 11px; }
+
+        .sec-last-updated {
+            font-size: 12px;
+            font-weight: 700;
+            color: #475569;
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
+
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container">
+         <div class="logo-placeholder" style="text-align: center;">
+    <img src="cpscslogo.png" alt="CPSC School Logo" style="width: 130px; height: auto;">
+</div>
+        <h1 class="main-title">HSC Batch - 2028</h1>
+        <div class="sub-title">Science (BV)</div>
+    </div>
+    
+    <div class="card">
+        <div class="stats-grid">
+            <div class="stat-box">🎒 আজ পর্যন্ত পার হয়েছে <span id="days-passed">0 দিন</span><small>(ক্লাস শুরু: ২৪ শে সেপ্টেম্বর, ২০২৬)</small></div>
+            <div class="stat-box">⏳ এইচএসসি পরীক্ষা বাকি <span id="days-remaining">0 দিন</span><small>(সম্ভাব্য পরীক্ষার তারিখ: মে, ২০২৮)</small></div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box" style="background:#f0fdf4; border-color:#bbf7d0;">📝 ক্লাস হয়েছে <span><span id="workdays-passed">0</span> দিন</span><small>(ছুটি ও পরীক্ষা বাদে)</small></div>
+            <div class="stat-box" style="background:#fff1f2; border-color:#fecdd3;">⏳ ক্লাসের জন্য বরাদ্দকৃত কার্যদিবস বাকি আছে <span><span id="workdays-remaining">0</span> দিন</span><small>(মোট কার্যদিবস: ১৯৯ দিন)</small></div>
+        </div>
+        
+        <div class="analysis-title">📊 ব্যাচ সিলেবাস প্রগ্রেস অ্যানালাইসিস (Total: <span id="total-tracked-students">0</span> Students)</div>
+        <div class="analysis-grid">
+            <div class="analysis-box">0-20% শেষ<span><span id="range-1">0</span> জন</span></div>
+            <div class="analysis-box">21-40% শেষ<span><span id="range-2">0</span> জন</span></div>
+            <div class="analysis-box">41-60% শেষ<span><span id="range-3">0</span> জন</span></div>
+            <div class="analysis-box">61-80% শেষ<span><span id="range-4">0</span> জন</span></div>
+            <div class="analysis-box">81-100% শেষ<span><span id="range-5">0</span> জন</span></div>
+        </div>
+    </div>
+
+    <div class="tab-buttons">
+        <button id="btn-sec" class="tab-btn active" onclick="switchTab('section-view')">Section Progress</button>
+        <button id="btn-ind" class="tab-btn" onclick="switchTab('individual-view')">Individual Progress</button>
+    </div>
+    
+    <!-- Section View (With Admin Edit Option) -->
+    <div id="section-view" class="tab-content active">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div class="section-title" style="margin-bottom:0;">Section Wise Progress</div>
+            <button id="admin-login-btn" onclick="openAdminModal()" style="background: #0f172a; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">Admin Edit 🔑</button>
+        </div>
+        
+        <!-- Section Progress Admin Login Box -->
+        <div id="admin-pin-modal" class="card" style="display: none; background: #f8fafc; border: 2px dashed #4f46e5; margin-bottom: 20px; text-align: center;">
+            <h4 style="margin: 0 0 8px 0; color: #4f46e5;">Section Admin Login 🔐</h4>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 10px;">সিক্রেট পিন দিয়ে সেকশন প্রোগ্রেস এডিট মোড চালু করুন। (এটি শুধু section অংশের progress এডিট করার জন্য, যা এডমিন করে থাকবেন। সকল সাধারণ শিক্ষার্থীরা স্বাভাবিকভাবেই সব দেখতে পারবে।)</p>
+            <div style="display: flex; gap: 8px; justify-content: center; max-width: 320px; margin: 0 auto;">
+                <input type="password" id="admin-pin-input" placeholder="Admin PIN" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; width: 120px; text-align: center;">
+                <button onclick="verifyAdminPin()" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">Login</button>
+                <button onclick="closeAdminModal()" style="background: #94a3b8; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">Cancel</button>
+            </div>
+            <div id="admin-pin-error" style="display:none; color: #ef4444; font-size: 12px; margin-top: 8px; font-weight: bold;">❌ পিন ভুল হয়েছে!</div>
+        </div>
+
+        <div id="sections-wrapper"></div>
+    </div>
+    
+    <!-- Individual View -->
+    <div id="individual-view" class="tab-content">
+        <div class="section-title">My Individual Progress</div>
+        <div id="login-form-block" class="card login-box">
+            <h3 style="margin:0 0 10px 0;">স্টুডেন্ট লগইন প্যানেল 🔐</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:15px;">তোমার রোল নম্বর এবং ৫ ডিজিটের একটি নতুন পিন সেট করে প্রোফাইল চালু করো। প্রথমবার প্রোফাইল চালু হওয়ার পর এই পিন দিয়েই পরবর্তীতে লগইন করে তোমার নিজস্ব প্রোগ্রেস প্রোফাইলে প্রবেশ করতে হবে।</p>
+            <input type="number" id="stud-roll" placeholder="তোমার রোল নম্বর ইংরেজিতে (যেমন: 36)" required>
+            
+            <!-- Student PIN with Eye Toggle -->
+            <div style="position: relative; width: 100%; margin: 10px 0;">
+                <input type="password" id="stud-pin" placeholder="৫ ডিজিটের গোপন পিন (ইংরেজিতে)" maxlength="5" required style="width: 100%; padding: 12px; padding-right: 40px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box;">
+                <span id="toggle-pin-btn" onclick="togglePinVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none; font-size: 16px;">👁️</span>
+            </div>
+
+            <button class="login-btn" onclick="registerAndLogin()">প্রোফাইল সেটআপ ও লগইন</button>
+            <div id="pin-error-msg" style="display: none; background: #fee2e2; color: #ef4444; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-top: 15px; border: 1px solid #fca5a5; line-height: 1.5; text-align: left;">
+                ❌ পিনটি ভুল হয়েছে। পিনটি পুনরায় জানতে <a href="mailto:cpscshsctracker@gmail.com" style="color: #b91c1c; text-decoration: underline;">cpscshsctracker@gmail.com</a> এ আপনার রোল উল্লেখ করে একটি ইমেইল করুন অথবা আমাদের টিমের কাউকে অবহিত করুন।
+            </div>
+        </div>
+        <div id="profile-block" style="display:none;">
+            <div class="card" style="background: linear-gradient(135deg, #4f46e5, #3730a3); color: white;">
+                <button class="logout-btn" onclick="logoutStudent()">Log Out ↩</button>
+                <h3 id="welcome-text" style="margin:0 0 5px 0; color:#fff;">রোল: </h3>
+                <p style="margin:0; font-size:14px; opacity:0.9;">তোমার নিজস্ব কাস্টম সিলেবাস ড্যাশবোর্ড</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <span style="font-weight: 600;">তোমার মোট সিলেবাস শেষ হয়েছে:</span>
+                    <span id="user-total-percent" style="font-size: 22px; font-weight: 800; color: #10b981;">0%</span>
+                </div>
+                <div class="progress-container" style="background: rgba(255,255,255,0.2); height: 12px; margin-top: 10px;">
+                    <div id="user-total-bar" class="progress-bar" style="background: #10b981; width: 0%;"></div>
+                </div>
+            </div>
+            <div id="individual-syllabus-wrapper"></div>
+        </div>
+    </div>
+    
+    <div class="footer-note">
+        <p class="footer-rhyme">"এই বিশালাকার সিলেবাসে, HTML ও হার মেনে যায়!"</p>
+        <p class="footer-author">∼ Aian 36</p>
+        <p class="footer-powered">Powered By Ahnaf Tahmid</p>
+        <div class="purple-info-bar">
+            <a href="contributors.html" target="_blank">🔗 Special Thanks to Contributors</a>
+            <span id="visit-count">👁️ Total Visits: Loading...</span>
+        </div>
+        <p style="font-size: 11px; font-weight: bold; color: #0f172a; text-align: center; margin-top: 12px; line-height: 1.5;">
+    For any query : <a href="mailto:cpscshsctracker@gmail.com" style="color: #0f172a; text-decoration: underline;">cpscshsctracker@gmail.com</a> or College Building, Section A (XI), Room no. 135
+</p>
+    </div>
+</div>
+
+<script>
+    const extraCanceledClassDays = 0; 
+
+    // Section Progress Admin PIN
+    const SECTION_ADMIN_PIN = "171817"; 
+    let isAdminLoggedIn = false;
+
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyE1N_jw7UygPCBk8zQM-wXomhT-NyYI0Qs",
+        authDomain: "cpscshsc-tracker.firebaseapp.com",
+        databaseURL: "https://cpscshsc-tracker-default-rtdb.firebaseio.com",
+        projectId: "cpscshsc-tracker",
+        storageBucket: "cpscshsc-tracker.firebasestorage.app",
+        messagingSenderId: "357179472512",
+        appId: "1:357179472512:web:fcbbb11b79bf537b0ef927",
+        measurementId: "G-6DCK0N97KH"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const syllabusStructure = [
+        { id: 'bn1', name: 'বাংলা ১ম পত্র', count: 56, prefix: 'টপিক' },
+        { id: 'bn2', name: 'বাংলা ২য় পত্র', count: 12, prefix: 'টপিক' },
+        { id: 'en1', name: 'ইংরেজি ১ম পত্র', count: 11, prefix: 'টপিক' },
+        { id: 'en2', name: 'ইংরেজি ২য় পত্র', count: 16, prefix: 'টপিক' },
+        { id: 'ph1', name: 'পদার্থবিজ্ঞান ১ম পত্র', count: 10, prefix: 'অধ্যায়' },
+        { id: 'ph2', name: 'পদার্থবিজ্ঞান ২য় পত্র', count: 11, prefix: 'অধ্যায়' },
+        { id: 'ch1', name: 'রসায়ন ১ম পত্র', count: 5, prefix: 'অধ্যায়' },
+        { id: 'ch2', name: 'রসায়ন ২য় পত্র', count: 5, prefix: 'অধ্যায়' },
+        { id: 'm1', name: 'উচ্চতর গণিত ১ম পত্র', count: 10, prefix: 'অধ্যায়' },
+        { id: 'm2', name: 'উচ্চতর গণিত ২য় পত্র', count: 10, prefix: 'অধ্যায়' },
+        { id: 'bio1', name: 'উদ্ভিদবিজ্ঞান', count: 12, prefix: 'অধ্যায়' },
+        { id: 'bio2', name: 'প্রাণীবিজ্ঞান', count: 12, prefix: 'অধ্যায়' },
+        { id: 'ict', name: 'আইসিটি (ICT)', count: 6, prefix: 'অধ্যায়' }
+    ];
+    const sections = ['Section A', 'Section B', 'Section C', 'Section D', 'Section E'];
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if(tabId === 'section-view') document.getElementById('btn-sec').classList.add('active');
+        else document.getElementById('btn-ind').classList.add('active');
+    }
+
+    function togglePinVisibility() {
+        const pinInput = document.getElementById('stud-pin');
+        const toggleBtn = document.getElementById('toggle-pin-btn');
+        if (pinInput.type === 'password') {
+            pinInput.type = 'text';
+            toggleBtn.innerText = '🙈';
+        } else {
+            pinInput.type = 'password';
+            toggleBtn.innerText = '👁️';
+        }
+    }
+
+    function getCurrentFormattedDate() {
+        const today = new Date();
+        const d = String(today.getDate()).padStart(2, '0');
+        const m = String(today.getMonth() + 1).padStart(2, '0');
+        const y = today.getFullYear();
+        return `${d}/${m}/${y}`;
+    }
+
+    function renderApp() {
+        const secWrapper = document.getElementById('sections-wrapper');
+        let secHtml = '';
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            // (Section A-er jonno deep golden color styling):
+const isSectionA = (sec === 'Section A');
+const titleColor = isSectionA ? '#b45309' : '#1e293b'; // Deep Golden/Amber color for Section A
+const specialBadge = isSectionA ? ' <span style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px; border: 1px solid #fde68a; margin-left: 6px;">⭐</span>' : '';
+
+secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #f59e0b; background: #fffbe2;' : ''}">
+    <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
+        <h3 class="section-header" style="color: ${titleColor};">${sec}${specialBadge}</h3>
+                    <div class="progress-info"><span>সিলেবাস শেষ হয়েছে:</span><span id="percent_text_${secId}" class="percentage-text">0%</span></div>
+                    <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
+                    <div class="click-notice">বিস্তারিত দেখতে ক্লিক করুন ▾</div>
+                </div>
+                <div id="content_${secId}" class="subject-container">`;
+            syllabusStructure.forEach((sub) => {
+                const subUniqueId = `${secId}_${sub.id}`;
+                secHtml += `<div id="block_${subUniqueId}" class="subject-block">
+                    <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
+                        <div class="subject-title"><span>${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:var(--success); font-weight:bold;">0%</span></div>
+                        <div class="progress-container" style="margin:5px 0 0 0; height:6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+                    </div>
+                    <div id="topics_${subUniqueId}" class="topic-list">`;
+                for (let i = 1; i <= sub.count; i++) {
+                    const tId = `${subUniqueId}_t${i}`;
+                    secHtml += `<div class="topic-item">
+                        <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${sub.prefix} ${i}</label></div>
+                        <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
+                    </div>`;
+                }
+                secHtml += `</div></div>`;
+            });
+            secHtml += `</div>
+                <div id="updated_date_${secId}" class="sec-last-updated">Updated on: N/A</div>
+            </div>`;
+        });
+        secWrapper.innerHTML = secHtml;
+
+        const indWrapper = document.getElementById('individual-syllabus-wrapper');
+        let indHtml = '';
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `ind_${sub.id}`;
+            indHtml += `<div id="block_${subUniqueId}" class="section-card" style="margin-top:20px;">
+                <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
+                    <div class="subject-title"><span style="color:var(--original-blue);">${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:var(--success); font-weight:bold;">0%</span></div>
+                    <div class="progress-container" style="margin:5px 0 0 0; height:6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+                    <div class="click-notice" style="margin-top:5px;">টপিক দেখতে ক্লিক করুন ▾</div>
+                </div>
+                <div id="topics_${subUniqueId}" class="topic-list">`;
+            for (let i = 1; i <= sub.count; i++) {
+                const tId = `${subUniqueId}_t${i}`;
+                indHtml += `<div class="topic-item">
+                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${sub.prefix} ${i}</label></div>
+                    <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
+                </div>`;
+            }
+            indHtml += `</div></div>`;
+        });
+        indWrapper.innerHTML = indHtml;
+    }
+
+    function toggleDropdown(id) {
+        const el = document.getElementById(id);
+        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleSubjectDropdown(e, id, blockId) {
+        if(e) e.stopPropagation();
+        const el = document.getElementById(id);
+        const block = document.getElementById(blockId);
+        if(el.style.display === 'block') {
+            el.style.display = 'none';
+            block.classList.remove('open-sub');
+        } else {
+            el.style.display = 'block';
+            block.classList.add('open-sub');
+        }
+    }
+
+    function openAdminModal() {
+        if(isAdminLoggedIn) {
+            if(confirm("আপনি কি সেকশন এডমিন মোড থেকে বের হতে চান?")) {
+                isAdminLoggedIn = false;
+                document.getElementById('admin-login-btn').innerText = "Admin Edit 🔑";
+                document.getElementById('admin-login-btn').style.background = "#0f172a";
+                disableSectionCheckboxes();
+            }
+        } else {
+            document.getElementById('admin-pin-modal').style.display = 'block';
+        }
+    }
+
+    function closeAdminModal() {
+        document.getElementById('admin-pin-modal').style.display = 'none';
+        document.getElementById('admin-pin-error').style.display = 'none';
+    }
+
+    function verifyAdminPin() {
+        const inputPin = document.getElementById('admin-pin-input').value.trim();
+        if(inputPin === SECTION_ADMIN_PIN) {
+            isAdminLoggedIn = true;
+            closeAdminModal();
+            document.getElementById('admin-login-btn').innerText = "Admin Mode ON 🔓";
+            document.getElementById('admin-login-btn').style.background = "#10b981";
+            enableSectionCheckboxes();
+            alert("এডমিন লগইন সফল হয়েছে! এখন সেকশনের টপিকগুলো এডিট করতে পারবেন।");
+        } else {
+            document.getElementById('admin-pin-error').style.display = 'block';
+        }
+    }
+
+    function enableSectionCheckboxes() {
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            syllabusStructure.forEach((sub) => {
+                const subUniqueId = `${secId}_${sub.id}`;
+                for (let i = 1; i <= sub.count; i++) {
+                    const cb = document.getElementById(`${subUniqueId}_t${i}`);
+                    if(cb) cb.disabled = false;
+                }
+            });
+        });
+    }
+
+    function disableSectionCheckboxes() {
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            syllabusStructure.forEach((sub) => {
+                const subUniqueId = `${secId}_${sub.id}`;
+                for (let i = 1; i <= sub.count; i++) {
+                    const cb = document.getElementById(`${subUniqueId}_t${i}`);
+                    if(cb) cb.disabled = true;
+                }
+            });
+        });
+    }
+
+    function updateCalculations(secId) {
+        let totalItemsInSection = 0;
+        let totalCheckedInSection = 0;
+        let sectionTopicsMap = {};
+
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `${secId}_${sub.id}`;
+            let subChecked = 0;
+            for (let i = 1; i <= sub.count; i++) {
+                const tId = `${subUniqueId}_t${i}`;
+                const cb = document.getElementById(tId);
+                const badge = document.getElementById(`badge_${tId}`);
+                if (cb && cb.checked) {
+                    subChecked++;
+                    if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
+                    sectionTopicsMap[tId] = true;
+                } else {
+                    if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
+                    sectionTopicsMap[tId] = false;
+                }
+            }
+            const subPercent = Math.round((subChecked / sub.count) * 100);
+            document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
+            document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
+            totalItemsInSection += sub.count;
+            totalCheckedInSection += subChecked;
+        });
+
+        const secPercent = Math.round((totalCheckedInSection / totalItemsInSection) * 100);
+        document.getElementById(`percent_text_${secId}`).innerText = secPercent + '%';
+        document.getElementById(`progress_bar_${secId}`).style.width = secPercent + '%';
+
+        if (isAdminLoggedIn) {
+            const currentDateStr = getCurrentFormattedDate();
+            document.getElementById(`updated_date_${secId}`).innerText = `Updated on: ${currentDateStr}`;
+
+            db.ref('section_progress/' + secId).update({
+                percent: secPercent,
+                topics: sectionTopicsMap,
+                lastUpdated: currentDateStr
+            });
+        }
+    }
+
+    function loadSectionProgressFromDatabase() {
+        db.ref('section_progress').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if(!data) return;
+
+            sections.forEach((sec, sIdx) => {
+                const secId = `sec_${sIdx}`;
+                if(data[secId]) {
+                    if (data[secId].lastUpdated) {
+                        document.getElementById(`updated_date_${secId}`).innerText = `Updated on: ${data[secId].lastUpdated}`;
+                    }
+
+                    if(data[secId].topics) {
+                        syllabusStructure.forEach((sub) => {
+                            const subUniqueId = `${secId}_${sub.id}`;
+                            for (let i = 1; i <= sub.count; i++) {
+                                const tId = `${subUniqueId}_t${i}`;
+                                const cb = document.getElementById(tId);
+                                if(cb && !isAdminLoggedIn) {
+                                    cb.checked = (data[secId].topics[tId] === true);
+                                }
+                            }
+                        });
+                        updateCalculations(secId);
+                    }
+                }
+            });
+        });
+    }
+
+    function resetIndividualUI() {
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `ind_${sub.id}`;
+            const topicsEl = document.getElementById(`topics_${subUniqueId}`);
+            const blockEl = document.getElementById(`block_${subUniqueId}`);
+            if (topicsEl) topicsEl.style.display = 'none';
+            if (blockEl) blockEl.classList.remove('open-sub');
+
+            for (let i = 1; i <= sub.count; i++) {
+                const tId = `${subUniqueId}_t${i}`;
+                const cb = document.getElementById(tId);
+                const badge = document.getElementById(`badge_${tId}`);
+                if (cb) cb.checked = false;
+                if (badge) {
+                    badge.innerText = 'Pending';
+                    badge.className = 'status-badge status-pending';
+                }
+            }
+            document.getElementById(`sub_percent_${subUniqueId}`).innerText = '0%';
+            document.getElementById(`sub_bar_${subUniqueId}`).style.width = '0%';
+        });
+        document.getElementById('user-total-percent').innerText = '0%';
+        document.getElementById('user-total-bar').style.width = '0%';
+    }
+
+    function updateIndividualCalculations() {
+        const activeRoll = localStorage.getItem('active_student_roll');
+        if(!activeRoll) return;
+
+        let totalItems = 0;
+        let totalChecked = 0;
+        let checkedTopicsMap = {};
+
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `ind_${sub.id}`;
+            let subChecked = 0;
+            for (let i = 1; i <= sub.count; i++) {
+                const tId = `${subUniqueId}_t${i}`;
+                const cb = document.getElementById(tId);
+                const badge = document.getElementById(`badge_${tId}`);
+                if (cb && cb.checked) {
+                    subChecked++;
+                    if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
+                    checkedTopicsMap[tId] = true;
+                } else {
+                    if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
+                    checkedTopicsMap[tId] = false;
+                }
+            }
+            const subPercent = Math.round((subChecked / sub.count) * 100);
+            document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
+            document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
+            totalItems += sub.count;
+            totalChecked += subChecked;
+        });
+
+        const totalPercent = Math.round((totalChecked / totalItems) * 100);
+        document.getElementById('user-total-percent').innerText = totalPercent + '%';
+        document.getElementById('user-total-bar').style.width = totalPercent + '%';
+
+        db.ref('students/' + activeRoll).update({
+            percent: totalPercent,
+            topics: checkedTopicsMap,
+            pin: localStorage.getItem(`pin_secure_roll_${activeRoll}`)
+        });
+    }
+
+    function registerAndLogin() {
+        const roll = document.getElementById('stud-roll').value.trim();
+        const pin = document.getElementById('stud-pin').value.trim();
+        if(!roll || pin.length < 5) {
+            alert('অনুগ্রহ করে সঠিক রোল নম্বর এবং ন্যূনতম ৫ ডিজিটের পিন কোড দিন!');
+            return;
+        }
+        
+        db.ref('students/' + roll).once('value').then((snapshot) => {
+            const data = snapshot.val();
+            if (data && data.pin && data.pin !== pin) {
+                document.getElementById('pin-error-msg').style.display = 'block';
+                return;
+            }
+            document.getElementById('pin-error-msg').style.display = 'none';
+                
+            if(!data) {
+                db.ref('students/' + roll).set({
+                    pin: pin,
+                    percent: 0,
+                    topics: {}
+                });
+            }
+
+            localStorage.setItem(`pin_secure_roll_${roll}`, pin);
+            localStorage.setItem('active_student_roll', roll);
+            checkLoginStatus();
+        });
+    }
+
+    function checkLoginStatus() {
+        const activeRoll = localStorage.getItem('active_student_roll');
+        if(activeRoll) {
+            document.getElementById('login-form-block').style.display = 'none';
+            document.getElementById('profile-block').style.display = 'block';
+            document.getElementById('welcome-text').innerText = `রোল নম্বর: ${activeRoll} 👤`;
+            
+            resetIndividualUI();
+
+            db.ref('students/' + activeRoll).once('value').then((snapshot) => {
+                const data = snapshot.val();
+                if(data && data.topics) {
+                    syllabusStructure.forEach((sub) => {
+                        const subUniqueId = `ind_${sub.id}`;
+                        for (let i = 1; i <= sub.count; i++) {
+                            const tId = `${subUniqueId}_t${i}`;
+                            const cb = document.getElementById(tId);
+                            if(cb) cb.checked = (data.topics[tId] === true);
+                        }
+                    });
+                    updateIndividualCalculations();
+                }
+            });
+        } else {
+            document.getElementById('login-form-block').style.display = 'block';
+            document.getElementById('profile-block').style.display = 'none';
+            resetIndividualUI();
+        }
+    }
+
+    function logoutStudent() {
+        localStorage.removeItem('active_student_roll');
+        resetIndividualUI();
+        checkLoginStatus();
+    }
+
+    function updateBatchAnalysisBox() {
+        db.ref('students').on('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            let r1=0, r2=0, r3=0, r4=0, r5=0, count=0;
+            Object.keys(data).forEach(roll => {
+                const p = data[roll].percent || 0;
+                if(p >= 0 && p <= 20) r1++;
+                else if(p >= 21 && p <= 40) r2++;
+                else if(p >= 41 && p <= 60) r3++;
+                else if(p >= 61 && p <= 80) r4++;
+                else if(p >= 81 && p <= 100) r5++;
+                count++;
+            });
+            document.getElementById('total-tracked-students').innerText = count;
+            document.getElementById('range-1').innerText = r1; 
+            document.getElementById('range-2').innerText = r2;
+            document.getElementById('range-3').innerText = r3; 
+            document.getElementById('range-4').innerText = r4;
+            document.getElementById('range-5').innerText = r5;
+        });
+    }
+
+    function isDateInRanges(date, ranges) {
+        return ranges.some(range => date >= range.start && date <= range.end);
+    }
+
+    function isGovtHoliday(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
+        const holidays = [
+            "2026-12-16", "2026-12-25", "2027-02-21", "2027-03-17", "2027-03-26", "2027-04-14", 
+            "2027-05-01", "2027-03-20", "2027-03-21", "2027-03-22", "2027-05-27", "2027-05-28", 
+            "2027-05-29", "2027-07-16", "2027-08-15", "2027-10-09", "2027-12-16", "2027-12-25", "2028-01-01"
+        ];
+        return holidays.includes(dateStr);
+    }
+
+    function calculateDays() {
+        const startDate = new Date(2026, 8, 24);
+        const examDate = new Date(2028, 4, 1);
+        const today = new Date();
+        
+        const daysPassed = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+        const daysRemaining = Math.ceil((examDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+        document.getElementById('days-passed').innerText = (daysPassed > 0 ? daysPassed : 0) + ' দিন';
+        document.getElementById('days-remaining').innerText = (daysRemaining > 0 ? daysRemaining : 0) + ' দিন';
+
+        const lockedExamRanges = [
+            { start: new Date(2026, 11, 1), end: new Date(2026, 11, 15) },
+            { start: new Date(2027, 3, 25), end: new Date(2027, 4, 6) },
+            { start: new Date(2027, 7, 15), end: new Date(2027, 7, 31) },
+            { start: new Date(2028, 0, 2),  end: new Date(2028, 0, 27) }
+        ];
+
+        const totalTargetClassDays = 199;
+        let rawClassDaysPassed = 0;
+        let currentLoopDate = new Date(startDate);
+        while (currentLoopDate <= today) {
+            const dayOfWeek = currentLoopDate.getDay();
+            if (dayOfWeek !== 5 && dayOfWeek !== 6 && !isDateInRanges(currentLoopDate, lockedExamRanges) && !isGovtHoliday(currentLoopDate)) {
+                rawClassDaysPassed++;
+            }
+            currentLoopDate.setDate(currentLoopDate.getDate() + 1);
+        }
+
+        let actualClassDaysPassed = rawClassDaysPassed - extraCanceledClassDays;
+        if (actualClassDaysPassed < 0) actualClassDaysPassed = 0;
+
+        if (today >= new Date(2028, 0, 2)) actualClassDaysPassed = totalTargetClassDays;
+        if (actualClassDaysPassed > totalTargetClassDays) actualClassDaysPassed = totalTargetClassDays;
+        
+        let classDaysRemaining = totalTargetClassDays - actualClassDaysPassed;
+
+        document.getElementById('workdays-passed').innerText = actualClassDaysPassed;
+        document.getElementById('workdays-remaining').innerText = classDaysRemaining < 0 ? 0 : classDaysRemaining;
+    }
+
+    function handleVisitCounter() {
+        db.ref('site_visits').transaction((currentVotes) => {
+            return (currentVotes || 0) + 1;
+        }, (error, committed, snapshot) => {
+            if (committed) {
+                document.getElementById('visit-count').innerText = "👁️ Total Visits: " + snapshot.val();
+            }
+        });
+    }
+
+    window.onload = function() {
+        renderApp();
+        calculateDays();
+        checkLoginStatus();
+        updateBatchAnalysisBox();
+        handleVisitCounter();
+        loadSectionProgressFromDatabase();
+    };
+</script>
+</body>
+</html>
