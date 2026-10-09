@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributors - HSC Batch 2028</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --gold: #05a723;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        .page-subtitle {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+        
+/* Grid Layout - Fixed Card Width & Centered */
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Contributor Card - Fixed Size */
+.contributor-card {
+    background: var(--card-bg);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 24px 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* 📌 Fixed width & height constraints */
+    width: 220px;
+    box-sizing: border-radius;
+}
+        .contributor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Profile Image or Letter Avatar */
+        .avatar-box {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e2e8f0;
+            background: #f97316; /* Orange Background */
+        }
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .initial-letter {
+            font-size: 36px;
+            font-weight: 800;
+            color: #000000; /* Black Color Letter */
+            text-transform: uppercase;
+        }
+
+        /* Name & Designation */
+        .member-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 4px 0;
+        }
+        .member-role {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            background: #e0e7ff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .member-bio {
+            font-size: 12.5px;
+            color: #475569;
+            line-height: 1.5;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* Back Button */
+        .back-btn-container {
+            margin-top: 40px;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #0f172a;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="page-title">The Team Behind CpscsHsc-Tracker</h1>
+    <p class="page-subtitle">আমাদের ডিজিটাল প্ল্যাটফর্মে অবদানকারী সদস্যবৃন্দ</p>
+
+    <div id="team-wrapper" class="team-grid"></div>
+
+    <div class="back-btn-container">
+        <a href="index.html" class="back-btn">⬅ মেইন পেজে ফিরে যাও</a>
+    </div>
+</div>
+
+<script>
+    // 👥 Team Members Configuration
+    // Chobi thakle image-er link diben, na thakle "" khali rakhben (auto First Letter show korbe).
+    const contributorsData = [
+        {
+            name: "Ahnaf Tahmid",
+            role: "Creator & Project Lead Executive",
+            image: "", // Example: "ahnaf.jpg" or direct URL
+            bio: "Planning, System Logic & Development"
+        },
+        {
+            name: "Sajim All Sifat",
+            role: "Project Student Executive",
+            image: "", 
+            bio: "" // currently blank
+        },
+     //   {
+     //       name: "Member Name",
+     //       role: "Student Ambassador",
+     //      image: "", 
+     //       bio: "" // currently blank 
+     //   }
+    ];
+
+    function renderContributors() {
+        const wrapper = document.getElementById('team-wrapper');
+        let html = '';
+
+        contributorsData.forEach(member => {
+            const firstLetter = member.name ? member.name.trim().charAt(0) : '?';
+            
+            html += `<div class="contributor-card">
+                <div class="avatar-box">
+                    ${member.image && member.image.trim() !== '' 
+                        ? `<img src="${member.image}" alt="${member.name}">` 
+                        : `<span class="initial-letter">${firstLetter}</span>`
+                    }
+                </div>
+                <h3 class="member-name">${member.name}</h3>
+                <span class="member-role">${member.role}</span>
+                ${member.bio && member.bio.trim() !== '' 
+                    ? `<div class="member-bio">"${member.bio}"</div>` 
+                    : ''
+                }
+            </div>`;
+        });
+
+        wrapper.innerHTML = html;
+    }
+
+    window.onload = renderContributors;
+</script>
+
+</body>
+</html>
