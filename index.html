@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CpscsHsc - Progress Tracker</title>
+    <title>CpscsHsc - Syllabus Progress Tracker</title>
+    
+    <!-- Open Graph / Link Preview Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HSC Batch 2028 - Master Progress Tracker">
+    <meta property="og:description" content="CPSCS HSC Batch 2028 Science (BV) Syllabus and Section Progress Tracker.">
+    <meta property="og:image" content="https://ahnaftahmid214.github.io/cpscshsctracker/cpscslogo.png">
+    <meta property="og:url" content="https://ahnaftahmid214.github.io/cpscshsctracker/">
+
     <style>
         :root {
             --primary: #4f46e5;
@@ -20,6 +28,24 @@
         .logo-container { text-align: center; margin-bottom: 25px; }
         .main-title { font-size: 26px; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; }
         .sub-title { font-size: 18px; font-weight: 700; color: var(--accent); margin: 0 0 15px 0; }
+        
+        /* Intro Banner Styling */
+        .intro-banner {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .highlight-sec { color: #d97706; font-weight: 800; }
+        .highlight-ind { color: #d97706; font-weight: 800; }
+        .facilities-link { color: #4f46e5; font-weight: 700; text-decoration: underline; transition: 0.2s; }
+        .facilities-link:hover { color: #3730a3; }
+
         .card { background: var(--card-bg); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; border: 1px solid #e2e8f0; position: relative; }
         
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
@@ -39,7 +65,7 @@
         .tab-content.active { display: block; }
         
         .section-title { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
-        .section-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .section-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1.5px solid #000000; }
         .section-header { font-size: 20px; font-weight: 700; color: #1e293b; margin: 0 0 12px 0; }
         .progress-info { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; }
         .progress-container { background: #e2e8f0; border-radius: 9999px; height: 10px; margin: 10px 0 5px 0; overflow: hidden; }
@@ -69,9 +95,9 @@
         .logout-btn:hover { background: #ffe4e6; }
         
         .footer-note { text-align: center; margin: 40px auto 10px auto; padding-top: 20px; border-top: 1px solid #e2e8f0; width: 100%; max-width: 600px; box-sizing: border-box; }
-        .footer-rhyme { font-style: italic; color: #4b5563; font-size: 15px; font-weight: 500; margin: 0 0 12px 0; }
-        .footer-author { font-weight: 700; color: #4f46e5; font-size: 16px; margin: 0 0 5px 0; }
-        .footer-powered { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; font-size: 13px; color: #8e9ca2; text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 0 0; font-weight: 700; opacity: 2.5; }
+        .footer-rhyme { font-style: italic; color: #4b5563; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; }
+        .footer-author { font-weight: 700; color: #4f46e5; font-size: 16px; margin: 0 0 12px 0; }
+        .footer-powered { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 0 0; font-weight: 700; }
         
         .purple-info-bar { background: var(--purple-bar); padding: 10px 15px; border-radius: 10px; color: white; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; margin-top: 15px; box-shadow: 0 4px 10px rgba(107, 33, 168, 0.2); }
         .purple-info-bar a { color: #f3e8ff; text-decoration: none; border-bottom: 1px dashed #d8b4fe; transition: 0.2s; }
@@ -94,13 +120,19 @@
 <body>
 <div class="container">
     <div class="logo-container">
-         <div class="logo-placeholder" style="text-align: center;">
-    <img src="cpscslogo.png" alt="CPSC School Logo" style="width: 130px; height: auto;">
+       <div class="logo-placeholder" style="text-align: center;">
+    <img src="cpscslogo.png" alt="CPSC School Logo" style="width: 120px; height: auto;">
 </div>
+        <h2 style="color: rgb(7, 112, 7);">❝তোমার সিলেবাসের অগ্রগতি ট্র্যাক করো❞</h2>
         <h1 class="main-title">HSC Batch - 2028</h1>
         <div class="sub-title">Science (BV)</div>
     </div>
     
+    <!-- Text Banner with Highlighted Colors & Link -->
+    <div class="intro-banner">
+        এই প্লাটফর্মে, <span class="highlight-sec">Section Progress</span> এ কোন সেকশনে কতটুকু সিলেবাস শেষ হয়েছে তা দেখতে পারবে এবং <span class="highlight-ind">Individual Progress</span> এ ক্লিক করে রোল ও গোপন পিন দিয়ে তোমার নিজস্ব সিলেবাস ট্র্যাকার চালু করে অগ্রগতি বিশ্লেষণ করতে পারবে। (<a href="facilities.html" class="facilities-link">আর যেসব সুবিধা পাবে ➔</a>)
+    </div>
+
     <div class="card">
         <div class="stats-grid">
             <div class="stat-box">🎒 আজ পর্যন্ত পার হয়েছে <span id="days-passed">0 দিন</span><small>(ক্লাস শুরু: ২৪ শে সেপ্টেম্বর, ২০২৬)</small></div>
@@ -112,7 +144,7 @@
             <div class="stat-box" style="background:#fff1f2; border-color:#fecdd3;">⏳ ক্লাসের জন্য বরাদ্দকৃত কার্যদিবস বাকি আছে <span><span id="workdays-remaining">0</span> দিন</span><small>(মোট কার্যদিবস: ১৯৯ দিন)</small></div>
         </div>
         
-        <div class="analysis-title">📊 ব্যাচ সিলেবাস প্রগ্রেস অ্যানালাইসিস (Total: <span id="total-tracked-students">0</span> Students)</div>
+        <div class="analysis-title">📊 ব্যাচ সিলেবাস প্রোগ্রেস অ্যানালাইসিস (Total: <span id="total-tracked-students">0</span> Students)</div>
         <div class="analysis-grid">
             <div class="analysis-box">0-20% শেষ<span><span id="range-1">0</span> জন</span></div>
             <div class="analysis-box">21-40% শেষ<span><span id="range-2">0</span> জন</span></div>
@@ -137,7 +169,7 @@
         <!-- Section Progress Admin Login Box -->
         <div id="admin-pin-modal" class="card" style="display: none; background: #f8fafc; border: 2px dashed #4f46e5; margin-bottom: 20px; text-align: center;">
             <h4 style="margin: 0 0 8px 0; color: #4f46e5;">Section Admin Login 🔐</h4>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 10px;">সিক্রেট পিন দিয়ে সেকশন প্রোগ্রেস এডিট মোড চালু করুন। (এটি শুধু section অংশের progress এডিট করার জন্য, যা এডমিন করে থাকবেন। সকল সাধারণ শিক্ষার্থীরা স্বাভাবিকভাবেই সব দেখতে পারবে।)</p>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 10px;">সিক্রেট পিন দিয়ে সেকশন প্রোগ্রেস এডিট মোড চালু করুন</p>
             <div style="display: flex; gap: 8px; justify-content: center; max-width: 320px; margin: 0 auto;">
                 <input type="password" id="admin-pin-input" placeholder="Admin PIN" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; width: 120px; text-align: center;">
                 <button onclick="verifyAdminPin()" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">Login</button>
@@ -154,19 +186,18 @@
         <div class="section-title">My Individual Progress</div>
         <div id="login-form-block" class="card login-box">
             <h3 style="margin:0 0 10px 0;">স্টুডেন্ট লগইন প্যানেল 🔐</h3>
-            <p style="font-size:13px; color:#64748b; margin-bottom:15px;">তোমার রোল নম্বর এবং ৫ ডিজিটের একটি নতুন পিন সেট করে প্রোফাইল চালু করো। প্রথমবার প্রোফাইল চালু হওয়ার পর এই পিন দিয়েই পরবর্তীতে লগইন করে তোমার নিজস্ব প্রোগ্রেস প্রোফাইলে প্রবেশ করতে হবে।</p>
+            <p style="font-size:13px; color:#64748b; margin-bottom:15px;">তোমার রোল নম্বর এবং ৫ ডিজিটের একটি নতুন পিন সেট করে প্রোফাইল চালু করো। প্রথমবার প্রোফাইল চালু হওয়ার পর এই পিন দিয়েই পরবর্তীতে লগইন করে তোমার নিজস্ব প্রোগ্রেস প্রোফাইলে ঢুকতে হবে।</p>
             <input type="number" id="stud-roll" placeholder="তোমার রোল নম্বর ইংরেজিতে (যেমন: 36)" required>
             
             <!-- Student PIN with Eye Toggle -->
             <div style="position: relative; width: 100%; margin: 10px 0;">
-                <input type="password" id="stud-pin" placeholder="৫ ডিজিটের গোপন পিন (ইংরেজিতে)" maxlength="5" required style="width: 100%; padding: 12px; padding-right: 40px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box;">
-                <span id="toggle-pin-btn" onclick="togglePinVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none; font-size: 16px;">👁️</span>
+                <input type="password" id="stud-pin" placeholder="৫ ডিজিটের গোপন পিন" maxlength="5" required style="width: 100%; padding: 12px; padding-right: 40px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box;">
+                <span id="toggle-pin-btn" onclick="togglePinVisibility()" maxlength="5" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none; font-size: 16px;">👁️</span>
             </div>
-
-            <button class="login-btn" onclick="registerAndLogin()">প্রোফাইল সেটআপ ও লগইন</button>
             <div id="pin-error-msg" style="display: none; background: #fee2e2; color: #ef4444; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-top: 15px; border: 1px solid #fca5a5; line-height: 1.5; text-align: left;">
                 ❌ পিনটি ভুল হয়েছে। পিনটি পুনরায় জানতে <a href="mailto:cpscshsctracker@gmail.com" style="color: #b91c1c; text-decoration: underline;">cpscshsctracker@gmail.com</a> এ আপনার রোল উল্লেখ করে একটি ইমেইল করুন অথবা আমাদের টিমের কাউকে অবহিত করুন।
             </div>
+            <button class="login-btn" onclick="registerAndLogin()">প্রোফাইল সেটআপ ও লগইন</button>
         </div>
         <div id="profile-block" style="display:none;">
             <div class="card" style="background: linear-gradient(135deg, #4f46e5, #3730a3); color: white;">
@@ -186,16 +217,16 @@
     </div>
     
     <div class="footer-note">
-        <p class="footer-rhyme">"এই বিশালাকার সিলেবাসে, HTML ও হার মেনে যায়!"</p>
-        <p class="footer-author">∼ Aian 36</p>
-        <p class="footer-powered">Powered By Ahnaf Tahmid</p>
+        <p class="footer-rhyme">"এই বিশালাকার সিলেবাসে, HTML ও হার মেনে যায়!"</p>
+        <p class="footer-author">~ Aian 36</p>
+        <p class="footer-powered">POWERED BY AHNAF TAHMID</p>
         <div class="purple-info-bar">
-            <a href="contributors.html" target="_blank">🔗 Special Thanks to Contributors</a>
+            <a href="contributors.html" target="_blank">🔗Contributors</a>
             <span id="visit-count">👁️ Total Visits: Loading...</span>
         </div>
         <p style="font-size: 11px; font-weight: bold; color: #0f172a; text-align: center; margin-top: 12px; line-height: 1.5;">
-    For any query : <a href="mailto:cpscshsctracker@gmail.com" style="color: #0f172a; text-decoration: underline;">cpscshsctracker@gmail.com</a> or College Building, Section A (XI), Room no. 135
-</p>
+            For any query : <a href="mailto:cpscshsctracker@gmail.com" style="color: #0f172a; text-decoration: underline;">cpscshsctracker@gmail.com</a> or College Building, Section A (XI), Room no. 135
+        </p>
     </div>
 </div>
 
@@ -203,7 +234,7 @@
     const extraCanceledClassDays = 0; 
 
     // Section Progress Admin PIN
-    const SECTION_ADMIN_PIN = "171817"; 
+    const SECTION_ADMIN_PIN = "7098"; 
     let isAdminLoggedIn = false;
 
     // Firebase Configuration
@@ -222,19 +253,156 @@
     const db = firebase.database();
 
     const syllabusStructure = [
-        { id: 'bn1', name: 'বাংলা ১ম পত্র', count: 56, prefix: 'টপিক' },
-        { id: 'bn2', name: 'বাংলা ২য় পত্র', count: 12, prefix: 'টপিক' },
-        { id: 'en1', name: 'ইংরেজি ১ম পত্র', count: 11, prefix: 'টপিক' },
-        { id: 'en2', name: 'ইংরেজি ২য় পত্র', count: 16, prefix: 'টপিক' },
-        { id: 'ph1', name: 'পদার্থবিজ্ঞান ১ম পত্র', count: 10, prefix: 'অধ্যায়' },
-        { id: 'ph2', name: 'পদার্থবিজ্ঞান ২য় পত্র', count: 11, prefix: 'অধ্যায়' },
-        { id: 'ch1', name: 'রসায়ন ১ম পত্র', count: 5, prefix: 'অধ্যায়' },
-        { id: 'ch2', name: 'রসায়ন ২য় পত্র', count: 5, prefix: 'অধ্যায়' },
-        { id: 'm1', name: 'উচ্চতর গণিত ১ম পত্র', count: 10, prefix: 'অধ্যায়' },
-        { id: 'm2', name: 'উচ্চতর গণিত ২য় পত্র', count: 10, prefix: 'অধ্যায়' },
-        { id: 'bio1', name: 'উদ্ভিদবিজ্ঞান', count: 12, prefix: 'অধ্যায়' },
-        { id: 'bio2', name: 'প্রাণীবিজ্ঞান', count: 12, prefix: 'অধ্যায়' },
-        { id: 'ict', name: 'আইসিটি (ICT)', count: 6, prefix: 'অধ্যায়' }
+        { 
+            id: 'bn1', 
+            name: 'বাংলা ১ম পত্র', 
+            topics: [
+                'গদ্য-১ : অপরিচিতা', 'গদ্য-২ : কারবালা-প্রান্তর', 'গদ্য-৩ : আত্মচরিত', 'গদ্য-৪ : বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', 'গদ্য-৫ : সাহিত্যে খেলা', 'গদ্য-৬ : বিলাসী', 'গদ্য-৭ : অর্ধাঙ্গী', 
+                'গদ্য-৮ : শিক্ষাচিন্তা', 'গদ্য-৯ : আহ্বান', 'গদ্য-১০ : ভুলের মূল্য', 'গদ্য-১১ : যৌবনের গান', 'গদ্য-১২ : তাজমহল', 'গদ্য-১৩ : জীবন ও বৃক্ষ', 'গদ্য-১৪ : মানব-কল্যাণ', 
+                'গদ্য-১৫ : গন্তব্য কাবুল', 'গদ্য-১৬ : মাসি-পিসি', 'গদ্য-১৭ : কলিমদ্দি দফাদার', 'গদ্য-১৮ : সৌদামিনী মালো', 'গদ্য-১৯ : চেতনার অ্যালবাম', 'গদ্য-২০ : একটি তুলসী গাছের কাহিনী', 'গদ্য-২১ : মানুষ', 
+                'গদ্য-২২ : মৌসুম', 'গদ্য-২৩ : গহন কোন বনের ধারে', 'গদ্য-২৪ : কপিলদাস মুর্মুর শেষ কাজ', 'গদ্য-২৫ : জাদুঘরে কেন যাব', 'গদ্য-২৬ : নেকলেস', 'গদ্য-২৭ : জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য, গান ও স্লোগান (সংকলিত)', 'গদ্য-২৮ : রেইনকোট',
+                'কবিতা-১ : স্বদেশ', 'কবিতা-২ : ঋতু বর্ণন', 'কবিতা-৩ : বিভীষণের প্রতি মেঘনাদ', 'কবিতা-৪ : ফুল্লরার বারোমাস্যা', 'কবিতা-৫ : সুখ', 'কবিতা-৬ : মানব-বন্দনা', 'কবিতা-৭ : সোনার তরী', 'কবিতা-৮ : ঐকতান', 'কবিতা-৯ : নবান্ন', 'কবিতা-১০ : বিদ্রোহী', 
+                'কবিতা-১১ : সাম্যবাদী', 'কবিতা-১২ : সুচেতনা', 'কবিতা-১৩ : প্রতিদান', 'কবিতা-১৪ : তাহারেই পড়ে মনে', 'কবিতা-১৫ : আগে কী সুন্দর দিন কাটাইতাম', 'কবিতা-১৬ : সেই অস্ত্র', 'কবিতা-১৭ : পদ্মা', 'কবিতা-১৮ : আলো চাই', 
+                'কবিতা-১৯ : আঠারো বছর বয়স', 'কবিতা-২০ : ফেব্রুয়ারি ১৯৬৯', 'কবিতা-২১ : হাড়', 'কবিতা-২২ : তোমার আপন পতাকা', 
+                'কবিতা-২৩ : আমি কিংবদন্তির কথা বলছি', 'কবিতা-২৪ : নূরলদীনের কথা মনে পড়ে যায়', 'কবিতা-২৫ : ছবি', 'কবিতা-২৬ : প্রত্যাবর্তনের লজ্জা', 'কবিতা-২৭ : ভূমিহীন কৃষিজীবী ইচ্ছে তার', 'কবিতা-২৮ : ব্ল্যাক-আউটের পূর্ণিমায়'
+            ] 
+        },
+        { 
+            id: 'bn2', 
+            name: 'বাংলা ২য় পত্র', 
+            topics: [
+                'ব্যাকরণ-১ : বাংলা উচ্চারণের নিয়ম', 'ব্যাকরণ-২ : বাংলা বানানের নিয়ম', 'ব্যাকরণ-৩ : বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি', 'ব্যাকরণ-৪ : শব্দ গঠন (উপসর্গ, প্রত্যয়, সমাস)', 'ব্যাকরণ-৫ : বাক্যতত্ত্ব', 'ব্যাকরণ-৬ : বাংলা ভাষার অপপ্রয়োগ ও শুদ্ধ প্রয়োগ',
+                'নির্মিতি-১ : পরিভাষা / অনুবাদ', 'নির্মিতি-২ : দিনলিপি লিখন / অভিজ্ঞতা বর্ণনা', 'নির্মিতি-৩ : ভাষণ লিখন / প্রতিবেদন লিখন', 'নির্মিতি-৪ : বৈদ্যুতিন চিঠি ও ক্ষুদে বার্তা লিখন / পত্র, আবেদনপত্র', 'নির্মিতি-৫ : সারাংশ, সারমর্ম ও ভাবসম্প্রসারণ লিখন / ভাব-সম্প্রসারণ', 'নির্মিতি-৬ : সংলাপ লিখন / খুদে গল্প লিখন', 'নির্মিতি-৭ : প্রবন্ধ-নিবন্ধ লিখন'
+            ] 
+        },
+        { 
+            id: 'en1', 
+            name: 'ইংরেজি ১ম পত্র', 
+            topics: ['1. MCQ (seen passage-1)', '2.Short Answer Question (seen passage-1) ', '3. Table/Flowchart (seen passage-2)', '4. Summary Writing (seen passage-3)', '5. Cloze Test with Clues', '6. Cloze Test without Clues', '7. Rearranging', '8. Paragraph Writing', '9. Completing Story', '10. Informal Letter / Email', '11. Analyzing Graph / Chart', '12. Theme Writing / Appreciating Poems'] 
+        },
+        { 
+            id: 'en2', 
+            name: 'ইংরেজি ২য় পত্র', 
+            topics: ['1. Article', '2. Preposition', '3. Words and Phrases', '4. Completing Sentence', '5. Right Form of Verbs', '6. Transformation', '7. Narration', '8. Pronoun Reference', '9. Modifier', '10. Connectors', '11. Synonym/Antonym', '12. Punctuation', '13. Paragraph', '14. Application', '15. Report Writing', '16. Composition'] 
+        },
+        { 
+            id: 'ph1', 
+            name: 'পদার্থবিজ্ঞান ১ম পত্র', 
+            topics: [
+                'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', 
+                'অধ্যায় ২: ভেক্টর', 
+                'অধ্যায় ৩: গতিবিদ্যা', 
+                'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', 
+                'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', 
+                'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', 
+                'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', 
+                'অধ্যায় ৮: পর্যায়বৃত্ত গতি', 
+                'অধ্যায় ৯: তরঙ্গ', 
+                'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব'
+            ] 
+        },
+        { 
+            id: 'ph2', 
+            name: 'পদার্থবিজ্ঞান ২য় পত্র', 
+            topics: [
+                'অধ্যায় ১: তাপগতিবিদ্যা', 
+                'অধ্যায় ২: স্থির তড়িৎ', 
+                'অধ্যায় ৩: চল তড়িৎ', 
+                'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', 
+                'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', 
+                'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', 
+                'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', 
+                'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', 
+                'অধ্যায় ৯: পরমাণুর মডেল', 
+                'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স',
+                'অধ্যায় ১১: জ্যোতির্বিজ্ঞান'
+            ] 
+        },
+        { 
+            id: 'ch1', 
+            name: 'রসায়ন ১ম পত্র', 
+            topics: [
+                'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', 
+                'অধ্যায় ২: গুণগত রসায়ন', 
+                'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', 
+                'অধ্যায় ৪: রাসায়নিক পরিবর্তন', 
+                'অধ্যায় ৫: কর্মমুখী রসায়ন'
+            ] 
+        },
+        { 
+            id: 'ch2', 
+            name: 'রসায়ন ২য় পত্র', 
+            topics: [
+                'অধ্যায় ১: পরিবেশ রসায়ন', 
+                'অধ্যায় ২: জৈব রসায়ন', 
+                'অধ্যায় ৩: পরিমাণগত রসায়ন', 
+                'অধ্যায় ৪: তড়িৎ রসায়ন', 
+                'অধ্যায় ৫: অর্থনৈতিক রসায়ন'
+            ] 
+        },
+        { 
+            id: 'm1', 
+            name: 'উচ্চতর গণিত ১ম পত্র', 
+            topics: [
+                'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', 
+                'অধ্যায় ২: ভেক্টর', 
+                'অধ্যায় ৩: সরলরেখা', 
+                'অধ্যায় ৪: বৃত্ত', 
+                'অধ্যায় ৫: বিন্যাস ও সমাবেশ', 
+                'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', 
+                'অধ্যায় ৭: সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত', 
+                'অধ্যায় ৮: ফাংশন ও ফাংশনের লেখচিত্র', 
+                'অধ্যায় ৯: অন্তরীকরণ', 
+                'অধ্যায় ১০: যোগজীকরণ'
+            ] 
+        },
+        { 
+            id: 'm2', 
+            name: 'উচ্চতর গণিত ২য় পত্র', 
+            topics: [
+                'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', 
+                'অধ্যায় ২: রৈখিক প্রোগ্রাম', 
+                'অধ্যায় ৩: জটিল সংখ্যা', 
+                'অধ্যায় ৪: বহুপদী ও বহুপদী সমীকরণ', 
+                'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', 
+                'অধ্যায় ৬: কনিক', 
+                'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ', 
+                'অধ্যায় ৮: স্থিতিবিদ্যা', 
+                'অধ্যায় ৯: সমতলে বস্তুকণার গতি', 
+                'অধ্যায় ১০: বিস্তার পরিমাপ ও সম্ভাবনা'
+            ] 
+        },
+        { 
+            id: 'bio1', 
+            name: 'উদ্ভিদবিজ্ঞান', 
+            topics: [
+                'অধ্যায় ১: কোষ ও এর গঠন', 'অধ্যায় ২: কোষ বিভাজন', 'অধ্যায় ৩: কোষ রসায়ন', 'অধ্যায় ৪: অনুজীব',
+                'অধ্যায় ৫: শৈবাল ও ছত্রাক', 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী উদ্ভিদ',
+                'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', 'অধ্যায় ৯: শারীরতত্ত্ব', 'অধ্যায় ১০: প্রজনন', 'অধ্যায় ১১: জীবপ্রযুক্তি', 'অধ্যায় ১২: পরিবেশ'
+            ] 
+        },
+        { 
+            id: 'bio2', 
+            name: 'প্রাণীবিজ্ঞান', 
+            topics: [
+                'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', 'অধ্যায় ২: প্রাণীর পরিচিতি', 'অধ্যায় ৩: মানব শারীরতত্ত্ব : পরিপাক ও শোষণ',
+                'অধ্যায় ৪: মানব শারীরতত্ত্ব : রক্ত সংবহন', 'অধ্যায় ৫: মানব শারীরতত্ত্ব : মানব শারীরতত্ত্ব : শ্বসন ও শ্বাসক্রিয়া', 'অধ্যায় ৬: মানব শারীরতত্ত্ব : বর্জ্য ও নিষ্কাশন',
+                'অধ্যায় ৭: মানব শারীরতত্ত্ব : চলন ও অঙ্গ চালনা', 'অধ্যায় ৮: মানব শারীরতত্ত্ব : সমন্বয় ও নিয়ন্ত্রণ', 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা',
+                'অধ্যায় ১০: মানবদেহের প্রতিরক্ষা (ইমিউনিটি)', 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', 'অধ্যায় ১২: প্রাণীর আচরণ'
+            ] 
+        },
+        { 
+            id: 'ict', 
+            name: 'আইসিটি (ICT)', 
+            topics: [
+                'অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', 
+                'অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং', 
+                'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', 
+                'অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি ও HTML', 
+                'অধ্যায় ৫: প্রোগ্রামিং ভাষা', 
+                'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম'
+            ] 
+        }
     ];
     const sections = ['Section A', 'Section B', 'Section C', 'Section D', 'Section E'];
 
@@ -271,19 +439,24 @@
         let secHtml = '';
         sections.forEach((sec, sIdx) => {
             const secId = `sec_${sIdx}`;
-            // (Section A-er jonno deep golden color styling):
-const isSectionA = (sec === 'Section A');
-const titleColor = isSectionA ? '#b45309' : '#1e293b'; // Deep Golden/Amber color for Section A
-const specialBadge = isSectionA ? ' <span style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px; border: 1px solid #fde68a; margin-left: 6px;">⭐</span>' : '';
+            
+            // Section A (Golden Background & Border) vs Section B-E (Black Border, White Background)
+            const isSectionA = (sec === 'Section A');
+            const cardBorderStyle = isSectionA 
+                ? 'border: 2px solid #f59e0b; background: #fffbe2;' 
+                : 'border: 1.5px solid #000000; background: #ffffff;';
+            const titleColor = isSectionA ? '#b45309' : '#1e293b';
+            const specialBadge = isSectionA ? ' <span style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px; border: 1px solid #fde68a; margin-left: 6px;">⭐</span>' : '';
 
-secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #f59e0b; background: #fffbe2;' : ''}">
-    <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
-        <h3 class="section-header" style="color: ${titleColor};">${sec}${specialBadge}</h3>
+            secHtml += `<div class="section-card" style="${cardBorderStyle}">
+                <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
+                    <h3 class="section-header" style="color: ${titleColor};">${sec}${specialBadge}</h3>
                     <div class="progress-info"><span>সিলেবাস শেষ হয়েছে:</span><span id="percent_text_${secId}" class="percentage-text">0%</span></div>
                     <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
-                    <div class="click-notice">বিস্তারিত দেখতে ক্লিক করুন ▾</div>
+                    <div class="click-notice">বিষয়বস্তু দেখতে ক্লিক করুন ▾</div>
                 </div>
                 <div id="content_${secId}" class="subject-container">`;
+            
             syllabusStructure.forEach((sub) => {
                 const subUniqueId = `${secId}_${sub.id}`;
                 secHtml += `<div id="block_${subUniqueId}" class="subject-block">
@@ -292,15 +465,18 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                         <div class="progress-container" style="margin:5px 0 0 0; height:6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
                     </div>
                     <div id="topics_${subUniqueId}" class="topic-list">`;
-                for (let i = 1; i <= sub.count; i++) {
-                    const tId = `${subUniqueId}_t${i}`;
+                
+                sub.topics.forEach((topicName, tIdx) => {
+                    const tId = `${subUniqueId}_t${tIdx + 1}`;
                     secHtml += `<div class="topic-item">
-                        <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${sub.prefix} ${i}</label></div>
+                        <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${topicName}</label></div>
                         <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
                     </div>`;
-                }
+                });
+                
                 secHtml += `</div></div>`;
             });
+            
             secHtml += `</div>
                 <div id="updated_date_${secId}" class="sec-last-updated">Updated on: N/A</div>
             </div>`;
@@ -318,13 +494,15 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                     <div class="click-notice" style="margin-top:5px;">টপিক দেখতে ক্লিক করুন ▾</div>
                 </div>
                 <div id="topics_${subUniqueId}" class="topic-list">`;
-            for (let i = 1; i <= sub.count; i++) {
-                const tId = `${subUniqueId}_t${i}`;
+            
+            sub.topics.forEach((topicName, tIdx) => {
+                const tId = `${subUniqueId}_t${tIdx + 1}`;
                 indHtml += `<div class="topic-item">
-                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${sub.prefix} ${i}</label></div>
+                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${topicName}</label></div>
                     <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
                 </div>`;
-            }
+            });
+            
             indHtml += `</div></div>`;
         });
         indWrapper.innerHTML = indHtml;
@@ -385,10 +563,10 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
             const secId = `sec_${sIdx}`;
             syllabusStructure.forEach((sub) => {
                 const subUniqueId = `${secId}_${sub.id}`;
-                for (let i = 1; i <= sub.count; i++) {
-                    const cb = document.getElementById(`${subUniqueId}_t${i}`);
+                sub.topics.forEach((_, tIdx) => {
+                    const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
                     if(cb) cb.disabled = false;
-                }
+                });
             });
         });
     }
@@ -398,10 +576,10 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
             const secId = `sec_${sIdx}`;
             syllabusStructure.forEach((sub) => {
                 const subUniqueId = `${secId}_${sub.id}`;
-                for (let i = 1; i <= sub.count; i++) {
-                    const cb = document.getElementById(`${subUniqueId}_t${i}`);
+                sub.topics.forEach((_, tIdx) => {
+                    const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
                     if(cb) cb.disabled = true;
-                }
+                });
             });
         });
     }
@@ -414,8 +592,8 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
         syllabusStructure.forEach((sub) => {
             const subUniqueId = `${secId}_${sub.id}`;
             let subChecked = 0;
-            for (let i = 1; i <= sub.count; i++) {
-                const tId = `${subUniqueId}_t${i}`;
+            sub.topics.forEach((_, tIdx) => {
+                const tId = `${subUniqueId}_t${tIdx + 1}`;
                 const cb = document.getElementById(tId);
                 const badge = document.getElementById(`badge_${tId}`);
                 if (cb && cb.checked) {
@@ -426,11 +604,11 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                     if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
                     sectionTopicsMap[tId] = false;
                 }
-            }
-            const subPercent = Math.round((subChecked / sub.count) * 100);
+            });
+            const subPercent = Math.round((subChecked / sub.topics.length) * 100);
             document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
             document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-            totalItemsInSection += sub.count;
+            totalItemsInSection += sub.topics.length;
             totalCheckedInSection += subChecked;
         });
 
@@ -465,13 +643,13 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                     if(data[secId].topics) {
                         syllabusStructure.forEach((sub) => {
                             const subUniqueId = `${secId}_${sub.id}`;
-                            for (let i = 1; i <= sub.count; i++) {
-                                const tId = `${subUniqueId}_t${i}`;
+                            sub.topics.forEach((_, tIdx) => {
+                                const tId = `${subUniqueId}_t${tIdx + 1}`;
                                 const cb = document.getElementById(tId);
                                 if(cb && !isAdminLoggedIn) {
                                     cb.checked = (data[secId].topics[tId] === true);
                                 }
-                            }
+                            });
                         });
                         updateCalculations(secId);
                     }
@@ -488,8 +666,8 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
             if (topicsEl) topicsEl.style.display = 'none';
             if (blockEl) blockEl.classList.remove('open-sub');
 
-            for (let i = 1; i <= sub.count; i++) {
-                const tId = `${subUniqueId}_t${i}`;
+            sub.topics.forEach((_, tIdx) => {
+                const tId = `${subUniqueId}_t${tIdx + 1}`;
                 const cb = document.getElementById(tId);
                 const badge = document.getElementById(`badge_${tId}`);
                 if (cb) cb.checked = false;
@@ -497,7 +675,7 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                     badge.innerText = 'Pending';
                     badge.className = 'status-badge status-pending';
                 }
-            }
+            });
             document.getElementById(`sub_percent_${subUniqueId}`).innerText = '0%';
             document.getElementById(`sub_bar_${subUniqueId}`).style.width = '0%';
         });
@@ -516,8 +694,8 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
         syllabusStructure.forEach((sub) => {
             const subUniqueId = `ind_${sub.id}`;
             let subChecked = 0;
-            for (let i = 1; i <= sub.count; i++) {
-                const tId = `${subUniqueId}_t${i}`;
+            sub.topics.forEach((_, tIdx) => {
+                const tId = `${subUniqueId}_t${tIdx + 1}`;
                 const cb = document.getElementById(tId);
                 const badge = document.getElementById(`badge_${tId}`);
                 if (cb && cb.checked) {
@@ -528,11 +706,11 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                     if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
                     checkedTopicsMap[tId] = false;
                 }
-            }
-            const subPercent = Math.round((subChecked / sub.count) * 100);
+            });
+            const subPercent = Math.round((subChecked / sub.topics.length) * 100);
             document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
             document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-            totalItems += sub.count;
+            totalItems += sub.topics.length;
             totalChecked += subChecked;
         });
 
@@ -556,11 +734,29 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
         }
         
         db.ref('students/' + roll).once('value').then((snapshot) => {
-            const data = snapshot.val();
-            if (data && data.pin && data.pin !== pin) {
-                document.getElementById('pin-error-msg').style.display = 'block';
-                return;
-            }
+    const data = snapshot.val();
+    const pinInput = document.getElementById('stud-pin');
+
+    if (data && data.pin && data.pin !== pin) {
+        // 1. Error Message Show
+        document.getElementById('pin-error-msg').style.display = 'block';
+        
+        // 2. Input Box Red Border & Clear Value
+        pinInput.style.borderColor = '#ef4444';
+        pinInput.value = ''; 
+        
+        // 3. Mobile Double Vibration (0.25s Total)
+        if (navigator.vibrate) {
+            navigator.vibrate([100, 50, 100]); 
+        }
+        return;
+    }
+    
+    // Correct PIN ba New Registration hole Border Normal hoye jabe
+    pinInput.style.borderColor = '#e2e8f0';
+    document.getElementById('pin-error-msg').style.display = 'none';
+    
+    // ... baki registration/login logic code same thakbe
             document.getElementById('pin-error-msg').style.display = 'none';
                 
             if(!data) {
@@ -591,11 +787,11 @@ secHtml += `<div class="section-card" style="${isSectionA ? 'border: 2px solid #
                 if(data && data.topics) {
                     syllabusStructure.forEach((sub) => {
                         const subUniqueId = `ind_${sub.id}`;
-                        for (let i = 1; i <= sub.count; i++) {
-                            const tId = `${subUniqueId}_t${i}`;
+                        sub.topics.forEach((_, tIdx) => {
+                            const tId = `${subUniqueId}_t${tIdx + 1}`;
                             const cb = document.getElementById(tId);
                             if(cb) cb.checked = (data.topics[tId] === true);
-                        }
+                        });
                     });
                     updateIndividualCalculations();
                 }
