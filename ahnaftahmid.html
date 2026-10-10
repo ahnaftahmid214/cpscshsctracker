@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahnaf Tahmid | Professional Portfolio</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --text-color: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --border-color: #1f2937;
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 8%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #3b82f6;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: var(--card-bg);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .mobile-menu a {
+            padding: 0.8rem 8%;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* Global Sections - Compact Padding for Minimal Gap */
+        section {
+            padding: 3.5rem 8% 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* 1. Hero Section & Particle Profile */
+        #home {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5.5rem;
+        }
+
+        /* Profile Container with Particle Glow */
+        .profile-container {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Continuous Particle Ring Effect around Border */
+        .particle-ring {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: calc(100% + 24px);
+            height: calc(100% + 24px);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: emitParticle linear infinite;
+        }
+
+        @keyframes emitParticle {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            padding: 3px;
+            background: var(--gradient-primary);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.25);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Wave Text Animation */
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+            min-height: 4rem;
+        }
+
+        .wave-letter {
+            display: inline-block;
+            animation: waveEffect 0.6s ease-in-out 1 forwards;
+            white-space: pre;
+        }
+
+        .wave-letter.gradient-text {
+            color: #3b82f6;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
+        }
+
+        @keyframes waveEffect {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.4);
+                color: #ec4899;
+                text-shadow: 0 0 10px #ec4899;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 1.4rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            background: rgba(17, 24, 39, 0.8);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            font-size: 1.6rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        /* 2. About & Skills Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .skill-category-title {
+            color: var(--accent-hover);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-badge {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .skill-badge i {
+            font-size: 1rem;
+        }
+
+        /* 3. Projects & Research Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .project-type {
+            font-size: 0.75rem;
+            color: var(--accent-hover);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            letter-spacing: 1px;
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .tech-item {
+            font-size: 0.72rem;
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--accent-hover);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: auto;
+        }
+
+        .project-btn {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s;
+        }
+
+        .btn-demo {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-demo:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-code {
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-code:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* 4. Leadership & Experience */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.4rem;
+            border-radius: 0 14px 14px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+
+        .timeline-card:hover {
+            transform: translateX(5px);
+        }
+
+        .timeline-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-card .role {
+            color: var(--accent-hover);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .timeline-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 5. Contact Section */
+        .contact-container {
+            max-width: 580px;
+            margin: auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        /* Scroll Animation Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive View Queries */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; }
+            section { padding: 2.5rem 5% 1.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+            .hero-content h1 { font-size: 2.3rem; min-height: 3.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .profile-container { width: 150px; height: 150px; }
+            .profile-img { width: 140px; height: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Ahnaf Tahmid.</div>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars" id="menu-icon"></i>
+            </div>
+        </nav>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#projects" onclick="toggleMenu()">Projects</a>
+            <a href="#experience" onclick="toggleMenu()">Experience</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section id="home">
+        <!-- Profile Photo with Continuous Particle Emitter -->
+        <div class="profile-container reveal">
+            <div class="particle-ring" id="particle-ring"></div>
+            <!-- Direct Image Link -->
+            <img src="ahnaf.png" alt="Ahnaf Tahmid" id="profile-img" class="profile-img">
+        </div>
+
+        <div class="hero-content reveal">
+            <!-- Dynamic Wave Text Heading -->
+            <h1 id="wave-heading">Hi, I'm <span class="gradient-text">Ahnaf Tahmid</span></h1>
+            <div class="hero-subtitle">System Architect, UI/UX Designer & Youth Development Enthusiast</div>
+            <p>Driven by scientific research and innovation, empowering youth through community leadership, and exploring the mysteries of astronomy.</p>
+            
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-folder-open"></i> View Work</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+            </div>
+            
+            <!-- Connected Social Icons -->
+            <div class="social-icons">
+                <a href="https://github.com/ahnaftahmid214" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/md.ahnafhossain.tahmid" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:ahnaftahmid214@gmail.com" title="Direct Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About & Skills Section -->
+    <section id="about">
+        <h2 class="section-title reveal">About & Skills</h2>
+        <div class="about-grid reveal">
+            
+            <!-- Left Bio -->
+            <div class="about-text">
+                <p>I am an HSC Science student at <a href="https://cpscs.edu.bd/" target="_blank" style="color: #a855f7; font-weight: 700; text-decoration: underline;">CPSCS</a>, driven by curiosity for technology, programming, and academic research. I enjoy creating practical digital solutions while continuously learning new tools.</p>
+                <p>Beyond academics, I actively participate in youth community service, scouting leadership, and event organization, aiming to make a positive impact through technology and collaboration.</p>            </div>
+
+            <!-- Right Categorized Skills with Icons -->
+            <div class="skills-side">
+                
+                <!-- Category 1 -->
+                <div class="skill-category-title"><i class="fas fa-code"></i> Web & Development</div>
+                <div class="skills-container">
+                    <div class="skill-badge"><i class="fab fa-html5" style="color: #e34f26;"></i> HTML5</div>
+                    <div class="skill-badge"><i class="fab fa-css3-alt" style="color: #1572b6;"></i> CSS3</div>
+                    <div class="skill-badge"><i class="fab fa-js" style="color: #f7df1e;"></i> JavaScript (Learning)</div>
+                    <div class="skill-badge"><i class="fas fa-fire" style="color: #ffca28;"></i> Firebase</div>
+                    <div class="skill-badge"><i class="fab fa-github" style="color: #ffffff;"></i> GitHub</div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="skill-category-title"><i class="fas fa-desktop"></i> Software & Design</div>
+                <div class="skills-container">
+                    <div class="skill-badge"><i class="fas fa-file-word" style="color: #2b579a;"></i> MS Word</div>
+                    <div class="skill-badge"><i class="fas fa-file-powerpoint" style="color: #d24726;"></i> PowerPoint</div>
+                    <div class="skill-badge"><i class="fas fa-palette" style="color: #00c4cc;"></i> Canva</div>
+                    <div class="skill-badge"><i class="fas fa-video" style="color: #00f2fe;"></i> CapCut</div>
+                    <div class="skill-badge"><i class="fas fa-pen-nib" style="color: #ff9a00;"></i> Illustrator</div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="skill-category-title"><i class="fas fa-brain"></i> AI & Smart Tools</div>
+                <div class="skills-container">
+                    <div class="skill-badge"><i class="fas fa-robot" style="color: #10a37f;"></i> ChatGPT</div>
+                    <div class="skill-badge"><i class="fas fa-sparkles" style="color: #8e8ea0;"></i> Gemini AI</div>
+                    <div class="skill-badge"><i class="fas fa-microphone-alt" style="color: #a855f7;"></i> Voiceover & AI Tools</div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="skill-category-title"><i class="fas fa-users-cog"></i> Leadership & Soft Skills</div>
+                <div class="skills-container">
+                    <div class="skill-badge"><i class="fas fa-calendar-check" style="color: #3b82f6;"></i> Event Management</div>
+                    <div class="skill-badge"><i class="fas fa-crown" style="color: #f59e0b;"></i> Team Leadership</div>
+                    <div class="skill-badge"><i class="fas fa-bullhorn" style="color: #ec4899;"></i> Public Moderation</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Projects & Research Section -->
+    <section id="projects">
+        <h2 class="section-title reveal">Projects & Research</h2>
+        <div class="projects-grid reveal">
+            
+            <!-- Web Project -->
+            <div class="project-card">
+                <div>
+                    <div class="project-type">Web Application</div>
+                    <h3>CpscsHsc-Tracker</h3>
+                    <p>A comprehensive web-based progress tracking system designed for student academic management and admin controls.</p>
+                    <div class="project-tech">
+                        <span class="tech-item">HTML5</span>
+                        <span class="tech-item">CSS3</span>
+                        <span class="tech-item">JavaScript</span>
+                        <span class="tech-item">Firebase</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://ahnaftahmid214.github.io/cpscshsctracker/" target="_blank" class="project-btn btn-demo">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/ahnaftahmid214/CpscsHsc-Tracker" target="_blank" class="project-btn btn-code">
+                        <i class="fab fa-github"></i> Code Repo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Research Paper 1 -->
+            <div class="project-card">
+                <div>
+                    <div class="project-type">Research Paper</div>
+                    <h3>National Level Research Paper #1</h3>
+                    <p>Scientific research paper presented at the National Round and appreciated for innovative problem-solving. The research name was "শ্রমের উপর ইপিজেড স্থাপনের প্রতিক্রিয়া অনুসন্ধান"</p>
+                    <div class="project-tech">
+                        <span class="tech-item">Scientific Research</span>
+                        <span class="tech-item">National Finalist</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Research Paper 2 -->
+            <div class="project-card">
+                <div>
+                    <div class="project-type">Research Paper</div>
+                    <h3>National Level Research Paper #2</h3>
+                    <p>Academic research paper selected for National Round showcasing analytical data models and research solutions. The research name was "শিক্ষক হয়ে উঠছেন বর্তমান শিক্ষা সমাজের তারকা?"</p>
+                    <div class="project-tech">
+                        <span class="tech-item">Data Analysis</span>
+                        <span class="tech-item">National Finalist</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. Leadership & Experience Section -->
+    <section id="experience">
+        <h2 class="section-title reveal">Leadership & Experience</h2>
+        <div class="timeline reveal">
+            
+            <div class="timeline-card">
+                <h3>Senior Patrol Leader</h3>
+                <div class="role">Bangladesh Scouts (BS ID: ZB9940)</div>
+                <p>Led the school scout team to achieve 2nd and 3rd place in Upazila-level Scout Parades.</p>
+            </div>
+
+            <div class="timeline-card">
+                <h3>Delegate / Participant</h3>
+                <div class="role">Lions International Youth Camp</div>
+                <p>Participated in a 3-day international youth camp focused on youth leadership, networking, and cross-cultural exchange.</p>
+            </div>
+
+            <div class="timeline-card">
+                <h3>Active Member & Event Manager</h3>
+                <div class="role">Leo Club of Saidpur (International Leo ID: 26896915)</div>
+                <p>Associated with Leoism for 2 years, actively managing and executing various large-scale community events.</p>
+            </div>
+
+            <div class="timeline-card">
+                <h3>Student Executive & Page Moderator</h3>
+                <div class="role">Science Bee (7 Months)</div>
+                <p>Managed social media operations, community moderation, and content curation for one of Bangladesh's largest science platforms.</p>
+            </div>
+
+            <div class="timeline-card">
+                <h3>Best Campus Ambassador (2x Awardee)</h3>
+                <div class="role">Education & Others</div>
+                <p>Awarded 'Best Campus Ambassador' twice for outstanding performance in promoting and managing educational campaigns.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. Contact Section with Connected Formspree Action -->
+    <section id="contact">
+        <h2 class="section-title reveal">Get In Touch</h2>
+        <div class="contact-container reveal">
+            <form action="https://formspree.io/f/xgaoyaqv" method="POST">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer; justify-content: center;">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- JavaScript Actions & Animations -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            
+            menu.classList.toggle('active');
+            if (menu.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+
+        window.addEventListener('scroll', revealSections);
+
+        function revealSections() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 80;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Continuous Glowing Particle Emitter System
+        function createBorderParticles() {
+            const container = document.getElementById('particle-ring');
+            if(!container) return;
+
+            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#60a5fa'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 3 + 2.5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 6px ${color}`;
+
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 85; 
+                
+                const startX = 85 + radius * Math.cos(angle);
+                const startY = 85 + radius * Math.sin(angle);
+
+                particle.style.left = `${startX}px`;
+                particle.style.top = `${startY}px`;
+
+                const distance = Math.random() * 20 + 10;
+                const dx = distance * Math.cos(angle);
+                const dy = distance * Math.sin(angle);
+
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+
+                const duration = Math.random() * 1 + 0.6;
+                particle.style.animationDuration = `${duration}s`;
+
+                container.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+
+            }, 90);
+        }
+
+        // On Page Load Actions
+        window.addEventListener('DOMContentLoaded', () => {
+            // 1. Wave Text Animation
+            const heading = document.getElementById('wave-heading');
+            if (heading) {
+                const fullText = "Hi, I'm Ahnaf Tahmid";
+                heading.innerHTML = ''; 
+
+                Array.from(fullText).forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.classList.add('wave-letter');
+                    span.textContent = char;
+                    span.style.animationDelay = `${index * 0.08}s`;
+
+                    if (index >= 8) {
+                        span.classList.add('gradient-text');
+                    }
+
+                    heading.appendChild(span);
+                });
+            }
+
+            // 2. Start Continuous Particle Emission around Image
+            createBorderParticles();
+
+            revealSections();
+        });
+    </script>
+</body>
+</html>
