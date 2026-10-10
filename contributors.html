@@ -4,206 +4,238 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contributors - HSC Batch 2028</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --bg: #f8fafc;
+            --primary: #2563eb;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text: #0f172a;
-            --gold: #05a723;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --gold: #d97706;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 30px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
+
         .container {
             width: 100%;
             max-width: 800px;
+            margin: 0 auto;
             text-align: center;
         }
-        .page-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 6px;
-        }
-        .page-subtitle {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
-        
-/* Grid Layout - Fixed Card Width & Centered */
-.team-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
 
-/* Contributor Card - Fixed Size */
-.contributor-card {
-    background: var(--card-bg);
-    border: 2px solid var(--gold);
-    border-radius: 16px;
-    padding: 24px 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* 📌 Fixed width & height constraints */
-    width: 220px;
-    box-sizing: border-radius;
-}
+        h1 {
+            font-size: 26px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Team Grid: Centered Layout */
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        /* Contributor Card (Golden Border Design like Section A) */
+        .contributor-card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, #f59e0b, #d97706, #b45309) 1;
+            border-radius: 16px;
+            padding: 24px 16px;
+            box-shadow: 0 6px 15px rgba(217, 119, 6, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            /* Strict Fixed Size constraints (Chepta ba stretch hobe na) */
+            flex: 0 0 220px;
+            width: 220px;
+            box-sizing: border-box;
+        }
+
         .contributor-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.15);
+            box-shadow: 0 10px 22px rgba(217, 119, 6, 0.2);
         }
 
-        /* Profile Image or Letter Avatar */
-        .avatar-box {
-            width: 85px;
-            height: 85px;
-            border-radius: 20px;
+        /* Avatar Styling */
+        .avatar-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 14px;
             overflow: hidden;
-            margin-bottom: 15px;
+            border: 2px solid var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #e2e8f0;
-            background: #f97316; /* Orange Background */
+            background: #fef3c7;
         }
-        .avatar-box img {
+
+        .avatar-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .initial-letter {
-            font-size: 36px;
-            font-weight: 800;
-            color: #000000; /* Black Color Letter */
-            text-transform: uppercase;
+
+        /* Fallback Initial style */
+        .avatar-initial {
+            font-size: 32px;
+            font-weight: 700;
+            color: #b45309;
         }
 
-        /* Name & Designation */
         .member-name {
             font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 0 0 4px 0;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
         }
+
         .member-role {
             font-size: 13px;
-            font-weight: 700;
-            color: var(--primary);
-            background: #e0e7ff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            display: inline-block;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 8px;
         }
+
         .member-bio {
-            font-size: 12.5px;
-            color: #475569;
-            line-height: 1.5;
-            margin-top: 6px;
-            font-style: italic;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        /* Portfolio Button Inside Card */
+        .portfolio-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 14px;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2);
         }
 
         /* Back Button */
-        .back-btn-container {
-            margin-top: 40px;
-        }
         .back-btn {
             display: inline-block;
-            background: #0f172a;
-            color: white;
-            padding: 10px 22px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        .back-btn:hover {
             background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1 class="page-title">The Team Behind CpscsHsc-Tracker</h1>
-    <p class="page-subtitle">আমাদের ডিজিটাল প্ল্যাটফর্মে অবদানকারী সদস্যবৃন্দ</p>
+    <div class="container">
+        <h1>Project Contributors of <span style="color: #020101;">CpscsHsc-Tracker</span></h1>
 
-    <div id="team-wrapper" class="team-grid"></div>
+        <!-- Contributors Grid Container -->
+        <div class="team-grid" id="team-container">
+            <!-- JavaScript will render cards dynamically here -->
+        </div>
 
-    <div class="back-btn-container">
-        <a href="index.html" class="back-btn">⬅ মেইন পেজে ফিরে যাও</a>
+        <a href="index.html" class="back-btn">← হোম পেজে ফিরে যান</a>
     </div>
-</div>
 
-<script>
-    // 👥 Team Members Configuration
-    // Chobi thakle image-er link diben, na thakle "" khali rakhben (auto First Letter show korbe).
-    const contributorsData = [
-        {
-            name: "Ahnaf Tahmid",
-            role: "Creator & Project Lead Executive",
-            image: "", // Example: "ahnaf.jpg" or direct URL
-            bio: "Planning, System Logic & Development"
-        },
-        {
-            name: "Sajim All Sifat",
-            role: "Project Student Executive",
-            image: "", 
-            bio: "" // currently blank
-        },
-     //   {
-     //       name: "Member Name",
-     //       role: "Student Ambassador",
-     //      image: "", 
-     //       bio: "" // currently blank 
-     //   }
-    ];
+    <script>
+        // Contributors Data
+        const contributorsData = [
+            {
+                name: "Ahnaf Tahmid",
+                role: "Creator & Lead Executive Developer",
+                image: "ahnaf.png",
+                bio: "System Architecture, UI/UX Design & Logic Implementation",
+                portfolio: "ahnaftahmid.html" 
+            },
+            {
+                name: "Sazim All Sifat",
+                role: "Co-Initiator & Development Collaborator",
+                image: "",
+                bio: "Data Management & Institutional Support",
+                portfolio: "https://sns121blueberry.netlify.app"
+            }
+        ];
 
-    function renderContributors() {
-        const wrapper = document.getElementById('team-wrapper');
-        let html = '';
+        function renderContributors() {
+            const container = document.getElementById('team-container');
+            container.innerHTML = '';
 
-        contributorsData.forEach(member => {
-            const firstLetter = member.name ? member.name.trim().charAt(0) : '?';
-            
-            html += `<div class="contributor-card">
-                <div class="avatar-box">
-                    ${member.image && member.image.trim() !== '' 
-                        ? `<img src="${member.image}" alt="${member.name}">` 
-                        : `<span class="initial-letter">${firstLetter}</span>`
-                    }
-                </div>
-                <h3 class="member-name">${member.name}</h3>
-                <span class="member-role">${member.role}</span>
-                ${member.bio && member.bio.trim() !== '' 
-                    ? `<div class="member-bio">"${member.bio}"</div>` 
-                    : ''
+            contributorsData.forEach(member => {
+                const initial = member.name ? member.name.charAt(0).toUpperCase() : 'M';
+                
+                let avatarHTML = '';
+                if (member.image && member.image.trim() !== "") {
+                    avatarHTML = `<img src="${member.image}" alt="${member.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\'avatar-initial\'>${initial}</span>';">`;
+                } else {
+                    avatarHTML = `<span class="avatar-initial">${initial}</span>`;
                 }
-            </div>`;
-        });
 
-        wrapper.innerHTML = html;
-    }
+                // Portfolio link thakle button toiri hobe
+                let portfolioHTML = '';
+                if (member.portfolio && member.portfolio.trim() !== "") {
+                    portfolioHTML = `<a href="${member.portfolio}" target="_blank" class="portfolio-btn">See Portfolio</a>`;
+                }
 
-    window.onload = renderContributors;
-</script>
+                const card = document.createElement('div');
+                card.className = 'contributor-card';
+                card.innerHTML = `
+                    <div class="avatar-container">
+                        ${avatarHTML}
+                    </div>
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-role">${member.role}</div>
+                    <div class="member-bio">${member.bio}</div>
+                    ${portfolioHTML}
+                `;
+                container.appendChild(card);
+            });
+        }
 
+        window.onload = renderContributors;
+    </script>
 </body>
 </html>
