@@ -1,998 +1,1527 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CpscsHsc - Syllabus Progress Tracker</title>
-    
-    <!-- Open Graph / Link Preview Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="HSC Batch 2028 - Master Progress Tracker">
-    <meta property="og:description" content="CPSCS HSC Batch 2028 Science (BV) Syllabus and Section Progress Tracker.">
-    <meta property="og:image" content="https://ahnaftahmid214.github.io/cpscshsctracker/cpscslogo.png">
-    <meta property="og:url" content="https://ahnaftahmid214.github.io/cpscshsctracker/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CpscsHscTracker</title>
+<!-- Open Graph / Link Preview Meta Tags -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="HSC Batch 2028 - Syllabus Progress Tracker">
+<meta property="og:description" content="CPSCS HSC Batch 2028 Science (BV) Syllabus and Section Progress Tracker.">
+<meta property="og:image" content="https://ahnaftahmid214.github.io/cpscshsctracker/cpscslogo.png">
+<meta property="og:url" content="https://ahnaftahmid214.github.io/cpscshsctracker/">
 
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --success: #10b981;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --accent: #e11d48;
-            --original-blue: #0052cc;
-            --purple-bar: #6b21a8;
-        }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 600px; padding-bottom: 20px; }
-        .logo-container { text-align: center; margin-bottom: 25px; }
-        /* Logo Particle Wrapper */
+<style>
+/* CSS Variable System for Themes */
+:root[data-theme="light"] {
+    --bg-gradient: linear-gradient(180deg, #eef2ff 0%, #e0e7ff 50%, #f1f5f9 100%);
+    --card-bg: #ffffff;
+    --card-border: #000000;
+    --card-shadow: 0 10px 25px rgba(99, 102, 241, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --primary-btn: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    --primary-color: #4f46e5;
+    --pill-bg: #e0e7ff;
+    --pill-text: #3730a3;
+    --input-bg: #f8fafc;
+    --input-border: #94a3b8;
+    --sub-card-bg: #f8fafc;
+    --sub-card-border: #cbd5e1;
+    --analysis-border: #475569;
+    --footer-rhyme-color: #334155;
+    --footer-author-color: #4338ca;
+    --footer-powered-color: #1e293b;
+    --footer-query-color: #0f172a;
+}
+
+:root[data-theme="dark"] {
+    --bg-gradient: radial-gradient(circle at 50% 0%, #2c1052 0%, #16062f 45%, #080212 100%);
+    --card-bg: rgba(45, 20, 75, 0.55);
+    --card-border: #ffffff;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --primary-btn: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --primary-color: #a855f7;
+    --pill-bg: rgba(124, 58, 237, 0.25);
+    --pill-text: #e9d5ff;
+    --input-bg: rgba(20, 8, 35, 0.7);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --sub-card-bg: rgba(20, 8, 35, 0.5);
+    --sub-card-border: rgba(255, 255, 255, 0.1);
+    --analysis-border: rgba(255, 255, 255, 0.25);
+    --footer-rhyme-color: #e2e8f0;
+    --footer-author-color: #c084fc;
+    --footer-powered-color: #f1f5f9;
+    --footer-query-color: #f8fafc;
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main); 
+    margin: 0; 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container { width: 100%; max-width: 550px; padding-bottom: 30px; }
+
+/* Top Header Pill Row */
+.top-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.live-tracker-pill {
+    background: var(--pill-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--pill-text);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Refined Slow Blinking Green Live Dot */
+.green-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #059669;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 4px #10b981;
+    animation: pulse-dot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.2;
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+        box-shadow: 0 0 6px 2px rgba(16, 185, 129, 0.7);
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.2;
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+    }
+}
+
+.theme-toggle-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--text-main);
+    padding: 6px 14px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: var(--card-shadow);
+    transition: 0.2s ease;
+}
+
+.logo-container { text-align: center; margin-bottom: 25px; }
+
+/* Logo Canvas & Image Wrapper */
 .logo-particle-wrapper {
     position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 12px auto;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 15px auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .logo-particle-wrapper img {
     position: relative;
     z-index: 2;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: contain;
 }
-
 #logo-canvas {
     position: absolute;
     top: 0;
     left: 0;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     z-index: 1;
     pointer-events: none;
+    background: transparent;
 }
-        .main-title { font-size: 26px; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; }
-        .sub-title { font-size: 18px; font-weight: 700; color: var(--accent); margin: 0 0 15px 0; }
-        
-        /* Intro Banner Styling */
-        .intro-banner {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            padding: 14px 16px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            color: #334155;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .highlight-sec { color: #d97706; font-weight: 800; }
-        .highlight-ind { color: #d97706; font-weight: 800; }
-        .facilities-link { color: #4f46e5; font-weight: 700; text-decoration: underline; transition: 0.2s; }
-        .facilities-link:hover { color: #3730a3; }
 
-        .card { background: var(--card-bg); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; border: 1px solid #e2e8f0; position: relative; }
-        
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-        .stat-box { background: #f1f5f9; padding: 12px 8px; border-radius: 12px; text-align: center; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .stat-box span { display: block; font-size: 20px; font-weight: bold; color: var(--primary); margin-top: 3px; }
-        .stat-box small { display: block; font-size: 11px; color: #64748b; margin-top: 3px; }
+.glow-title {
+    font-size: 21px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #2563eb 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 10px 0 12px 0;
+    text-align: center;
+}
+:root[data-theme="dark"] .glow-title {
+    background: linear-gradient(90deg, #38bdf8 0%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .analysis-title { font-size: 14px; font-weight: 700; color: #475569; margin: 15px 0 5px 0; text-transform: uppercase; border-top: 1px solid #e2e8f0; padding-top: 15px; }
-        .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
-        .analysis-box { background: #fff; border: 1px solid #e2e8f0; padding: 10px; border-radius: 10px; text-align: center; font-size: 11px; font-weight: 600; }
-        .analysis-box span { display: block; font-size: 16px; font-weight: bold; color: var(--success); margin-top: 3px; }
-        
-        .tab-buttons { display: flex; gap: 10px; margin-bottom: 25px; width: 100%; }
-        .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
-        .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
-        .tab-content { display: none; width: 100%; }
-        .tab-content.active { display: block; }
-        
-        .section-title { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
-        .section-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1.5px solid #000000; }
-        .section-header { font-size: 20px; font-weight: 700; color: #1e293b; margin: 0 0 12px 0; }
-        .progress-info { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; }
-        .progress-container { background: #e2e8f0; border-radius: 9999px; height: 10px; margin: 10px 0 5px 0; overflow: hidden; }
-        .progress-bar { background: var(--success); height: 100%; width: 0%; transition: width 0.4s ease; }
-        .percentage-text { font-weight: bold; color: var(--success); font-size: 16px; }
-        .click-notice { text-align: right; font-size: 12px; color: var(--primary); font-weight: 600; margin-top: 8px; cursor: pointer; }
+.main-title-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.main-title { 
+    font-size: 22px; 
+    font-weight: 800; 
+    color: var(--text-main); 
+}
+.sub-title-pill { 
+    background: var(--pill-bg); 
+    border: 1px solid var(--sub-card-border); 
+    color: var(--pill-text); 
+    padding: 4px 12px; 
+    border-radius: 999px; 
+    font-size: 13px; 
+    font-weight: 700; 
+}
 
-        .subject-container { display: none; margin-top: 20px; padding-top: 15px; border-top: 2px dashed #e2e8f0; }
-        .subject-block { margin-bottom: 15px; background: #fff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; }
-        .subject-clickable-header { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-        .subject-title { font-size: 16px; font-weight: 700; color: var(--original-blue); margin: 0; display: flex; justify-content: space-between; align-items: center; }
-        .subject-title::after { content: ' ▾'; font-size: 14px; color: #64748b; }
-        .subject-block.open-sub .subject-title::after { content: ' ▴'; }
-        
-        .topic-list { display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f1f5f9; padding-left: 5px; }
-        .topic-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; background: #f8fafc; border-radius: 6px; margin-bottom: 6px; border: 1px solid #f1f5f9; }
-        .topic-left { display: flex; align-items: center; color: #000000; font-weight: 500; font-size: 14px; }
-        .topic-left input { margin-right: 10px; width: 16px; height: 16px; cursor: pointer; }
-        .status-badge { font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
-        .status-pending { background: #fee2e2; color: #ef4444; }
-        .status-covered { background: #d1fae5; color: #10b981; }
-        
-        .login-box { text-align: center; padding: 30px 20px; }
-        .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box; }
-        .login-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; margin-top: 10px; }
-        .logout-btn { background: #f1f5f9; color: #e11d48; border: 1px solid #fca5a5; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; float: right; margin-top: -5px; }
-        .logout-btn:hover { background: #ffe4e6; }
-        
-        .footer-note { text-align: center; margin: 40px auto 10px auto; padding-top: 20px; border-top: 1px solid #e2e8f0; width: 100%; max-width: 600px; box-sizing: border-box; }
-        .footer-rhyme { font-style: italic; color: #4b5563; font-size: 16px; font-weight: 600; margin: 0 0 8px 0; }
-        .footer-author { font-weight: 700; color: #4f46e5; font-size: 16px; margin: 0 0 12px 0; }
-        .footer-powered { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 0 0; font-weight: 700; }
-        
-        .purple-info-bar { background: var(--purple-bar); padding: 10px 15px; border-radius: 10px; color: white; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; margin-top: 15px; box-shadow: 0 4px 10px rgba(107, 33, 168, 0.2); }
-        .purple-info-bar a { color: #f3e8ff; text-decoration: none; border-bottom: 1px dashed #d8b4fe; transition: 0.2s; }
-        .purple-info-bar a:hover { color: #ffffff; border-bottom-style: solid; }
-        .purple-info-bar span { background: rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 20px; font-size: 11px; }
+/* Intro Banner Styling */
+.intro-banner {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    padding: 16px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+}
+.highlight-sec { color: #d97706; font-weight: 800; }
+.highlight-ind { color: #db2777; font-weight: 800; }
+:root[data-theme="dark"] .highlight-sec { color: #f472b6; }
+:root[data-theme="dark"] .highlight-ind { color: #f472b6; }
 
-        .sec-last-updated {
-            font-size: 12px;
-            font-weight: 700;
-            color: #475569;
-            margin-top: 10px;
-            text-align: left;
-        }
-    </style>
+.facilities-link { color: var(--primary-color); font-weight: 700; text-decoration: none; }
+.facilities-link:hover { text-decoration: underline; }
 
-    <!-- Firebase SDK Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+/* Grid Cards */
+.card-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sunset-card {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    border-radius: 20px;
+    padding: 16px;
+    position: relative;
+    box-shadow: var(--card-shadow);
+}
+
+.card-icon-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--pill-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.card-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.card-value {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+.value-pink { color: #db2777; }
+.value-yellow { color: #d97706; }
+.value-green { color: #059669; }
+.value-cyan { color: #2563eb; }
+
+:root[data-theme="dark"] .value-pink { color: #f472b6; }
+:root[data-theme="dark"] .value-yellow { color: #fbbf24; }
+:root[data-theme="dark"] .value-green { color: #34d399; }
+:root[data-theme="dark"] .value-cyan { color: #38bdf8; }
+
+.card-unit {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.card-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+/* Analysis Card */
+.analysis-container-card {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: var(--card-shadow);
+}
+.analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+.total-students-pill {
+    background: var(--pill-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--pill-text);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    display: inline-block;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+.analysis-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.analysis-ring-box {
+    background: var(--sub-card-bg);
+    border: 1px solid var(--analysis-border);
+    border-radius: 16px;
+    padding: 14px;
+    text-align: center;
+}
+.ring-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.ring-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-main);
+    border: 4px solid var(--analysis-border);
+}
+.ring-green { border-color: #10b981; }
+.ring-blue { border-color: #3b82f6; }
+.ring-yellow { border-color: #f59e0b; }
+.ring-cyan { border-color: #06b6d4; }
+.ring-purple { border-color: #8b5cf6; }
+
+.ring-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Tab Navigation Buttons */
+.tab-buttons { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    background: var(--card-bg);
+    padding: 6px;
+    border-radius: 20px;
+    border: 1px solid var(--sub-card-border);
+    margin-bottom: 20px; 
+    box-shadow: var(--card-shadow);
+}
+.tab-btn { 
+    padding: 14px; 
+    border: none; 
+    background: transparent; 
+    color: var(--text-muted); 
+    border-radius: 14px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    font-size: 14px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.tab-btn.active { 
+    background: var(--primary-btn); 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); 
+}
+
+.tab-content { display: none; width: 100%; }
+.tab-content.active { display: block; }
+
+.admin-edit-pill-btn {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--text-main);
+    padding: 14px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.search-input-box {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    color: var(--text-main);
+    font-size: 13px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+/* Section Cards Style */
+.section-card { 
+    background: var(--card-bg); 
+    padding: 20px; 
+    border-radius: 20px; 
+    box-shadow: var(--card-shadow); 
+    margin-bottom: 20px; 
+    border: 2px solid var(--card-border);
+    position: relative; 
+}
+
+/* Section A Special Golden Theme Styling */
+:root[data-theme="light"] .section-card-special {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+    border: 2.5px solid #d97706 !important;
+    box-shadow: 0 10px 25px rgba(217, 119, 6, 0.25) !important;
+}
+:root[data-theme="light"] .section-card-special .sec-title-group h3,
+:root[data-theme="light"] .section-card-special .percentage-text,
+:root[data-theme="light"] .section-card-special .progress-info span {
+    color: #78350f !important;
+}
+:root[data-theme="light"] .section-card-special .sec-updated {
+    color: #92400e !important;
+    font-weight: 700;
+}
+:root[data-theme="light"] .section-card-special .sec-avatar {
+    background: #f59e0b !important;
+    color: #ffffff !important;
+    border: 1px solid #b45309 !important;
+}
+
+:root[data-theme="dark"] .section-card-special {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.18) 0%, rgba(217, 119, 6, 0.1) 100%) !important;
+    border: 2px solid #d97706 !important;
+    box-shadow: 0 0 20px rgba(217, 119, 6, 0.25) !important;
+}
+
+.sec-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.sec-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--primary-color);
+    font-size: 16px;
+    border: 1px solid var(--sub-card-border);
+}
+.sec-title-group h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.sec-updated {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.progress-info { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+.progress-container { background: var(--sub-card-border); border-radius: 999px; height: 8px; margin: 8px 0; overflow: hidden; }
+.progress-bar { background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%); height: 100%; width: 0%; transition: width 0.4s ease; }
+.percentage-text { font-weight: 800; color: #10b981; font-size: 16px; }
+
+.click-notice-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--primary-color);
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.subject-container { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sub-card-border); }
+.subject-block { margin-bottom: 12px; background: var(--sub-card-bg); border: 1px solid var(--sub-card-border); padding: 12px; border-radius: 14px; }
+.subject-clickable-header { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+.subject-title { font-size: 15px; font-weight: 700; color: var(--primary-color); margin: 0; display: flex; justify-content: space-between; align-items: center; }
+
+.topic-list { display: none; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sub-card-border); }
+.topic-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--card-bg); border-radius: 10px; margin-bottom: 6px; border: 1px solid var(--sub-card-border); }
+.topic-left { display: flex; align-items: center; color: var(--text-main); font-weight: 500; font-size: 13.5px; }
+.topic-left input { margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary-color); }
+
+.status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 8px; }
+.status-pending { background: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); }
+.status-covered { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+/* Login Box (Student Profile Panel) */
+.login-box { text-align: left; padding: 25px 20px; }
+.login-box-header { text-align: center; margin-bottom: 20px; }
+.login-box-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--pill-bg);
+    border: 1px solid var(--sub-card-border);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 12px auto;
+}
+
+.input-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 12px 0 6px 0;
+}
+
+.login-box input { 
+    width: 100%; 
+    padding: 12px; 
+    background: var(--input-bg); 
+    border: 1px solid var(--input-border); 
+    color: var(--text-main); 
+    border-radius: 12px; 
+    font-size: 14px; 
+    box-sizing: border-box; 
+    outline: none;
+}
+
+.login-btn { 
+    width: 100%; 
+    padding: 14px; 
+    background: var(--primary-btn); 
+    color: white; 
+    border: none; 
+    border-radius: 12px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    font-size: 15px; 
+    margin-top: 18px; 
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); 
+}
+
+.logout-btn { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; float: right; }
+
+/* Footer Styling */
+.footer-note { text-align: center; margin: 30px auto 10px auto; padding-top: 20px; border-top: 1px solid var(--sub-card-border); width: 100%; }
+.footer-rhyme { font-style: italic; color: var(--footer-rhyme-color); font-size: 16px; font-weight: 700; margin: 0 0 6px 0; }
+.footer-author { font-weight: 800; color: var(--footer-author-color); font-size: 16px; margin: 0 0 12px 0; }
+.footer-powered { font-size: 13px; color: var(--footer-powered-color); text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 15px 0; font-weight: 900; }
+
+.footer-btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.footer-pill-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+/* Contributors Button Hover & Active Animation */
+.animated-contributors-btn:hover, .animated-contributors-btn:active {
+    transform: translateY(-3px) scale(1.03);
+    background: var(--primary-btn) !important;
+    color: #ffffff !important;
+    border-color: #a855f7 !important;
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4) !important;
+}
+
+</style>
+
+<!-- Firebase SDK Scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="logo-container">
-    <!-- Particle Wrapper around Logo -->
+
+<!-- Top Header Row -->
+<div class="top-header-row">
+    <div class="live-tracker-pill">
+        <span class="green-dot"></span> Live Tracker
+    </div>
+    <button class="theme-toggle-btn" onclick="toggleTheme()">
+        🎨 Dark/Light
+    </button>
+</div>
+
+<div class="logo-container">
     <div class="logo-particle-wrapper">
-        <canvas id="logo-canvas" width="120" height="120"></canvas>
-       <div class="logo-placeholder" style="text-align: center;">
-    <img src="cpscslogo.png" alt="CPSC School Logo" style="width: 120px; height: auto;">
+        <canvas id="logo-canvas" width="130" height="130"></canvas>
+        <img src="cpscslogo.png" alt="CPSC School Logo">
+    </div>
+    <div class="glow-title">“তোমার সিলেবাসের অগ্রগতি ট্র্যাক করো”</div>
+    <div class="main-title-badge">
+        <span class="main-title">HSC Batch - 2028</span>
+        <span class="sub-title-pill">Science (BV)</span>
     </div>
 </div>
-        <h2 style="color: rgb(7, 112, 7);">❝তোমার সিলেবাসের অগ্রগতি ট্র্যাক করো❞</h2>
-        <h1 class="main-title">HSC Batch - 2028</h1>
-        <div class="sub-title">Science (BV)</div>
+
+<!-- Intro Banner -->
+<div class="intro-banner">
+    ℹ️ এই প্ল্যাটফর্মে <span class="highlight-sec">Section Progress</span> এ কোন সেকশনে কতটুকু সিলেবাস শেষ হয়েছে তা দেখতে পারবে এবং <span class="highlight-ind">Individual Progress</span> এ ক্লিক করে রোল ও গোপন পিন দিয়ে তোমার নিজস্ব সিলেবাস ট্র্যাকার চালু করে অগ্রগতি বিশ্লেষণ করতে পারবে। (<a href="facilities.html" class="facilities-link">আর যেসব সুবিধা পাবে →</a>)
+</div>
+
+<!-- Stats Grid -->
+<div class="card-grid-2">
+    <div class="sunset-card">
+        <div class="card-icon-badge">📅</div>
+        <div class="card-label">আজ পর্যন্ত পার হয়েছে</div>
+        <div><span id="days-passed" class="card-value value-pink">0</span> <span class="card-unit">দিন</span></div>
+        <div class="card-sub">ক্লাস শুরু: ২৫ শে সেপ্টেম্বর ২০২৫</div>
     </div>
-    
-    <!-- Text Banner with Highlighted Colors & Link -->
-    <div class="intro-banner">
-        এই প্লাটফর্মে, <span class="highlight-sec">Section Progress</span> এ কোন সেকশনে কতটুকু সিলেবাস শেষ হয়েছে তা দেখতে পারবে এবং <span class="highlight-ind">Individual Progress</span> এ ক্লিক করে রোল ও গোপন পিন দিয়ে তোমার নিজস্ব সিলেবাস ট্র্যাকার চালু করে অগ্রগতি বিশ্লেষণ করতে পারবে। (<a href="facilities.html" class="facilities-link">আর যেসব সুবিধা পাবে ➔</a>)
+    <div class="sunset-card">
+        <div class="card-icon-badge">⏳</div>
+        <div class="card-label">এইচএসসি পরীক্ষা বাকি</div>
+        <div><span id="days-remaining" class="card-value value-yellow">0</span> <span class="card-unit">দিন</span></div>
+        <div class="card-sub">সম্ভাব্য তারিখ: মে ২০২৮</div>
+    </div>
+</div>
+
+<div class="card-grid-2">
+    <div class="sunset-card">
+        <div class="card-icon-badge">👨‍🏫</div>
+        <div class="card-label">ক্লাস হয়েছে</div>
+        <div><span id="workdays-passed" class="card-value value-green">0</span> <span class="card-unit">দিন</span></div>
+        <div class="card-sub">ছুটি ও পরীক্ষা বাদে</div>
+    </div>
+    <div class="sunset-card">
+        <div class="card-icon-badge">💼</div>
+        <div class="card-label">কার্যদিবস বাকি</div>
+        <div><span id="workdays-remaining" class="card-value value-cyan">0</span> <span class="card-unit">দিন</span></div>
+        <div class="card-sub">মোট কার্যদিবস: ১৯৯ দিন</div>
+    </div>
+</div>
+
+<!-- Batch Analysis Card -->
+<div class="analysis-container-card">
+    <div class="analysis-header">
+        📊 ব্যাচ সিলেবাস প্রোগ্রেস এনালাইসিস
+    </div>
+    <div class="total-students-pill">
+        TOTAL: <span id="total-tracked-students">0</span> STUDENTS
     </div>
 
-    <div class="card">
-        <div class="stats-grid">
-            <div class="stat-box">🎒 আজ পর্যন্ত পার হয়েছে <span id="days-passed">0 দিন</span><small>(ক্লাস শুরু: ২৪ শে সেপ্টেম্বর, ২০২৬)</small></div>
-            <div class="stat-box">⏳ এইচএসসি পরীক্ষা বাকি <span id="days-remaining">0 দিন</span><small>(সম্ভাব্য পরীক্ষার তারিখ: মে, ২০২৮)</small></div>
+    <div class="analysis-grid-2x2">
+        <div class="analysis-ring-box">
+            <div class="ring-title" style="color: #10b981;">0-20% শেষ</div>
+            <div class="ring-circle ring-green"><span id="range-1">0</span></div>
+            <div class="ring-sub">জন শিক্ষার্থী</div>
         </div>
-        
-        <div class="stats-grid">
-            <div class="stat-box" style="background:#f0fdf4; border-color:#bbf7d0;">📝 ক্লাস হয়েছে <span><span id="workdays-passed">0</span> দিন</span><small>(ছুটি ও পরীক্ষা বাদে)</small></div>
-            <div class="stat-box" style="background:#fff1f2; border-color:#fecdd3;">⏳ ক্লাসের জন্য বরাদ্দকৃত কার্যদিবস বাকি আছে <span><span id="workdays-remaining">0</span> দিন</span><small>(মোট কার্যদিবস: ১৯৯ দিন)</small></div>
+        <div class="analysis-ring-box">
+            <div class="ring-title" style="color: #3b82f6;">21-40% শেষ</div>
+            <div class="ring-circle ring-blue"><span id="range-2">0</span></div>
+            <div class="ring-sub">জন শিক্ষার্থী</div>
         </div>
-        
-        <div class="analysis-title">📊 ব্যাচ সিলেবাস প্রোগ্রেস অ্যানালাইসিস (Total: <span id="total-tracked-students">0</span> Students)</div>
-        <div class="analysis-grid">
-            <div class="analysis-box">0-20% শেষ<span><span id="range-1">0</span> জন</span></div>
-            <div class="analysis-box">21-40% শেষ<span><span id="range-2">0</span> জন</span></div>
-            <div class="analysis-box">41-60% শেষ<span><span id="range-3">0</span> জন</span></div>
-            <div class="analysis-box">61-80% শেষ<span><span id="range-4">0</span> জন</span></div>
-            <div class="analysis-box">81-100% শেষ<span><span id="range-5">0</span> জন</span></div>
+        <div class="analysis-ring-box">
+            <div class="ring-title" style="color: #f59e0b;">41-60% শেষ</div>
+            <div class="ring-circle ring-yellow"><span id="range-3">0</span></div>
+            <div class="ring-sub">জন শিক্ষার্থী</div>
         </div>
+        <div class="analysis-ring-box">
+            <div class="ring-title" style="color: #06b6d4;">61-80% শেষ</div>
+            <div class="ring-circle ring-cyan"><span id="range-4">0</span></div>
+            <div class="ring-sub">জন শিক্ষার্থী</div>
+        </div>
+    </div>
+    
+    <div class="analysis-ring-box" style="margin-top: 12px;">
+        <div class="ring-title" style="color: #8b5cf6;">81-100% শেষ</div>
+        <div class="ring-circle ring-purple"><span id="range-5">0</span></div>
+        <div class="ring-sub">জন শিক্ষার্থী</div>
+    </div>
+</div>
+
+<!-- Tab Selection -->
+<div class="tab-buttons">
+    <button id="btn-sec" class="tab-btn active" onclick="switchTab('section-view')">
+        📚 Section Progress
+    </button>
+    <button id="btn-ind" class="tab-btn" onclick="switchTab('individual-view')">
+        🎓 Individual Progress
+    </button>
+</div>
+
+<!-- Section View -->
+<div id="section-view" class="tab-content active">
+    <button id="admin-login-btn" class="admin-edit-pill-btn" onclick="openAdminModal()">
+        🔒 Admin Edit
+    </button>
+
+    <!-- Real-time Live Filter Search Bar -->
+    <input type="text" id="live-search-input" class="search-input-box" placeholder="Search section or topic..." onkeyup="filterSyllabusSearch()">
+
+    <div id="admin-pin-modal" class="section-card" style="display: none; text-align: center;">
+        <h4 style="margin: 0 0 8px 0; color: var(--primary-color);">Section Admin Login</h4>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">সিক্রেট পিন দিয়ে সেকশন প্রোগ্রেস এডিট মোড চালু করুন</p>
+        <div style="display: flex; gap: 8px; justify-content: center; max-width: 320px; margin: 0 auto;">
+            <input type="password" id="admin-pin-input" placeholder="Admin PIN" style="padding: 8px; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main); border-radius: 8px; width: 120px; text-align: center;">
+            <button onclick="verifyAdminPin()" style="background: var(--primary-color); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">Login</button>
+            <button onclick="closeAdminModal()" style="background: #64748b; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">Cancel</button>
+        </div>
+        <div id="admin-pin-error" style="display: none; color: #ef4444; font-size: 12px; margin-top: 8px; font-weight: bold;">পিন ভুল হয়েছে!</div>
     </div>
 
-    <div class="tab-buttons">
-        <button id="btn-sec" class="tab-btn active" onclick="switchTab('section-view')">Section Progress</button>
-        <button id="btn-ind" class="tab-btn" onclick="switchTab('individual-view')">Individual Progress</button>
-    </div>
-    
-    <!-- Section View (With Admin Edit Option) -->
-    <div id="section-view" class="tab-content active">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <div class="section-title" style="margin-bottom:0;">Section Wise Progress</div>
-            <button id="admin-login-btn" onclick="openAdminModal()" style="background: #0f172a; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">Admin Edit 🔑</button>
-        </div>
-        
-        <!-- Section Progress Admin Login Box -->
-        <div id="admin-pin-modal" class="card" style="display: none; background: #f8fafc; border: 2px dashed #4f46e5; margin-bottom: 20px; text-align: center;">
-            <h4 style="margin: 0 0 8px 0; color: #4f46e5;">Section Admin Login 🔐</h4>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 10px;">সিক্রেট পিন দিয়ে সেকশন প্রোগ্রেস এডিট মোড চালু করুন</p>
-            <div style="display: flex; gap: 8px; justify-content: center; max-width: 320px; margin: 0 auto;">
-                <input type="password" id="admin-pin-input" placeholder="Admin PIN" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; width: 120px; text-align: center;">
-                <button onclick="verifyAdminPin()" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">Login</button>
-                <button onclick="closeAdminModal()" style="background: #94a3b8; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">Cancel</button>
-            </div>
-            <div id="admin-pin-error" style="display:none; color: #ef4444; font-size: 12px; margin-top: 8px; font-weight: bold;">❌ পিন ভুল হয়েছে!</div>
+    <div id="sections-wrapper"></div>
+</div>
+
+<!-- Individual View -->
+<div id="individual-view" class="tab-content">
+    <div id="login-form-block" class="section-card login-box">
+        <div class="login-box-header">
+            <div class="login-box-icon">🪪</div>
+            <h3 style="margin: 0 0 6px 0; color: var(--text-main); font-size: 20px;">ব্যক্তিগত প্রোগ্রেস প্যানেল</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0;">তোমার রোল নম্বর এবং সিক্রেট পিন দিয়ে লগইন করো</p>
         </div>
 
-        <div id="sections-wrapper"></div>
-    </div>
-    
-    <!-- Individual View -->
-    <div id="individual-view" class="tab-content">
-        <div class="section-title">My Individual Progress</div>
-        <div id="login-form-block" class="card login-box">
-            <h3 style="margin:0 0 10px 0;">স্টুডেন্ট লগইন প্যানেল 🔐</h3>
-            <p style="font-size:13px; color:#64748b; margin-bottom:15px;">তোমার রোল নম্বর এবং ৫ ডিজিটের একটি নতুন পিন সেট করে প্রোফাইল চালু করো। প্রথমবার প্রোফাইল চালু হওয়ার পর এই পিন দিয়েই পরবর্তীতে লগইন করে তোমার নিজস্ব প্রোগ্রেস প্রোফাইলে ঢুকতে হবে।</p>
-            <input type="number" id="stud-roll" placeholder="তোমার রোল নম্বর ইংরেজিতে (যেমন: 36)" required>
-            
-            <!-- Student PIN with Eye Toggle -->
-            <div style="position: relative; width: 100%; margin: 10px 0;">
-                <input type="password" id="stud-pin" placeholder="৫ ডিজিটের গোপন পিন" maxlength="5" required style="width: 100%; padding: 12px; padding-right: 40px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; box-sizing: border-box;">
-                <span id="toggle-pin-btn" onclick="togglePinVisibility()" maxlength="5" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none; font-size: 16px;">👁️</span>
-            </div>
-            <div id="pin-error-msg" style="display: none; background: #fee2e2; color: #ef4444; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-top: 15px; border: 1px solid #fca5a5; line-height: 1.5; text-align: left;">
-                ❌ পিনটি ভুল হয়েছে। পিনটি পুনরায় জানতে <a href="mailto:cpscshsctracker@gmail.com" style="color: #b91c1c; text-decoration: underline;">cpscshsctracker@gmail.com</a> এ আপনার রোল উল্লেখ করে একটি ইমেইল করুন অথবা আমাদের টিমের কাউকে অবহিত করুন।
-            </div>
-            <button class="login-btn" onclick="registerAndLogin()">প্রোফাইল সেটআপ ও লগইন</button>
+        <label class="input-label" for="stud-roll">Student Roll Number</label>
+        <input type="number" id="stud-roll" placeholder="e.g. 101" required>
+        
+        <label class="input-label" for="stud-pin">Secret PIN</label>
+        <div style="position: relative; width: 100%;">
+            <input type="password" id="stud-pin" placeholder="•••••" maxlength="5" required style="padding-right: 40px;">
+            <span id="toggle-pin-btn" onclick="togglePinVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none; font-size: 16px;">👁️</span>
         </div>
-        <div id="profile-block" style="display:none;">
-            <div class="card" style="background: linear-gradient(135deg, #4f46e5, #3730a3); color: white;">
-                <button class="logout-btn" onclick="logoutStudent()">Log Out ↩</button>
-                <h3 id="welcome-text" style="margin:0 0 5px 0; color:#fff;">রোল: </h3>
-                <p style="margin:0; font-size:14px; opacity:0.9;">তোমার নিজস্ব কাস্টম সিলেবাস ড্যাশবোর্ড</p>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-                    <span style="font-weight: 600;">তোমার মোট সিলেবাস শেষ হয়েছে:</span>
-                    <span id="user-total-percent" style="font-size: 22px; font-weight: 800; color: #10b981;">0%</span>
-                </div>
-                <div class="progress-container" style="background: rgba(255,255,255,0.2); height: 12px; margin-top: 10px;">
-                    <div id="user-total-bar" class="progress-bar" style="background: #10b981; width: 0%;"></div>
-                </div>
+
+        <div id="pin-error-msg" style="display: none; background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-top: 15px; border: 1px solid rgba(239, 68, 68, 0.3); text-align: left;">
+            পিনটি ভুল হয়েছে। পিনটি পুনরায় জানতে <a href="mailto:cpscshsctracker@gmail.com" style="color: #ef4444; text-decoration: underline;">cpscshsctracker@gmail.com</a> এ আপনার রোল উল্লেখ করে একটি ইমেইল করুন।
+        </div>
+
+        <button class="login-btn" onclick="registerAndLogin()">প্রোগ্রেস ট্র্যাক করুন</button>
+    </div>
+
+    <div id="profile-block" style="display:none;">
+        <div class="section-card" style="background: var(--primary-btn); color: white; border: none;">
+            <button class="logout-btn" onclick="logoutStudent()">Log Out</button>
+            <h3 id="welcome-text" style="margin:0 0 5px 0; color:#fff;">রোল: </h3>
+            <p style="margin:0; font-size:14px; opacity:0.9;">তোমার নিজস্ব কাস্টম সিলেবাস ড্যাশবোর্ড</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <span style="font-weight: 600;">তোমার মোট সিলেবাস শেষ হয়েছে:</span>
+                <span id="user-total-percent" style="font-size: 22px; font-weight: 800; color: #34d399;">0%</span>
             </div>
-            <div id="individual-syllabus-wrapper"></div>
+            <div class="progress-container" style="background: rgba(255, 255, 255, 0.2); margin-top: 10px;">
+                <div id="user-total-bar" class="progress-bar" style="background: #34d399; width: 0%;"></div>
+            </div>
         </div>
+        <div id="individual-syllabus-wrapper"></div>
     </div>
-    
-    <div class="footer-note">
-        <p class="footer-rhyme">"এই বিশালাকার সিলেবাসে, HTML ও হার মেনে যায়!"</p>
-        <p class="footer-author">~ Aian 36</p>
-        <p class="footer-powered">POWERED BY AHNAF TAHMID</p>
-        <div class="purple-info-bar">
-            <a href="contributors.html" target="_blank">🔗About Contributors</a>
-            <span id="visit-count">👁️ Total Visits: Loading...</span>
-        </div>
-        <p style="font-size: 11px; font-weight: bold; color: #0f172a; text-align: center; margin-top: 12px; line-height: 1.5;">
-            For any query : <a href="mailto:cpscshsctracker@gmail.com" style="color: #0f172a; text-decoration: underline;">cpscshsctracker@gmail.com</a> or College Building, Section A (XI), Room no. 135
-        </p>
+</div>
+
+<!-- Footer -->
+<div class="footer-note">
+    <p class="footer-rhyme">“এই বিশালাকার সিলেবাসে, HTML ও হার মেনে যায়!”</p>
+    <p class="footer-author">~ Aian 36</p>
+    <p class="footer-powered">POWERED BY AHNAF TAHMID</p>
+
+    <div class="footer-btn-grid">
+        <a href="contributors.html" target="_blank" class="footer-pill-btn animated-contributors-btn">👥 About Contributors</a>
+        <div class="footer-pill-btn">👁️ <span id="visit-count">Total Visits: Loading...</span></div>
     </div>
+
+    <p style="font-size: 12px; color: var(--footer-query-color); font-weight: 700; line-height: 1.6;">
+        For any query: <a href="mailto:cpscshsctracker@gmail.com" style="color: var(--primary-color); text-decoration: underline;">cpscshsctracker@gmail.com</a> or College Building, Section A (XI), Room no. 115
+    </p>
+</div>
+
 </div>
 
 <script>
-    const extraCanceledClassDays = 0; 
+const extraCanceledClassDays = 0;
+const SECTION_ADMIN_PIN = "7098";
+let isAdminLoggedIn = false;
 
-    // Section Progress Admin PIN
-    const SECTION_ADMIN_PIN = "7098"; 
-    let isAdminLoggedIn = false;
+// Theme Switcher Logic
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+}
 
-    // Firebase Configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyE1N_jw7UygPCBk8zQM-wXomhT-NyYI0Qs",
-        authDomain: "cpscshsc-tracker.firebaseapp.com",
-        databaseURL: "https://cpscshsc-tracker-default-rtdb.firebaseio.com",
-        projectId: "cpscshsc-tracker",
-        storageBucket: "cpscshsc-tracker.firebasestorage.app",
-        messagingSenderId: "357179472512",
-        appId: "1:357179472512:web:fcbbb11b79bf537b0ef927",
-        measurementId: "G-6DCK0N97KH"
-    };
-    
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyE1N_jw7UygPCBk8zQM-wXomhT-NyYI0Qs",
+    authDomain: "cpscshsc-tracker.firebaseapp.com",
+    databaseURL: "https://cpscshsc-tracker-default-rtdb.firebaseio.com",
+    projectId: "cpscshsc-tracker",
+    storageBucket: "cpscshsc-tracker.firebasestorage.app",
+    messagingSenderId: "357179472512",
+    appId: "1:357179472512:web:fcbbb11b79bf537b0ef927",
+    measurementId: "G-6DCKON97KH"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-    const syllabusStructure = [
-        { 
-            id: 'bn1', 
-            name: 'বাংলা ১ম পত্র', 
-            topics: [
-                'গদ্য-১ : অপরিচিতা', 'গদ্য-২ : কারবালা-প্রান্তর', 'গদ্য-৩ : আত্মচরিত', 'গদ্য-৪ : বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', 'গদ্য-৫ : সাহিত্যে খেলা', 'গদ্য-৬ : বিলাসী', 'গদ্য-৭ : অর্ধাঙ্গী', 
-                'গদ্য-৮ : শিক্ষাচিন্তা', 'গদ্য-৯ : আহ্বান', 'গদ্য-১০ : ভুলের মূল্য', 'গদ্য-১১ : যৌবনের গান', 'গদ্য-১২ : তাজমহল', 'গদ্য-১৩ : জীবন ও বৃক্ষ', 'গদ্য-১৪ : মানব-কল্যাণ', 
-                'গদ্য-১৫ : গন্তব্য কাবুল', 'গদ্য-১৬ : মাসি-পিসি', 'গদ্য-১৭ : কলিমদ্দি দফাদার', 'গদ্য-১৮ : সৌদামিনী মালো', 'গদ্য-১৯ : চেতনার অ্যালবাম', 'গদ্য-২০ : একটি তুলসী গাছের কাহিনী', 'গদ্য-২১ : মানুষ', 
-                'গদ্য-২২ : মৌসুম', 'গদ্য-২৩ : গহন কোন বনের ধারে', 'গদ্য-২৪ : কপিলদাস মুর্মুর শেষ কাজ', 'গদ্য-২৫ : জাদুঘরে কেন যাব', 'গদ্য-২৬ : নেকলেস', 'গদ্য-২৭ : জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য, গান ও স্লোগান (সংকলিত)', 'গদ্য-২৮ : রেইনকোট',
-                'কবিতা-১ : স্বদেশ', 'কবিতা-২ : ঋতু বর্ণন', 'কবিতা-৩ : বিভীষণের প্রতি মেঘনাদ', 'কবিতা-৪ : ফুল্লরার বারোমাস্যা', 'কবিতা-৫ : সুখ', 'কবিতা-৬ : মানব-বন্দনা', 'কবিতা-৭ : সোনার তরী', 'কবিতা-৮ : ঐকতান', 'কবিতা-৯ : নবান্ন', 'কবিতা-১০ : বিদ্রোহী', 
-                'কবিতা-১১ : সাম্যবাদী', 'কবিতা-১২ : সুচেতনা', 'কবিতা-১৩ : প্রতিদান', 'কবিতা-১৪ : তাহারেই পড়ে মনে', 'কবিতা-১৫ : আগে কী সুন্দর দিন কাটাইতাম', 'কবিতা-১৬ : সেই অস্ত্র', 'কবিতা-১৭ : পদ্মা', 'কবিতা-১৮ : আলো চাই', 
-                'কবিতা-১৯ : আঠারো বছর বয়স', 'কবিতা-২০ : ফেব্রুয়ারি ১৯৬৯', 'কবিতা-২১ : হাড়', 'কবিতা-২২ : তোমার আপন পতাকা', 
-                'কবিতা-২৩ : আমি কিংবদন্তির কথা বলছি', 'কবিতা-২৪ : নূরলদীনের কথা মনে পড়ে যায়', 'কবিতা-২৫ : ছবি', 'কবিতা-২৬ : প্রত্যাবর্তনের লজ্জা', 'কবিতা-২৭ : ভূমিহীন কৃষিজীবী ইচ্ছে তার', 'কবিতা-২৮ : ব্ল্যাক-আউটের পূর্ণিমায়'
-            ] 
-        },
-        { 
-            id: 'bn2', 
-            name: 'বাংলা ২য় পত্র', 
-            topics: [
-                'ব্যাকরণ-১ : বাংলা উচ্চারণের নিয়ম', 'ব্যাকরণ-২ : বাংলা বানানের নিয়ম', 'ব্যাকরণ-৩ : বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি', 'ব্যাকরণ-৪ : শব্দ গঠন (উপসর্গ, প্রত্যয়, সমাস)', 'ব্যাকরণ-৫ : বাক্যতত্ত্ব', 'ব্যাকরণ-৬ : বাংলা ভাষার অপপ্রয়োগ ও শুদ্ধ প্রয়োগ',
-                'নির্মিতি-১ : পরিভাষা / অনুবাদ', 'নির্মিতি-২ : দিনলিপি লিখন / অভিজ্ঞতা বর্ণনা', 'নির্মিতি-৩ : ভাষণ লিখন / প্রতিবেদন লিখন', 'নির্মিতি-৪ : বৈদ্যুতিন চিঠি ও ক্ষুদে বার্তা লিখন / পত্র, আবেদনপত্র', 'নির্মিতি-৫ : সারাংশ, সারমর্ম ও ভাবসম্প্রসারণ লিখন / ভাব-সম্প্রসারণ', 'নির্মিতি-৬ : সংলাপ লিখন / খুদে গল্প লিখন', 'নির্মিতি-৭ : প্রবন্ধ-নিবন্ধ লিখন'
-            ] 
-        },
-        { 
-            id: 'en1', 
-            name: 'ইংরেজি ১ম পত্র', 
-            topics: ['1. MCQ (seen passage-1)', '2.Short Answer Question (seen passage-1) ', '3. Table/Flowchart (seen passage-2)', '4. Summary Writing (seen passage-3)', '5. Cloze Test with Clues', '6. Cloze Test without Clues', '7. Rearranging', '8. Paragraph Writing', '9. Completing Story', '10. Informal Letter / Email', '11. Analyzing Graph / Chart', '12. Theme Writing / Appreciating Poems'] 
-        },
-        { 
-            id: 'en2', 
-            name: 'ইংরেজি ২য় পত্র', 
-            topics: ['1. Article', '2. Preposition', '3. Words and Phrases', '4. Completing Sentence', '5. Right Form of Verbs', '6. Transformation', '7. Narration', '8. Pronoun Reference', '9. Modifier', '10. Connectors', '11. Synonym/Antonym', '12. Punctuation', '13. Paragraph', '14. Application', '15. Report Writing', '16. Composition'] 
-        },
-        { 
-            id: 'ph1', 
-            name: 'পদার্থবিজ্ঞান ১ম পত্র', 
-            topics: [
-                'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', 
-                'অধ্যায় ২: ভেক্টর', 
-                'অধ্যায় ৩: গতিবিদ্যা', 
-                'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', 
-                'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', 
-                'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', 
-                'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', 
-                'অধ্যায় ৮: পর্যায়বৃত্ত গতি', 
-                'অধ্যায় ৯: তরঙ্গ', 
-                'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব'
-            ] 
-        },
-        { 
-            id: 'ph2', 
-            name: 'পদার্থবিজ্ঞান ২য় পত্র', 
-            topics: [
-                'অধ্যায় ১: তাপগতিবিদ্যা', 
-                'অধ্যায় ২: স্থির তড়িৎ', 
-                'অধ্যায় ৩: চল তড়িৎ', 
-                'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', 
-                'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', 
-                'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', 
-                'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', 
-                'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', 
-                'অধ্যায় ৯: পরমাণুর মডেল', 
-                'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স',
-                'অধ্যায় ১১: জ্যোতির্বিজ্ঞান'
-            ] 
-        },
-        { 
-            id: 'ch1', 
-            name: 'রসায়ন ১ম পত্র', 
-            topics: [
-                'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', 
-                'অধ্যায় ২: গুণগত রসায়ন', 
-                'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', 
-                'অধ্যায় ৪: রাসায়নিক পরিবর্তন', 
-                'অধ্যায় ৫: কর্মমুখী রসায়ন'
-            ] 
-        },
-        { 
-            id: 'ch2', 
-            name: 'রসায়ন ২য় পত্র', 
-            topics: [
-                'অধ্যায় ১: পরিবেশ রসায়ন', 
-                'অধ্যায় ২: জৈব রসায়ন', 
-                'অধ্যায় ৩: পরিমাণগত রসায়ন', 
-                'অধ্যায় ৪: তড়িৎ রসায়ন', 
-                'অধ্যায় ৫: অর্থনৈতিক রসায়ন'
-            ] 
-        },
-        { 
-            id: 'm1', 
-            name: 'উচ্চতর গণিত ১ম পত্র', 
-            topics: [
-                'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', 
-                'অধ্যায় ২: ভেক্টর', 
-                'অধ্যায় ৩: সরলরেখা', 
-                'অধ্যায় ৪: বৃত্ত', 
-                'অধ্যায় ৫: বিন্যাস ও সমাবেশ', 
-                'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', 
-                'অধ্যায় ৭: সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত', 
-                'অধ্যায় ৮: ফাংশন ও ফাংশনের লেখচিত্র', 
-                'অধ্যায় ৯: অন্তরীকরণ', 
-                'অধ্যায় ১০: যোগজীকরণ'
-            ] 
-        },
-        { 
-            id: 'm2', 
-            name: 'উচ্চতর গণিত ২য় পত্র', 
-            topics: [
-                'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', 
-                'অধ্যায় ২: রৈখিক প্রোগ্রাম', 
-                'অধ্যায় ৩: জটিল সংখ্যা', 
-                'অধ্যায় ৪: বহুপদী ও বহুপদী সমীকরণ', 
-                'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', 
-                'অধ্যায় ৬: কনিক', 
-                'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ', 
-                'অধ্যায় ৮: স্থিতিবিদ্যা', 
-                'অধ্যায় ৯: সমতলে বস্তুকণার গতি', 
-                'অধ্যায় ১০: বিস্তার পরিমাপ ও সম্ভাবনা'
-            ] 
-        },
-        { 
-            id: 'bio1', 
-            name: 'উদ্ভিদবিজ্ঞান', 
-            topics: [
-                'অধ্যায় ১: কোষ ও এর গঠন', 'অধ্যায় ২: কোষ বিভাজন', 'অধ্যায় ৩: কোষ রসায়ন', 'অধ্যায় ৪: অনুজীব',
-                'অধ্যায় ৫: শৈবাল ও ছত্রাক', 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী উদ্ভিদ',
-                'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', 'অধ্যায় ৯: শারীরতত্ত্ব', 'অধ্যায় ১০: প্রজনন', 'অধ্যায় ১১: জীবপ্রযুক্তি', 'অধ্যায় ১২: পরিবেশ'
-            ] 
-        },
-        { 
-            id: 'bio2', 
-            name: 'প্রাণীবিজ্ঞান', 
-            topics: [
-                'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', 'অধ্যায় ২: প্রাণীর পরিচিতি', 'অধ্যায় ৩: মানব শারীরতত্ত্ব : পরিপাক ও শোষণ',
-                'অধ্যায় ৪: মানব শারীরতত্ত্ব : রক্ত সংবহন', 'অধ্যায় ৫: মানব শারীরতত্ত্ব : মানব শারীরতত্ত্ব : শ্বসন ও শ্বাসক্রিয়া', 'অধ্যায় ৬: মানব শারীরতত্ত্ব : বর্জ্য ও নিষ্কাশন',
-                'অধ্যায় ৭: মানব শারীরতত্ত্ব : চলন ও অঙ্গ চালনা', 'অধ্যায় ৮: মানব শারীরতত্ত্ব : সমন্বয় ও নিয়ন্ত্রণ', 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা',
-                'অধ্যায় ১০: মানবদেহের প্রতিরক্ষা (ইমিউনিটি)', 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', 'অধ্যায় ১২: প্রাণীর আচরণ'
-            ] 
-        },
-        { 
-            id: 'ict', 
-            name: 'আইসিটি (ICT)', 
-            topics: [
-                'অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', 
-                'অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং', 
-                'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', 
-                'অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি ও HTML', 
-                'অধ্যায় ৫: প্রোগ্রামিং ভাষা', 
-                'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম'
-            ] 
-        }
-    ];
-    const sections = ['Section A', 'Section B', 'Section C', 'Section D', 'Section E'];
+const syllabusStructure = [
+{
+id: 'bn1',
+name: 'বাংলা ১ম পত্র',
+topics: [
+'গদ্য-১: অপরিচিতা', 'গদ্য-২: কারবালা-প্রান্তর', 'গদ্য-৩: আত্মচরিত', 'গদ্য-৪: বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', 'গদ্য-৫: সাহিত্যে খেলা', 'গদ্য-৬: বিলাসী', 'গদ্য-৭: অর্ধাঙ্গী', 'গদ্য-৮: শিক্ষাচিন্তা', 'গদ্য-৯: আহ্বান', 'গদ্য-১০: ভুলের মূল্য', 'গদ্য-১১: যৌবনের গান', 'গদ্য-১২: তাজমহল', 'গدم-১৩: জীবন ও বৃক্ষ', 'গদ্য-১৪: মানব-কল্যাণ', 'গদ্য-১৫: গন্তব্য কাবুল', 'গদ্য-১৬: মাসি-পিসি', 'গদ্য-১৭: কলিমদ্দি দফাদার', 'গদ্য-১৮: সৌদামিনী মালো', 'গদ্য-১৯: চেতনার অ্যালবাম', 'গদ্য-২০: একটি তুলসী গাছের কাহিনী', 'গদ্য-২১: মানুষ', 'গদ্য-২২: মৌসুম', 'গদ্য-২৩: গহন কোন বনের ধারে', 'গদ্য-২৪: কপিলদাস মুর্মুর শেষ কাজ', 'গদ্য-২৫: জাদুঘরে কেন যাব', 'গদ্য-২৬: নেকলেস', 'গদ্য-২৭: জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য, গান ও স্লোগান (সংকলিত)', 'গদ্য-২৮: রেইনকোট',
+'কবিতা-১: স্বদেশ', 'কবিতা-২: ঋতু বর্ণন', 'কবিতা-৩: বিভীষণের প্রতি মেঘনাদ', 'কবিতা-৪: ফুল্লরার বারোমাস্যা', 'কবিতা-৫: সুখ', 'কবিতা-৬: মানব-বন্দনা', 'কবিতা-৭: সোনার তরী', 'কবিতা-৮: ঐকতান', 'কবিতা-৯: নবান্ন', 'কবিতা-১০: বিদ্রোহী', 'কবিতা-১১: সাম্যবাদী', 'কবিতা-১২: সুচেতনা', 'কবিতা-১৩: প্রতিদান', 'কবিতা-১৪: তাহারেই পড়ে মনে', 'কবিতা-১৫: আগে কী সুন্দর দিন কাটাইতাম', 'কবিতা-১৬: সেই অস্ত্র', 'কবিতা-১৭: পদ্মা', 'কবিতা-১৮: আলো চাই', 'কবিতা-১৯: আঠারো বছর বয়স', 'কবিতা-২০: ফেব্রুয়ারি ১৯৬৯', 'কবিতা-২১: হাড়', 'কবিতা-২২: তোমার আপন পতাকা', 'কবিতা-২৩: আমি কিংবদন্তির কথা বলছি', 'কবিতা-২৪: নূরলদীনের কথা মনে পড়ে যায়', 'কবিতা-২৫: ছবি', 'কবিতা-২৬: প্রত্যাবর্তনের লজ্জা', 'কবিতা-২৭: ভূমিহীন কৃষিজীবী ইচ্ছে তার', 'কবিতা-২৮: ব্ল্যাক-আউটের পূর্ণিমায়'
+]
+},
+{
+id: 'bn2',
+name: 'বাংলা ২য় পত্র',
+topics: [
+'ব্যাকরণ-১: বাংলা উচ্চারণের নিয়ম', 'ব্যাকরণ-২: বাংলা বানানের নিয়ম', 'ব্যাকরণ-৩: বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি', 'ব্যাকরণ-৪: শব্দ গঠন (উপসর্গ, প্রত্যয়, সমাস)', 'ব্যাকরণ-৫: বাক্যতত্ত্ব', 'ব্যাকরণ-৬: বাংলা ভাষার অপপ্রয়োগ ও শুদ্ধ প্রয়োগ',
+'নির্মিতি-১: পরিভাষা/ অনুবাদ', 'নির্মিতি-২: দিনলিপি লিখন / অভিজ্ঞতা বর্ণনা', 'নির্মিতি-৩: ভাষণ লিখন / প্রতিবেদন লিখন', 'নির্মিতি-৪: বৈদ্যুতিন চিঠি ও ক্ষুদে বার্তা লিখন পত্র, আবেদনপত্র', 'নির্মিতি-৫: সারাংশ, সারমর্ম ও ভাবসম্প্রসারণ লিখন / ভাব-সম্প্রসারণ', 'নির্মিতি-৬: সংলাপ লিখন খুদে গল্প লিখন', 'নির্মিতি-৭: প্রবন্ধ-নিবন্ধ লিখন'
+]
+},
+{
+id: 'en1',
+name: 'ইংরেজি ১ম পত্র',
+topics: ['1. MCQ (seen passage-1)', '2. Short Answer Question (seen passage-1)', '3. Table/Flowchart (seen passage-2)', '4. Summary Writing (seen passage-3)', '5. Cloze Test with Clues', '6. Cloze Test without Clues', '7. Rearranging', '8. Paragraph Writing', '9. Completing Story', '10. Informal Letter / Email', '11. Analyzing Graph / Chart', '12. Theme Writing / Appreciating Poems']
+},
+{
+id: 'en2',
+name: 'ইংরেজি ২য় পত্র',
+topics: ['1. Article', '2. Preposition', '3. Words and Phrases', '4. Completing Sentence', '5. Right Form of Verbs', '6. Transformation', '7. Narration', '8. Pronoun Reference', '9. Modifier', '10. Connectors', '11. Synonym/Antonym', '12. Punctuation', '13. Paragraph', '14. Application', '15. Report Writing', '16. Composition']
+},
+{
+id: 'ph1',
+name: 'পদার্থবিজ্ঞান ১ম পত্র',
+topics: [
+'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', 'অধ্যায় ২: ভেক্টর', 'অধ্যায় ৩: গতিবিদ্যা', 'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', 'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', 'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', 'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', 'অধ্যায় ৮: পর্যায়বৃত্ত গতি', 'অধ্যায় ৯: তরঙ্গ', 'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব'
+]
+},
+{
+id: 'ph2',
+name: 'পদার্থবিজ্ঞান ২য় পত্র',
+topics: [
+'অধ্যায় ১: তাপগতিবিদ্যা', 'অধ্যায় ২: স্থির তড়িৎ', 'অধ্যায় ৩: চল তড়িৎ', 'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', 'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', 'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', 'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', 'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', 'অধ্যায় ৯: পরমাণুর মডেল', 'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স', 'অধ্যায় ১১: জ্যোতির্বিজ্ঞান'
+]
+},
+{
+id: 'ch1',
+name: 'রসায়ন ১ম পত্র',
+topics: [
+'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', 'অধ্যায় ২: গুণগত রসায়ন', 'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', 'অধ্যায় ৪: রাসায়নিক পরিবর্তন', 'অধ্যায় ৫: কর্মমুখী রসায়ন'
+]
+},
+{
+id: 'ch2',
+name: 'রসায়ন ২য় পত্র',
+topics: [
+'অধ্যায় ১: পরিবেশ রসায়ন', 'অধ্যায় ২: জৈব রসায়ন', 'অধ্যায় ৩: পরিমাণগত রসায়ন', 'অধ্যায় ৪: তড়িৎ রসায়ন', 'অধ্যায় ৫: অর্থনৈতিক রসায়ন'
+]
+},
+{
+id: 'm1',
+name: 'উচ্চতর গণিত ১ম পত্র',
+topics: [
+'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', 'অধ্যায় ২: ভেক্টর', 'অধ্যায় ৩: সরলরেখা', 'অধ্যায় ৪: বৃত্ত', 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', 'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', 'অধ্যায় ৭: সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত', 'অধ্যায় ৮: ফাংশন ও ফাংশনের লেখচিত্র', 'অধ্যায় ৯: অন্তরীকরণ', 'অধ্যায় ১০: যোগজীকরণ'
+]
+},
+{
+id: 'm2',
+name: 'উচ্চতর গণিত ২য় পত্র',
+topics: [
+'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', 'অধ্যায় ২: রৈখিক প্রোগ্রাম', 'অধ্যায় ৩: জটিল সংখ্যা', 'অধ্যায় ৪: বহুপদী ও বহুপদী সমীকরণ', 'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', 'অধ্যায় ৬: কনিক', 'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ', 'অধ্যায় ৮: স্থিতিবিদ্যা', 'অধ্যায় ৯: সমতলে বস্তুকণার গতি', 'অধ্যায় ১০: বিস্তার পরিমাপ ও সম্ভাবনা'
+]
+},
+{
+id: 'biol',
+name: 'উদ্ভিদবিজ্ঞান',
+topics: [
+'অধ্যায় ১: কোষ ও এর গঠন', 'অধ্যায় ২: কোষ বিভাজন', 'অধ্যায় ৩: কোষ রসায়ন', 'অধ্যায় ৪: অনুজীব', 'অধ্যায় ৫: শৈবাল ও ছত্রাক', 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী উদ্ভিদ', 'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', 'অধ্যায় ৯: শারীরতত্ত্ব', 'অধ্যায় ১০: প্রজনন', 'অধ্যায় ১১: জীবপ্রযুক্তি', 'অধ্যায় ১২: পরিবেশ'
+]
+},
+{
+id: 'bio2',
+name: 'প্রাণীবিজ্ঞান',
+topics: [
+'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', 'অধ্যায় ২: প্রাণীর পরিচিতি', 'অধ্যায় ৩: মানব শারীরতত্ত্ব: পরিপাক ও শোষণ', 'অধ্যায় ৪: মানব শারীরতত্ত্ব: রক্ত সংবহন', 'অধ্যায় ৫: মানব শারীরতত্ত্ব: শ্বসন ও শ্বাসক্রিয়া', 'অধ্যায় ৬: মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন', 'অধ্যায় ৭: মানব শারীরতত্ত্ব: চলন ও অঙ্গ চালনা', 'অধ্যায় ৮: মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ', 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা', 'অধ্যায় ১০: মানবদেহের প্রতিরক্ষা (ইমিউনিটি)', 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', 'অধ্যায় ১২: প্রাণীর আচরণ'
+]
+},
+{
+id: 'ict',
+name: 'আইসিটি (ICT)',
+topics: [
+'অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', 'অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং', 'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', 'অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি ও HTML', 'অধ্যায় ৫: প্রোগ্রামিং ভাষা', 'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম'
+]
+}
+];
 
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        if(tabId === 'section-view') document.getElementById('btn-sec').classList.add('active');
-        else document.getElementById('btn-ind').classList.add('active');
+const sections = ['Section A', 'Section B', 'Section C', 'Section D', 'Section E'];
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach($t => $t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach($b => $b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    if(tabId === 'section-view') document.getElementById('btn-sec').classList.add('active');
+    else document.getElementById('btn-ind').classList.add('active');
+}
+
+function togglePinVisibility() {
+    const pinInput = document.getElementById('stud-pin');
+    const toggleBtn = document.getElementById('toggle-pin-btn');
+    if (pinInput.type === 'password') {
+        pinInput.type = 'text';
+        toggleBtn.innerText = '🔒';
+    } else {
+        pinInput.type = 'password';
+        toggleBtn.innerText = '👁️';
     }
+}
 
-    function togglePinVisibility() {
-        const pinInput = document.getElementById('stud-pin');
-        const toggleBtn = document.getElementById('toggle-pin-btn');
-        if (pinInput.type === 'password') {
-            pinInput.type = 'text';
-            toggleBtn.innerText = '🙈';
-        } else {
-            pinInput.type = 'password';
-            toggleBtn.innerText = '👁️';
-        }
-    }
+function getCurrentFormattedDate() {
+    const today = new Date();
+    const $d = String(today.getDate()).padStart(2, '0');
+    const $m = String(today.getMonth() + 1).padStart(2, '0');
+    const $y = today.getFullYear();
+    return `${$d}/${$m}/${$y}`;
+}
 
-    function getCurrentFormattedDate() {
-        const today = new Date();
-        const d = String(today.getDate()).padStart(2, '0');
-        const m = String(today.getMonth() + 1).padStart(2, '0');
-        const y = today.getFullYear();
-        return `${d}/${m}/${y}`;
-    }
-
-    function renderApp() {
-        const secWrapper = document.getElementById('sections-wrapper');
-        let secHtml = '';
-        sections.forEach((sec, sIdx) => {
-            const secId = `sec_${sIdx}`;
-            
-            // Section A (Golden Background & Border) vs Section B-E (Black Border, White Background)
-            const isSectionA = (sec === 'Section A');
-            const cardBorderStyle = isSectionA 
-                ? 'border: 2px solid #f59e0b; background: #fffbe2;' 
-                : 'border: 1.5px solid #000000; background: #ffffff;';
-            const titleColor = isSectionA ? '#b45309' : '#1e293b';
-            const specialBadge = isSectionA ? ' <span style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px; border: 1px solid #fde68a; margin-left: 6px;">⭐</span>' : '';
-
-            secHtml += `<div class="section-card" style="${cardBorderStyle}">
-                <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
-                    <h3 class="section-header" style="color: ${titleColor};">${sec}${specialBadge}</h3>
-                    <div class="progress-info"><span>সিলেবাস শেষ হয়েছে:</span><span id="percent_text_${secId}" class="percentage-text">0%</span></div>
-                    <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
-                    <div class="click-notice">বিষয়বস্তু দেখতে ক্লিক করুন ▾</div>
-                </div>
-                <div id="content_${secId}" class="subject-container">`;
-            
-            syllabusStructure.forEach((sub) => {
-                const subUniqueId = `${secId}_${sub.id}`;
-                secHtml += `<div id="block_${subUniqueId}" class="subject-block">
-                    <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
-                        <div class="subject-title"><span>${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:var(--success); font-weight:bold;">0%</span></div>
-                        <div class="progress-container" style="margin:5px 0 0 0; height:6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+function renderApp() {
+    const secWrapper = document.getElementById('sections-wrapper');
+    let secHtml = '';
+    sections.forEach((sec, sIdx) => {
+        const secId = `sec_${sIdx}`;
+        const isSectionA = (sec === 'Section A');
+        const letter = sec.replace('Section ', '');
+        const star = isSectionA ? '⭐' : '';
+        const cardClass = isSectionA ? 'section-card section-card-special search-target-sec' : 'section-card search-target-sec';
+        
+        secHtml += `<div class="${cardClass}" data-sec-name="${sec}">
+            <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
+                <div class="sec-header-row">
+                    <div class="sec-avatar">${letter}</div>
+                    <div class="sec-title-group">
+                        <h3>${sec} ${star}</h3>
+                        <div class="sec-updated" id="updated_date_${secId}">Updated: N/A</div>
                     </div>
-                    <div id="topics_${subUniqueId}" class="topic-list">`;
-                
-                sub.topics.forEach((topicName, tIdx) => {
-                    const tId = `${subUniqueId}_t${tIdx + 1}`;
-                    secHtml += `<div class="topic-item">
-                        <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${topicName}</label></div>
-                        <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
-                    </div>`;
-                });
-                
-                secHtml += `</div></div>`;
-            });
-            
-            secHtml += `</div>
-                <div id="updated_date_${secId}" class="sec-last-updated">Updated on: N/A</div>
-            </div>`;
-        });
-        secWrapper.innerHTML = secHtml;
+                </div>
 
-        const indWrapper = document.getElementById('individual-syllabus-wrapper');
-        let indHtml = '';
+                <div class="progress-info">
+                    <span>Syllabus Complete</span>
+                    <span id="percent_text_${secId}" class="percentage-text">0%</span>
+                </div>
+                <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
+                
+                <div class="click-notice-row">
+                    <span>বিষয়বস্তু দেখতে ক্লিক করুন ❯</span>
+                </div>
+            </div>
+            
+            <div id="content_${secId}" class="subject-container">`;
+        
         syllabusStructure.forEach((sub) => {
-            const subUniqueId = `ind_${sub.id}`;
-            indHtml += `<div id="block_${subUniqueId}" class="section-card" style="margin-top:20px;">
+            const subUniqueId = `${secId}_${sub.id}`;
+            secHtml += `<div id="block_${subUniqueId}" class="subject-block search-target-sub" data-sub-name="${sub.name}">
                 <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
-                    <div class="subject-title"><span style="color:var(--original-blue);">${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:var(--success); font-weight:bold;">0%</span></div>
-                    <div class="progress-container" style="margin:5px 0 0 0; height:6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
-                    <div class="click-notice" style="margin-top:5px;">টপিক দেখতে ক্লিক করুন ▾</div>
+                    <div class="subject-title"><span>${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight:bold;">0%</span></div>
+                    <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
                 </div>
                 <div id="topics_${subUniqueId}" class="topic-list">`;
             
             sub.topics.forEach((topicName, tIdx) => {
                 const tId = `${subUniqueId}_t${tIdx + 1}`;
-                indHtml += `<div class="topic-item">
-                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${topicName}</label></div>
+                secHtml += `<div class="topic-item search-target-topic" data-topic-name="${topicName}">
+                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${topicName}</label></div>
                     <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
                 </div>`;
             });
-            
-            indHtml += `</div></div>`;
+            secHtml += `</div></div>`;
         });
-        indWrapper.innerHTML = indHtml;
-    }
+        secHtml += `</div>
+        </div>`;
+    });
+    secWrapper.innerHTML = secHtml;
 
-    function toggleDropdown(id) {
-        const el = document.getElementById(id);
-        el.style.display = el.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function toggleSubjectDropdown(e, id, blockId) {
-        if(e) e.stopPropagation();
-        const el = document.getElementById(id);
-        const block = document.getElementById(blockId);
-        if(el.style.display === 'block') {
-            el.style.display = 'none';
-            block.classList.remove('open-sub');
-        } else {
-            el.style.display = 'block';
-            block.classList.add('open-sub');
-        }
-    }
-
-    function openAdminModal() {
-        if(isAdminLoggedIn) {
-            if(confirm("আপনি কি সেকশন এডমিন মোড থেকে বের হতে চান?")) {
-                isAdminLoggedIn = false;
-                document.getElementById('admin-login-btn').innerText = "Admin Edit 🔑";
-                document.getElementById('admin-login-btn').style.background = "#0f172a";
-                disableSectionCheckboxes();
-            }
-        } else {
-            document.getElementById('admin-pin-modal').style.display = 'block';
-        }
-    }
-
-    function closeAdminModal() {
-        document.getElementById('admin-pin-modal').style.display = 'none';
-        document.getElementById('admin-pin-error').style.display = 'none';
-    }
-
-    function verifyAdminPin() {
-        const inputPin = document.getElementById('admin-pin-input').value.trim();
-        if(inputPin === SECTION_ADMIN_PIN) {
-            isAdminLoggedIn = true;
-            closeAdminModal();
-            document.getElementById('admin-login-btn').innerText = "Admin Mode ON 🔓";
-            document.getElementById('admin-login-btn').style.background = "#10b981";
-            enableSectionCheckboxes();
-            alert("এডমিন লগইন সফল হয়েছে! এখন সেকশনের টপিকগুলো এডিট করতে পারবেন।");
-        } else {
-            document.getElementById('admin-pin-error').style.display = 'block';
-        }
-    }
-
-    function enableSectionCheckboxes() {
-        sections.forEach((sec, sIdx) => {
-            const secId = `sec_${sIdx}`;
-            syllabusStructure.forEach((sub) => {
-                const subUniqueId = `${secId}_${sub.id}`;
-                sub.topics.forEach((_, tIdx) => {
-                    const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
-                    if(cb) cb.disabled = false;
-                });
-            });
-        });
-    }
-
-    function disableSectionCheckboxes() {
-        sections.forEach((sec, sIdx) => {
-            const secId = `sec_${sIdx}`;
-            syllabusStructure.forEach((sub) => {
-                const subUniqueId = `${secId}_${sub.id}`;
-                sub.topics.forEach((_, tIdx) => {
-                    const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
-                    if(cb) cb.disabled = true;
-                });
-            });
-        });
-    }
-
-    function updateCalculations(secId) {
-        let totalItemsInSection = 0;
-        let totalCheckedInSection = 0;
-        let sectionTopicsMap = {};
-
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `${secId}_${sub.id}`;
-            let subChecked = 0;
-            sub.topics.forEach((_, tIdx) => {
-                const tId = `${subUniqueId}_t${tIdx + 1}`;
-                const cb = document.getElementById(tId);
-                const badge = document.getElementById(`badge_${tId}`);
-                if (cb && cb.checked) {
-                    subChecked++;
-                    if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
-                    sectionTopicsMap[tId] = true;
-                } else {
-                    if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
-                    sectionTopicsMap[tId] = false;
-                }
-            });
-            const subPercent = Math.round((subChecked / sub.topics.length) * 100);
-            document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
-            document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-            totalItemsInSection += sub.topics.length;
-            totalCheckedInSection += subChecked;
-        });
-
-        const secPercent = Math.round((totalCheckedInSection / totalItemsInSection) * 100);
-        document.getElementById(`percent_text_${secId}`).innerText = secPercent + '%';
-        document.getElementById(`progress_bar_${secId}`).style.width = secPercent + '%';
-
-        if (isAdminLoggedIn) {
-            const currentDateStr = getCurrentFormattedDate();
-            document.getElementById(`updated_date_${secId}`).innerText = `Updated on: ${currentDateStr}`;
-
-            db.ref('section_progress/' + secId).update({
-                percent: secPercent,
-                topics: sectionTopicsMap,
-                lastUpdated: currentDateStr
-            });
-        }
-    }
-
-    function loadSectionProgressFromDatabase() {
-        db.ref('section_progress').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if(!data) return;
-
-            sections.forEach((sec, sIdx) => {
-                const secId = `sec_${sIdx}`;
-                if(data[secId]) {
-                    if (data[secId].lastUpdated) {
-                        document.getElementById(`updated_date_${secId}`).innerText = `Updated on: ${data[secId].lastUpdated}`;
-                    }
-
-                    if(data[secId].topics) {
-                        syllabusStructure.forEach((sub) => {
-                            const subUniqueId = `${secId}_${sub.id}`;
-                            sub.topics.forEach((_, tIdx) => {
-                                const tId = `${subUniqueId}_t${tIdx + 1}`;
-                                const cb = document.getElementById(tId);
-                                if(cb && !isAdminLoggedIn) {
-                                    cb.checked = (data[secId].topics[tId] === true);
-                                }
-                            });
-                        });
-                        updateCalculations(secId);
-                    }
-                }
-            });
-        });
-    }
-
-    function resetIndividualUI() {
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `ind_${sub.id}`;
-            const topicsEl = document.getElementById(`topics_${subUniqueId}`);
-            const blockEl = document.getElementById(`block_${subUniqueId}`);
-            if (topicsEl) topicsEl.style.display = 'none';
-            if (blockEl) blockEl.classList.remove('open-sub');
-
-            sub.topics.forEach((_, tIdx) => {
-                const tId = `${subUniqueId}_t${tIdx + 1}`;
-                const cb = document.getElementById(tId);
-                const badge = document.getElementById(`badge_${tId}`);
-                if (cb) cb.checked = false;
-                if (badge) {
-                    badge.innerText = 'Pending';
-                    badge.className = 'status-badge status-pending';
-                }
-            });
-            document.getElementById(`sub_percent_${subUniqueId}`).innerText = '0%';
-            document.getElementById(`sub_bar_${subUniqueId}`).style.width = '0%';
-        });
-        document.getElementById('user-total-percent').innerText = '0%';
-        document.getElementById('user-total-bar').style.width = '0%';
-    }
-
-    function updateIndividualCalculations() {
-        const activeRoll = localStorage.getItem('active_student_roll');
-        if(!activeRoll) return;
-
-        let totalItems = 0;
-        let totalChecked = 0;
-        let checkedTopicsMap = {};
-
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `ind_${sub.id}`;
-            let subChecked = 0;
-            sub.topics.forEach((_, tIdx) => {
-                const tId = `${subUniqueId}_t${tIdx + 1}`;
-                const cb = document.getElementById(tId);
-                const badge = document.getElementById(`badge_${tId}`);
-                if (cb && cb.checked) {
-                    subChecked++;
-                    if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
-                    checkedTopicsMap[tId] = true;
-                } else {
-                    if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
-                    checkedTopicsMap[tId] = false;
-                }
-            });
-            const subPercent = Math.round((subChecked / sub.topics.length) * 100);
-            document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
-            document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-            totalItems += sub.topics.length;
-            totalChecked += subChecked;
-        });
-
-        const totalPercent = Math.round((totalChecked / totalItems) * 100);
-        document.getElementById('user-total-percent').innerText = totalPercent + '%';
-        document.getElementById('user-total-bar').style.width = totalPercent + '%';
-
-        db.ref('students/' + activeRoll).update({
-            percent: totalPercent,
-            topics: checkedTopicsMap,
-            pin: localStorage.getItem(`pin_secure_roll_${activeRoll}`)
-        });
-    }
-
-    function registerAndLogin() {
-        const roll = document.getElementById('stud-roll').value.trim();
-        const pin = document.getElementById('stud-pin').value.trim();
-        if(!roll || pin.length < 5) {
-            alert('অনুগ্রহ করে সঠিক রোল নম্বর এবং ন্যূনতম ৫ ডিজিটের পিন কোড দিন!');
-            return;
-        }
+    const indWrapper = document.getElementById('individual-syllabus-wrapper');
+    let indHtml = '';
+    syllabusStructure.forEach((sub) => {
+        const subUniqueId = `ind_${sub.id}`;
+        indHtml += `<div id="block_${subUniqueId}" class="section-card" style="margin-top: 20px;">
+            <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
+                <div class="subject-title"><span style="color:var(--primary-color);">${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight: bold;">0%</span></div>
+                <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+            </div>
+            <div class="click-notice-row" style="margin-top: 8px;"><span>টপিক দেখতে ক্লিক করুন ❯</span></div>
+            <div id="topics_${subUniqueId}" class="topic-list">`;
         
-        db.ref('students/' + roll).once('value').then((snapshot) => {
-    const data = snapshot.val();
-    const pinInput = document.getElementById('stud-pin');
+        sub.topics.forEach((topicName, tIdx) => {
+            const tId = `${subUniqueId}_t${tIdx + 1}`;
+            indHtml += `<div class="topic-item">
+                <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${topicName}</label></div>
+                <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
+            </div>`;
+        });
+        indHtml += `</div></div>`;
+    });
+    indWrapper.innerHTML = indHtml;
+}
 
-    if (data && data.pin && data.pin !== pin) {
-        // 1. Error Message Show
-        document.getElementById('pin-error-msg').style.display = 'block';
-        
-        // 2. Input Box Red Border & Clear Value
-        pinInput.style.borderColor = '#ef4444';
-        pinInput.value = ''; 
-        
-        // 3. Mobile Double Vibration (0.25s Total)
-        if (navigator.vibrate) {
-            navigator.vibrate([100, 50, 100]); 
-        }
+// Live Search Filter Functionality
+function filterSyllabusSearch() {
+    const query = document.getElementById('live-search-input').value.toLowerCase().trim();
+    const secCards = document.querySelectorAll('.search-target-sec');
+
+    if (query === '') {
+        secCards.forEach(card => {
+            card.style.display = 'block';
+            const subBlocks = card.querySelectorAll('.search-target-sub');
+            subBlocks.forEach(sub => sub.style.display = 'block');
+            const topicItems = card.querySelectorAll('.search-target-topic');
+            topicItems.forEach(t => t.style.display = 'flex');
+        });
         return;
     }
-    
-    // Correct PIN ba New Registration hole Border Normal hoye jabe
-    pinInput.style.borderColor = '#e2e8f0';
-    document.getElementById('pin-error-msg').style.display = 'none';
-    
-    // ... baki registration/login logic code same thakbe
-            document.getElementById('pin-error-msg').style.display = 'none';
-                
-            if(!data) {
-                db.ref('students/' + roll).set({
-                    pin: pin,
-                    percent: 0,
-                    topics: {}
-                });
-            }
 
-            localStorage.setItem(`pin_secure_roll_${roll}`, pin);
-            localStorage.setItem('active_student_roll', roll);
-            checkLoginStatus();
+    secCards.forEach(card => {
+        const secName = card.getAttribute('data-sec-name').toLowerCase();
+        let secHasMatch = secName.includes(query);
+
+        const subBlocks = card.querySelectorAll('.search-target-sub');
+        subBlocks.forEach(sub => {
+            const subName = sub.getAttribute('data-sub-name').toLowerCase();
+            let subHasMatch = subName.includes(query);
+
+            const topicItems = sub.querySelectorAll('.search-target-topic');
+            topicItems.forEach(t => {
+                const topicName = t.getAttribute('data-topic-name').toLowerCase();
+                if (topicName.includes(query)) {
+                    t.style.display = 'flex';
+                    subHasMatch = true;
+                } else {
+                    t.style.display = 'none';
+                }
+            });
+
+            if (subHasMatch) {
+                sub.style.display = 'block';
+                secHasMatch = true;
+            } else {
+                sub.style.display = 'none';
+            }
+        });
+
+        if (secHasMatch) {
+            card.style.display = 'block';
+            const secId = card.querySelector('.subject-container');
+            if (secId) secId.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function toggleDropdown(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleSubjectDropdown(e, id, blockId) {
+    if(e) e.stopPropagation();
+    const el = document.getElementById(id);
+    const block = document.getElementById(blockId);
+    if(el.style.display === 'block') {
+        el.style.display = 'none';
+        block.classList.remove('open-sub');
+    } else {
+        el.style.display = 'block';
+        block.classList.add('open-sub');
+    }
+}
+
+function openAdminModal() {
+    if(isAdminLoggedIn) {
+        if (confirm("আপনি কি সেকশন এডমিন মোড থেকে বের হতে চান?")) {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-login-btn').innerText = "🔒 Admin Edit";
+            disableSectionCheckboxes();
+        }
+    } else {
+        document.getElementById('admin-pin-modal').style.display = 'block';
+    }
+}
+
+function closeAdminModal() {
+    document.getElementById('admin-pin-modal').style.display = 'none';
+    document.getElementById('admin-pin-error').style.display = 'none';
+}
+
+function verifyAdminPin() {
+    const inputPin = document.getElementById('admin-pin-input').value.trim();
+    if(inputPin === SECTION_ADMIN_PIN) {
+        isAdminLoggedIn = true;
+        closeAdminModal();
+        document.getElementById('admin-login-btn').innerText = "🔓 Admin Mode ON";
+        enableSectionCheckboxes();
+        alert("এডমিন লগইন সফল হয়েছে! এখন সেকশনের টপিকগুলো এডিট করতে পারবেন।");
+    } else {
+        document.getElementById('admin-pin-error').style.display = 'block';
+    }
+}
+
+function enableSectionCheckboxes() {
+    sections.forEach((sec, sIdx) => {
+        const secId = `sec_${sIdx}`;
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `${secId}_${sub.id}`;
+            sub.topics.forEach((_, tIdx) => {
+                const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
+                if(cb) cb.disabled = false;
+            });
+        });
+    });
+}
+
+function disableSectionCheckboxes() {
+    sections.forEach((sec, sIdx) => {
+        const secId = `sec_${sIdx}`;
+        syllabusStructure.forEach((sub) => {
+            const subUniqueId = `${secId}_${sub.id}`;
+            sub.topics.forEach((_, tIdx) => {
+                const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
+                if(cb) cb.disabled = true;
+            });
+        });
+    });
+}
+
+function updateCalculations(secId) {
+    let totalItemsInSection = 0;
+    let totalCheckedInSection = 0;
+    let sectionTopicsMap = {};
+    
+    syllabusStructure.forEach((sub) => {
+        const subUniqueId = `${secId}_${sub.id}`;
+        let subChecked = 0;
+        sub.topics.forEach((_, tIdx) => {
+            const tId = `${subUniqueId}_t${tIdx + 1}`;
+            const cb = document.getElementById(tId);
+            const badge = document.getElementById(`badge_${tId}`);
+            if (cb && cb.checked) {
+                subChecked++;
+                if (badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
+                sectionTopicsMap[tId] = true;
+            } else {
+                if (badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
+                sectionTopicsMap[tId] = false;
+            }
+        });
+        const subPercent = Math.round((subChecked / sub.topics.length) * 100);
+        document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
+        document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
+        totalItemsInSection += sub.topics.length;
+        totalCheckedInSection += subChecked;
+    });
+    
+    const secPercent = Math.round((totalCheckedInSection / totalItemsInSection) * 100);
+    document.getElementById(`percent_text_${secId}`).innerText = secPercent + '%';
+    document.getElementById(`progress_bar_${secId}`).style.width = secPercent + '%';
+    
+    if (isAdminLoggedIn) {
+        const currentDateStr = getCurrentFormattedDate();
+        document.getElementById(`updated_date_${secId}`).innerText = `Updated: ${currentDateStr}`;
+        db.ref('section_progress/' + secId).update({
+            percent: secPercent,
+            topics: sectionTopicsMap,
+            lastUpdated: currentDateStr
         });
     }
+}
 
-    function checkLoginStatus() {
-        const activeRoll = localStorage.getItem('active_student_roll');
-        if(activeRoll) {
-            document.getElementById('login-form-block').style.display = 'none';
-            document.getElementById('profile-block').style.display = 'block';
-            document.getElementById('welcome-text').innerText = `রোল নম্বর: ${activeRoll} 👤`;
-            
-            resetIndividualUI();
-
-            db.ref('students/' + activeRoll).once('value').then((snapshot) => {
-                const data = snapshot.val();
-                if(data && data.topics) {
+function loadSectionProgressFromDatabase() {
+    db.ref('section_progress').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if(!data) return;
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            if (data[secId]) {
+                if (data[secId].lastUpdated) {
+                    document.getElementById(`updated_date_${secId}`).innerText = `Updated: ${data[secId].lastUpdated}`;
+                }
+                if(data[secId].topics) {
                     syllabusStructure.forEach((sub) => {
-                        const subUniqueId = `ind_${sub.id}`;
+                        const subUniqueId = `${secId}_${sub.id}`;
                         sub.topics.forEach((_, tIdx) => {
                             const tId = `${subUniqueId}_t${tIdx + 1}`;
                             const cb = document.getElementById(tId);
-                            if(cb) cb.checked = (data.topics[tId] === true);
+                            if(cb && !isAdminLoggedIn) {
+                                cb.checked = (data[secId].topics[tId] === true);
+                            }
                         });
                     });
-                    updateIndividualCalculations();
+                    updateCalculations(secId);
                 }
-            });
-        } else {
-            document.getElementById('login-form-block').style.display = 'block';
-            document.getElementById('profile-block').style.display = 'none';
-            resetIndividualUI();
-        }
-    }
+            }
+        });
+    });
+}
 
-    function logoutStudent() {
-        localStorage.removeItem('active_student_roll');
+function resetIndividualUI() {
+    syllabusStructure.forEach((sub) => {
+        const subUniqueId = `ind_${sub.id}`;
+        const topicsEl = document.getElementById(`topics_${subUniqueId}`);
+        const blockEl = document.getElementById(`block_${subUniqueId}`);
+        if (topicsEl) topicsEl.style.display = 'none';
+        if (blockEl) blockEl.classList.remove('open-sub');
+        
+        sub.topics.forEach((_, tIdx) => {
+            const tId = `${subUniqueId}_t${tIdx + 1}`;
+            const cb = document.getElementById(tId);
+            const badge = document.getElementById(`badge_${tId}`);
+            if (cb) cb.checked = false;
+            if (badge) {
+                badge.innerText = 'Pending';
+                badge.className = 'status-badge status-pending';
+            }
+        });
+        document.getElementById(`sub_percent_${subUniqueId}`).innerText = '0%';
+        document.getElementById(`sub_bar_${subUniqueId}`).style.width = '0%';
+    });
+    document.getElementById('user-total-percent').innerText = '0%';
+    document.getElementById('user-total-bar').style.width = '0%';
+}
+
+function updateIndividualCalculations() {
+    const activeRoll = localStorage.getItem('active_student_roll');
+    if(!activeRoll) return;
+    let totalItems = 0;
+    let totalChecked = 0;
+    let checkedTopicsMap = {};
+    
+    syllabusStructure.forEach((sub) => {
+        const subUniqueId = `ind_${sub.id}`;
+        let subChecked = 0;
+        sub.topics.forEach((_, tIdx) => {
+            const tId = `${subUniqueId}_t${tIdx + 1}`;
+            const cb = document.getElementById(tId);
+            const badge = document.getElementById(`badge_${tId}`);
+            if (cb && cb.checked) {
+                subChecked++;
+                if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
+                checkedTopicsMap[tId] = true;
+            } else {
+                if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
+                checkedTopicsMap[tId] = false;
+            }
+        });
+        const subPercent = Math.round((subChecked / sub.topics.length) * 100);
+        document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
+        document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
+        totalItems += sub.topics.length;
+        totalChecked += subChecked;
+    });
+    
+    const totalPercent = Math.round((totalChecked / totalItems) * 100);
+    document.getElementById('user-total-percent').innerText = totalPercent + '%';
+    document.getElementById('user-total-bar').style.width = totalPercent + '%';
+    
+    db.ref('students/' + activeRoll).update({
+        percent: totalPercent,
+        topics: checkedTopicsMap,
+        pin: localStorage.getItem(`pin_secure_roll_${activeRoll}`)
+    });
+}
+
+function registerAndLogin() {
+    const roll = document.getElementById('stud-roll').value.trim();
+    const pin = document.getElementById('stud-pin').value.trim();
+    if(!roll || pin.length < 5) {
+        alert('অনুগ্রহ করে সঠিক রোল নম্বর এবং ন্যূনতম ৫ ডিজিটের পিন কোড দিন!');
+        return;
+    }
+    
+    db.ref('students/' + roll).once('value').then((snapshot) => {
+        const data = snapshot.val();
+        const pinInput = document.getElementById('stud-pin');
+        if (data && data.pin && data.pin !== pin) {
+            document.getElementById('pin-error-msg').style.display = 'block';
+            pinInput.style.borderColor = '#ef4444';
+            pinInput.value = '';
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            return;
+        }
+        pinInput.style.borderColor = 'var(--input-border)';
+        document.getElementById('pin-error-msg').style.display = 'none';
+        
+        if(!data) {
+            db.ref('students/' + roll).set({
+                pin: pin,
+                percent: 0,
+                topics: {}
+            });
+        }
+        localStorage.setItem(`pin_secure_roll_${roll}`, pin);
+        localStorage.setItem('active_student_roll', roll);
+        checkLoginStatus();
+    });
+}
+
+function checkLoginStatus() {
+    const activeRoll = localStorage.getItem('active_student_roll');
+    if(activeRoll) {
+        document.getElementById('login-form-block').style.display = 'none';
+        document.getElementById('profile-block').style.display = 'block';
+        document.getElementById('welcome-text').innerText = `রোল নম্বর: ${activeRoll}`;
         resetIndividualUI();
-        checkLoginStatus();
-    }
-
-    function updateBatchAnalysisBox() {
-        db.ref('students').on('value', (snapshot) => {
-            const data = snapshot.val() || {};
-            let r1=0, r2=0, r3=0, r4=0, r5=0, count=0;
-            Object.keys(data).forEach(roll => {
-                const p = data[roll].percent || 0;
-                if(p >= 0 && p <= 20) r1++;
-                else if(p >= 21 && p <= 40) r2++;
-                else if(p >= 41 && p <= 60) r3++;
-                else if(p >= 61 && p <= 80) r4++;
-                else if(p >= 81 && p <= 100) r5++;
-                count++;
-            });
-            document.getElementById('total-tracked-students').innerText = count;
-            document.getElementById('range-1').innerText = r1; 
-            document.getElementById('range-2').innerText = r2;
-            document.getElementById('range-3').innerText = r3; 
-            document.getElementById('range-4').innerText = r4;
-            document.getElementById('range-5').innerText = r5;
-        });
-    }
-
-    function isDateInRanges(date, ranges) {
-        return ranges.some(range => date >= range.start && date <= range.end);
-    }
-
-    function isGovtHoliday(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const dateStr = `${year}-${month}-${day}`;
-        const holidays = [
-            "2026-12-16", "2026-12-25", "2027-02-21", "2027-03-17", "2027-03-26", "2027-04-14", 
-            "2027-05-01", "2027-03-20", "2027-03-21", "2027-03-22", "2027-05-27", "2027-05-28", 
-            "2027-05-29", "2027-07-16", "2027-08-15", "2027-10-09", "2027-12-16", "2027-12-25", "2028-01-01"
-        ];
-        return holidays.includes(dateStr);
-    }
-
-    function calculateDays() {
-        const startDate = new Date(2026, 8, 24);
-        const examDate = new Date(2028, 4, 1);
-        const today = new Date();
-        
-        const daysPassed = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-        const daysRemaining = Math.ceil((examDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-        document.getElementById('days-passed').innerText = (daysPassed > 0 ? daysPassed : 0) + ' দিন';
-        document.getElementById('days-remaining').innerText = (daysRemaining > 0 ? daysRemaining : 0) + ' দিন';
-
-        const lockedExamRanges = [
-            { start: new Date(2026, 11, 1), end: new Date(2026, 11, 15) },
-            { start: new Date(2027, 3, 25), end: new Date(2027, 4, 6) },
-            { start: new Date(2027, 7, 15), end: new Date(2027, 7, 31) },
-            { start: new Date(2028, 0, 2),  end: new Date(2028, 0, 27) }
-        ];
-
-        const totalTargetClassDays = 199;
-        let rawClassDaysPassed = 0;
-        let currentLoopDate = new Date(startDate);
-        while (currentLoopDate <= today) {
-            const dayOfWeek = currentLoopDate.getDay();
-            if (dayOfWeek !== 5 && dayOfWeek !== 6 && !isDateInRanges(currentLoopDate, lockedExamRanges) && !isGovtHoliday(currentLoopDate)) {
-                rawClassDaysPassed++;
+        db.ref('students/' + activeRoll).once('value').then((snapshot) => {
+            const data = snapshot.val();
+            if(data && data.topics) {
+                syllabusStructure.forEach((sub) => {
+                    const subUniqueId = `ind_${sub.id}`;
+                    sub.topics.forEach((_, tIdx) => {
+                        const tId = `${subUniqueId}_t${tIdx + 1}`;
+                        const cb = document.getElementById(tId);
+                        if(cb) cb.checked = (data.topics[tId] === true);
+                    });
+                });
+                updateIndividualCalculations();
             }
-            currentLoopDate.setDate(currentLoopDate.getDate() + 1);
+        });
+    } else {
+        document.getElementById('login-form-block').style.display = 'block';
+        document.getElementById('profile-block').style.display = 'none';
+        resetIndividualUI();
+    }
+}
+
+function logoutStudent() {
+    localStorage.removeItem('active_student_roll');
+    resetIndividualUI();
+    checkLoginStatus();
+}
+
+function updateBatchAnalysisBox() {
+    db.ref('students').on('value', (snapshot) => {
+        const data = snapshot.val() || {};
+        let r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0, count = 0;
+        Object.keys(data).forEach(roll => {
+            const p = data[roll].percent || 0;
+            if(p >= 0 && p <= 20) r1++;
+            else if(p >= 21 && p <= 40) r2++;
+            else if(p >= 41 && p <= 60) r3++;
+            else if(p >= 61 && p <= 80) r4++;
+            else if(p >= 81 && p <= 100) r5++;
+            count++;
+        });
+        document.getElementById('total-tracked-students').innerText = count;
+        document.getElementById('range-1').innerText = r1;
+        document.getElementById('range-2').innerText = r2;
+        document.getElementById('range-3').innerText = r3;
+        document.getElementById('range-4').innerText = r4;
+        document.getElementById('range-5').innerText = r5;
+    });
+}
+
+function isDateInRanges(date, ranges) {
+    return ranges.some(range => date >= range.start && date <= range.end);
+}
+
+function isGovtHoliday(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+    const holidays = [
+        "2026-12-16", "2026-12-25", "2027-02-21", "2027-03-17", "2027-03-26", "2027-04-14",
+        "2027-05-01", "2027-03-20", "2027-03-21", "2027-03-22", "2027-05-27", "2027-05-28",
+        "2027-05-29", "2027-07-16", "2027-08-15", "2027-10-09", "2027-12-16", "2027-12-25", "2028-01-01"
+    ];
+    return holidays.includes(dateStr);
+}
+
+function calculateDays() {
+    const startDate = new Date(2026, 8, 24);
+    const examDate = new Date(2028, 4, 1);
+    const today = new Date();
+    const daysPassed = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+    const daysRemaining = Math.ceil((examDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    
+    document.getElementById('days-passed').innerText = (daysPassed > 0 ? daysPassed : 0);
+    document.getElementById('days-remaining').innerText = (daysRemaining > 0 ? daysRemaining : 0);
+    
+    const lockedExamRanges = [
+        { start: new Date(2026, 11, 1), end: new Date(2026, 11, 15) },
+        { start: new Date(2027, 3, 25), end: new Date(2027, 4, 6) },
+        { start: new Date(2027, 7, 15), end: new Date(2027, 7, 31) },
+        { start: new Date(2028, 0, 2), end: new Date(2028, 0, 27) }
+    ];
+    const totalTargetClassDays = 199;
+    let rawClassDaysPassed = 0;
+    let currentLoopDate = new Date(startDate);
+    
+    while (currentLoopDate <= today) {
+        const dayOfWeek = currentLoopDate.getDay();
+        if (dayOfWeek !== 5 && dayOfWeek !== 6 && !isDateInRanges(currentLoopDate, lockedExamRanges) && !isGovtHoliday(currentLoopDate)) {
+            rawClassDaysPassed++;
         }
-
-        let actualClassDaysPassed = rawClassDaysPassed - extraCanceledClassDays;
-        if (actualClassDaysPassed < 0) actualClassDaysPassed = 0;
-
-        if (today >= new Date(2028, 0, 2)) actualClassDaysPassed = totalTargetClassDays;
-        if (actualClassDaysPassed > totalTargetClassDays) actualClassDaysPassed = totalTargetClassDays;
-        
-        let classDaysRemaining = totalTargetClassDays - actualClassDaysPassed;
-
-        document.getElementById('workdays-passed').innerText = actualClassDaysPassed;
-        document.getElementById('workdays-remaining').innerText = classDaysRemaining < 0 ? 0 : classDaysRemaining;
+        currentLoopDate.setDate(currentLoopDate.getDate() + 1);
     }
+    let actualClassDaysPassed = rawClassDaysPassed - extraCanceledClassDays;
+    if (actualClassDaysPassed < 0) actualClassDaysPassed = 0;
+    if (today >= new Date(2028, 0, 2)) actualClassDaysPassed = totalTargetClassDays;
+    if (actualClassDaysPassed > totalTargetClassDays) actualClassDaysPassed = totalTargetClassDays;
+    let classDaysRemaining = totalTargetClassDays - actualClassDaysPassed;
+    
+    document.getElementById('workdays-passed').innerText = actualClassDaysPassed;
+    document.getElementById('workdays-remaining').innerText = classDaysRemaining < 0 ? 0 : classDaysRemaining;
+}
 
-    function handleVisitCounter() {
-        db.ref('site_visits').transaction((currentVotes) => {
-            return (currentVotes || 0) + 1;
-        }, (error, committed, snapshot) => {
-            if (committed) {
-                document.getElementById('visit-count').innerText = "👁️ Total Visits: " + snapshot.val();
-            }
-        });
-    }
+function handleVisitCounter() {
+    db.ref('site_visits').transaction((currentVotes) => {
+        return (currentVotes || 0) + 1;
+    }, (error, committed, snapshot) => {
+        if (committed) {
+            document.getElementById('visit-count').innerText = snapshot.val();
+        }
+    });
+}
 
-    window.onload = function() {
-        renderApp();
-        calculateDays();
-        checkLoginStatus();
-        updateBatchAnalysisBox();
-        handleVisitCounter();
-        loadSectionProgressFromDatabase();
-    };
+window.onload = function() {
+    renderApp();
+    calculateDays();
+    checkLoginStatus();
+    updateBatchAnalysisBox();
+    handleVisitCounter();
+    loadSectionProgressFromDatabase();
+};
 
+/* Smooth Slow Radial Logo Particle Animation */
 function initLogoParticles() {
     const canvas = document.getElementById('logo-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const radius = 45; 
-    
-    // Blue color-er weight bariye dewa holo jate eta beshi ber hoy
-    const colors = ['#38bdf8', '#38bdf8', '#38bdf8', '#38bdf8', '#ffff00', '#ef4444']; 
-    
+    const radius = 40;
+    const colors = ['#38bdf8', '#818cf8', '#a855f7', '#c084fc', '#f472b6', '#6366f1'];
     let particles = [];
-
+    
     class Particle {
         constructor() {
             this.angle = Math.random() * Math.PI * 2;
             this.x = centerX + Math.cos(this.angle) * radius;
             this.y = centerY + Math.sin(this.angle) * radius;
-            
-            // 📌 Speed onek kome ashar jonno value komano holo (0.1 theke 0.35)
-            this.speed = 0.1 + Math.random() * 0.25;
+            this.speed = 0.08 + Math.random() * 0.15; // Slower speed
             this.vx = Math.cos(this.angle) * this.speed;
             this.vy = Math.sin(this.angle) * this.speed;
-            
             this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.size = 1.5 + Math.random() * 2;
+            this.size = 1 + Math.random() * 1.8; // Smaller size
             this.alpha = 1;
-            this.decay = 0.010 + Math.random() * 0.010; // Dhire dhire fade out hobe
+            this.decay = 0.005 + Math.random() * 0.007; // Slower fade out
         }
-
         update() {
             this.x += this.vx;
             this.y += this.vy;
             this.alpha -= this.decay;
         }
-
         draw() {
             ctx.save();
             ctx.globalAlpha = Math.max(0, this.alpha);
             ctx.fillStyle = this.color;
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
             ctx.restore();
         }
     }
-
+    
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (particles.length < 30) {
-            for(let i = 0; i < 1; i++) {
-                particles.push(new Particle());
-            }
+        if (particles.length < 18 && Math.random() < 0.4) { // Fewer particles, less dense
+            particles.push(new Particle());
         }
-
         for (let i = particles.length - 1; i >= 0; i--) {
             particles[i].update();
             particles[i].draw();
@@ -1000,14 +1529,11 @@ function initLogoParticles() {
                 particles.splice(i, 1);
             }
         }
-
         requestAnimationFrame(animate);
     }
-
     animate();
 }
 
-// Global window.onload-e call korun
 window.addEventListener('load', function() {
     initLogoParticles();
 });
