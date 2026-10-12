@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CpscsHscTracker</title>
+<title>CpscsHsc Syllabus Progress Tracker</title>
 <!-- Open Graph / Link Preview Meta Tags -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="HSC Batch 2028 - Syllabus Progress Tracker">
+<meta property="og:title" content="HSC Batch 2028 Master Progress Tracker">
 <meta property="og:description" content="CPSCS HSC Batch 2028 Science (BV) Syllabus and Section Progress Tracker.">
 <meta property="og:image" content="https://ahnaftahmid214.github.io/cpscshsctracker/cpscslogo.png">
 <meta property="og:url" content="https://ahnaftahmid214.github.io/cpscshsctracker/">
@@ -93,7 +93,6 @@ body {
     gap: 8px;
 }
 
-/* Refined Slow Blinking Green Live Dot */
 .green-dot {
     width: 7px;
     height: 7px;
@@ -105,21 +104,9 @@ body {
 }
 
 @keyframes pulse-dot {
-    0% {
-        transform: scale(0.8);
-        opacity: 0.2;
-        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
-    }
-    50% {
-        transform: scale(1.15);
-        opacity: 1;
-        box-shadow: 0 0 6px 2px rgba(16, 185, 129, 0.7);
-    }
-    100% {
-        transform: scale(0.8);
-        opacity: 0.2;
-        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
-    }
+    0% { transform: scale(0.8); opacity: 0.2; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+    50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 6px 2px rgba(16, 185, 129, 0.7); }
+    100% { transform: scale(0.8); opacity: 0.2; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
 }
 
 .theme-toggle-btn {
@@ -140,7 +127,6 @@ body {
 
 .logo-container { text-align: center; margin-bottom: 25px; }
 
-/* Logo Canvas & Image Wrapper */
 .logo-particle-wrapper {
     position: relative;
     width: 130px;
@@ -190,22 +176,9 @@ body {
     gap: 8px;
     margin-bottom: 20px;
 }
-.main-title { 
-    font-size: 22px; 
-    font-weight: 800; 
-    color: var(--text-main); 
-}
-.sub-title-pill { 
-    background: var(--pill-bg); 
-    border: 1px solid var(--sub-card-border); 
-    color: var(--pill-text); 
-    padding: 4px 12px; 
-    border-radius: 999px; 
-    font-size: 13px; 
-    font-weight: 700; 
-}
+.main-title { font-size: 22px; font-weight: 800; color: var(--text-main); }
+.sub-title-pill { background: var(--pill-bg); border: 1px solid var(--sub-card-border); color: var(--pill-text); padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
 
-/* Intro Banner Styling */
 .intro-banner {
     background: var(--card-bg);
     border: 1px solid var(--sub-card-border);
@@ -225,7 +198,6 @@ body {
 .facilities-link { color: var(--primary-color); font-weight: 700; text-decoration: none; }
 .facilities-link:hover { text-decoration: underline; }
 
-/* Grid Cards */
 .card-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -256,19 +228,8 @@ body {
     font-size: 14px;
 }
 
-.card-label {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.3;
-}
-
-.card-value {
-    font-size: 26px;
-    font-weight: 900;
-    margin-bottom: 4px;
-}
+.card-label { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+.card-value { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
 .value-pink { color: #db2777; }
 .value-yellow { color: #d97706; }
 .value-green { color: #059669; }
@@ -279,19 +240,9 @@ body {
 :root[data-theme="dark"] .value-green { color: #34d399; }
 :root[data-theme="dark"] .value-cyan { color: #38bdf8; }
 
-.card-unit {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text-main);
-}
+.card-unit { font-size: 14px; font-weight: 700; color: var(--text-main); }
+.card-sub { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
 
-.card-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 6px;
-}
-
-/* Analysis Card */
 .analysis-container-card {
     background: var(--card-bg);
     border: 1px solid var(--sub-card-border);
@@ -300,15 +251,7 @@ body {
     margin-bottom: 25px;
     box-shadow: var(--card-shadow);
 }
-.analysis-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--text-main);
-    margin-bottom: 12px;
-}
+.analysis-header { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 800; color: var(--text-main); margin-bottom: 12px; }
 .total-students-pill {
     background: var(--pill-bg);
     border: 1px solid var(--sub-card-border);
@@ -322,11 +265,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-.analysis-grid-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
+.analysis-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .analysis-ring-box {
     background: var(--sub-card-bg);
     border: 1px solid var(--analysis-border);
@@ -334,114 +273,52 @@ body {
     padding: 14px;
     text-align: center;
 }
-.ring-title {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
+.ring-title { font-size: 12px; font-weight: 700; margin-bottom: 10px; }
 .ring-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin: 0 auto 8px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--text-main);
-    border: 4px solid var(--analysis-border);
+    width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 8px auto;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: var(--text-main); border: 4px solid var(--analysis-border);
 }
 .ring-green { border-color: #10b981; }
 .ring-blue { border-color: #3b82f6; }
 .ring-yellow { border-color: #f59e0b; }
 .ring-cyan { border-color: #06b6d4; }
 .ring-purple { border-color: #8b5cf6; }
+.ring-sub { font-size: 11px; color: var(--text-muted); }
 
-.ring-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-/* Tab Navigation Buttons */
 .tab-buttons { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px; 
-    background: var(--card-bg);
-    padding: 6px;
-    border-radius: 20px;
-    border: 1px solid var(--sub-card-border);
-    margin-bottom: 20px; 
-    box-shadow: var(--card-shadow);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; 
+    background: var(--card-bg); padding: 6px; border-radius: 20px;
+    border: 1px solid var(--sub-card-border); margin-bottom: 20px; box-shadow: var(--card-shadow);
 }
 .tab-btn { 
-    padding: 14px; 
-    border: none; 
-    background: transparent; 
-    color: var(--text-muted); 
-    border-radius: 14px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: 0.3s; 
-    font-size: 14px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    padding: 14px; border: none; background: transparent; color: var(--text-muted); 
+    border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 14px; 
+    display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.tab-btn.active { 
-    background: var(--primary-btn); 
-    color: white; 
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); 
-}
+.tab-btn.active { background: var(--primary-btn); color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
 
 .tab-content { display: none; width: 100%; }
 .tab-content.active { display: block; }
 
 .admin-edit-pill-btn {
-    width: 100%;
-    background: var(--card-bg);
-    border: 1px solid var(--sub-card-border);
-    color: var(--text-main);
-    padding: 14px;
-    border-radius: 18px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: var(--card-shadow);
+    width: 100%; background: var(--card-bg); border: 1px solid var(--sub-card-border);
+    color: var(--text-main); padding: 14px; border-radius: 18px; font-weight: 700;
+    font-size: 14px; cursor: pointer; margin-bottom: 15px; display: flex;
+    align-items: center; justify-content: center; gap: 8px; box-shadow: var(--card-shadow);
 }
 
 .search-input-box {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 16px;
-    padding: 14px 16px;
-    color: var(--text-main);
-    font-size: 13px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    outline: none;
+    width: 100%; background: var(--input-bg); border: 1px solid var(--input-border);
+    border-radius: 16px; padding: 14px 16px; color: var(--text-main); font-size: 13px;
+    box-sizing: border-box; margin-bottom: 20px; outline: none;
 }
 
-/* Section Cards Style */
 .section-card { 
-    background: var(--card-bg); 
-    padding: 20px; 
-    border-radius: 20px; 
-    box-shadow: var(--card-shadow); 
-    margin-bottom: 20px; 
-    border: 2px solid var(--card-border);
-    position: relative; 
+    background: var(--card-bg); padding: 20px; border-radius: 20px; 
+    box-shadow: var(--card-shadow); margin-bottom: 20px; border: 2px solid var(--card-border); position: relative; 
 }
 
-/* Section A Special Golden Theme Styling */
 :root[data-theme="light"] .section-card-special {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
     border: 2.5px solid #d97706 !important;
@@ -449,18 +326,9 @@ body {
 }
 :root[data-theme="light"] .section-card-special .sec-title-group h3,
 :root[data-theme="light"] .section-card-special .percentage-text,
-:root[data-theme="light"] .section-card-special .progress-info span {
-    color: #78350f !important;
-}
-:root[data-theme="light"] .section-card-special .sec-updated {
-    color: #92400e !important;
-    font-weight: 700;
-}
-:root[data-theme="light"] .section-card-special .sec-avatar {
-    background: #f59e0b !important;
-    color: #ffffff !important;
-    border: 1px solid #b45309 !important;
-}
+:root[data-theme="light"] .section-card-special .progress-info span { color: #78350f !important; }
+:root[data-theme="light"] .section-card-special .sec-updated { color: #92400e !important; font-weight: 700; }
+:root[data-theme="light"] .section-card-special .sec-avatar { background: #f59e0b !important; color: #ffffff !important; border: 1px solid #b45309 !important; }
 
 :root[data-theme="dark"] .section-card-special {
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.18) 0%, rgba(217, 119, 6, 0.1) 100%) !important;
@@ -468,156 +336,99 @@ body {
     box-shadow: 0 0 20px rgba(217, 119, 6, 0.25) !important;
 }
 
-.sec-header-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
+.sec-header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .sec-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: var(--pill-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    color: var(--primary-color);
-    font-size: 16px;
-    border: 1px solid var(--sub-card-border);
+    width: 40px; height: 40px; border-radius: 12px; background: var(--pill-bg);
+    display: flex; align-items: center; justify-content: center; font-weight: 800;
+    color: var(--primary-color); font-size: 16px; border: 1px solid var(--sub-card-border);
 }
-.sec-title-group h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--text-main);
-}
-.sec-updated {
-    font-size: 11px;
-    color: var(--text-muted);
-}
+.sec-title-group h3 { margin: 0; font-size: 18px; font-weight: 800; color: var(--text-main); }
+.sec-updated { font-size: 11px; color: var(--text-muted); }
 
 .progress-info { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
 .progress-container { background: var(--sub-card-border); border-radius: 999px; height: 8px; margin: 8px 0; overflow: hidden; }
 .progress-bar { background: linear-gradient(90deg, #f59e0b 0%, #10b981 100%); height: 100%; width: 0%; transition: width 0.4s ease; }
 .percentage-text { font-weight: 800; color: #10b981; font-size: 16px; }
 
-.click-notice-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: var(--primary-color);
-    margin-top: 10px;
-    cursor: pointer;
-    font-weight: 600;
-}
+.click-notice-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--primary-color); margin-top: 10px; cursor: pointer; font-weight: 600; }
 
 .subject-container { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sub-card-border); }
-.subject-block { margin-bottom: 12px; background: var(--sub-card-bg); border: 1px solid var(--sub-card-border); padding: 12px; border-radius: 14px; }
+.subject-block { 
+    margin-bottom: 12px; 
+    background: var(--sub-card-bg); 
+    border: 1px solid var(--sub-card-border); 
+    padding: 14px 16px; 
+    border-radius: 14px; 
+}
 .subject-clickable-header { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
 .subject-title { font-size: 15px; font-weight: 700; color: var(--primary-color); margin: 0; display: flex; justify-content: space-between; align-items: center; }
 
-.topic-list { display: none; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sub-card-border); }
-.topic-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--card-bg); border-radius: 10px; margin-bottom: 6px; border: 1px solid var(--sub-card-border); }
-.topic-left { display: flex; align-items: center; color: var(--text-main); font-weight: 500; font-size: 13.5px; }
-.topic-left input { margin-right: 10px; width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary-color); }
+.chapter-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--card-bg); border-radius: 10px; margin-bottom: 6px; border: 1px solid var(--sub-card-border); }
+.chapter-left { display: flex; align-items: flex-start; flex-direction: column; gap: 3px; cursor: pointer; flex-grow: 1; }
+.chapter-name-row { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13.5px; color: var(--text-main); }
+.topic-click-hint { font-size: 11px; color: var(--primary-color); font-weight: 600; text-decoration: underline; }
 
-.status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 8px; }
-.status-pending { background: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); }
+.status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+.status-pending { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); border: 1px solid rgba(100, 116, 139, 0.3); }
+.status-progress { background: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); }
 .status-covered { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
 
-/* Login Box (Student Profile Panel) */
+.spinner-yellow {
+    width: 8px; height: 8px; border: 2px solid #f59e0b; border-top: 2px solid transparent;
+    border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Popup Modal Styles */
+#custom-popup-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.65); z-index: 9999; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.popup-box {
+    background: var(--card-bg); border: 1px solid var(--sub-card-border);
+    padding: 24px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.popup-title { font-size: 17px; font-weight: 800; color: var(--text-main); margin: 0 0 4px 0; }
+.popup-subtitle { font-size: 12px; color: var(--text-muted); margin: 0 0 15px 0; }
+.popup-topics-container { max-height: 260px; overflow-y: auto; text-align: left; margin-bottom: 20px; padding-right: 4px; }
+.popup-topic-row { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--sub-card-bg); border: 1px solid var(--sub-card-border); border-radius: 12px; margin-bottom: 8px; font-size: 13px; gap: 10px; }
+.popup-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+.popup-action-btn { padding: 12px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; color: #fff; }
+.popup-close-btn { background: #64748b; color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; width: 100%; }
+
 .login-box { text-align: left; padding: 25px 20px; }
 .login-box-header { text-align: center; margin-bottom: 20px; }
 .login-box-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--pill-bg);
-    border: 1px solid var(--sub-card-border);
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    margin: 0 auto 12px auto;
+    width: 60px; height: 60px; background: var(--pill-bg); border: 1px solid var(--sub-card-border);
+    border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 12px auto;
 }
-
-.input-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin: 12px 0 6px 0;
-}
-
+.input-label { display: block; font-size: 13px; font-weight: 700; color: var(--text-main); margin: 12px 0 6px 0; }
 .login-box input { 
-    width: 100%; 
-    padding: 12px; 
-    background: var(--input-bg); 
-    border: 1px solid var(--input-border); 
-    color: var(--text-main); 
-    border-radius: 12px; 
-    font-size: 14px; 
-    box-sizing: border-box; 
-    outline: none;
+    width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--input-border); 
+    color: var(--text-main); border-radius: 12px; font-size: 14px; box-sizing: border-box; outline: none;
 }
-
 .login-btn { 
-    width: 100%; 
-    padding: 14px; 
-    background: var(--primary-btn); 
-    color: white; 
-    border: none; 
-    border-radius: 12px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    font-size: 15px; 
-    margin-top: 18px; 
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); 
+    width: 100%; padding: 14px; background: var(--primary-btn); color: white; border: none; 
+    border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 15px; margin-top: 18px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); 
 }
-
 .logout-btn { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; float: right; }
 
-/* Footer Styling */
 .footer-note { text-align: center; margin: 30px auto 10px auto; padding-top: 20px; border-top: 1px solid var(--sub-card-border); width: 100%; }
 .footer-rhyme { font-style: italic; color: var(--footer-rhyme-color); font-size: 16px; font-weight: 700; margin: 0 0 6px 0; }
 .footer-author { font-weight: 800; color: var(--footer-author-color); font-size: 16px; margin: 0 0 12px 0; }
 .footer-powered { font-size: 13px; color: var(--footer-powered-color); text-transform: uppercase; letter-spacing: 1.5px; margin: 12px 0 15px 0; font-weight: 900; }
 
-.footer-btn-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
-}
+.footer-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
 .footer-pill-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--sub-card-border);
-    color: var(--text-main);
-    padding: 12px;
-    border-radius: 16px;
-    font-size: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    box-shadow: var(--card-shadow);
-    transition: all 0.3s ease;
+    background: var(--card-bg); border: 1px solid var(--sub-card-border); color: var(--text-main);
+    padding: 12px; border-radius: 16px; font-size: 12px; font-weight: 700; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: var(--card-shadow); transition: all 0.3s ease;
 }
-
-/* Contributors Button Hover & Active Animation */
 .animated-contributors-btn:hover, .animated-contributors-btn:active {
-    transform: translateY(-3px) scale(1.03);
-    background: var(--primary-btn) !important;
-    color: #ffffff !important;
-    border-color: #a855f7 !important;
-    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4) !important;
+    transform: translateY(-3px) scale(1.03); background: var(--primary-btn) !important; color: #ffffff !important; border-color: #a855f7 !important; box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4) !important;
 }
-
 </style>
 
 <!-- Firebase SDK Scripts -->
@@ -629,12 +440,8 @@ body {
 
 <!-- Top Header Row -->
 <div class="top-header-row">
-    <div class="live-tracker-pill">
-        <span class="green-dot"></span> Live Tracker
-    </div>
-    <button class="theme-toggle-btn" onclick="toggleTheme()">
-        🎨 Dark/Light
-    </button>
+    <div class="live-tracker-pill"><span class="green-dot"></span> Live Tracker</div>
+    <button class="theme-toggle-btn" onclick="toggleTheme()">🎨 Theme</button>
 </div>
 
 <div class="logo-container">
@@ -649,12 +456,10 @@ body {
     </div>
 </div>
 
-<!-- Intro Banner -->
 <div class="intro-banner">
     ℹ️ এই প্ল্যাটফর্মে <span class="highlight-sec">Section Progress</span> এ কোন সেকশনে কতটুকু সিলেবাস শেষ হয়েছে তা দেখতে পারবে এবং <span class="highlight-ind">Individual Progress</span> এ ক্লিক করে রোল ও গোপন পিন দিয়ে তোমার নিজস্ব সিলেবাস ট্র্যাকার চালু করে অগ্রগতি বিশ্লেষণ করতে পারবে। (<a href="facilities.html" class="facilities-link">আর যেসব সুবিধা পাবে →</a>)
 </div>
 
-<!-- Stats Grid -->
 <div class="card-grid-2">
     <div class="sunset-card">
         <div class="card-icon-badge">📅</div>
@@ -674,25 +479,20 @@ body {
     <div class="sunset-card">
         <div class="card-icon-badge">👨‍🏫</div>
         <div class="card-label">ক্লাস হয়েছে</div>
-        <div><span id="workdays-passed" class="card-value value-green">0</span> <span class="card-unit">দিন</span></div>
+        <div><span id="workdays-passed" class="card-value value-green">14</span> <span class="card-unit">দিন</span></div>
         <div class="card-sub">ছুটি ও পরীক্ষা বাদে</div>
     </div>
     <div class="sunset-card">
         <div class="card-icon-badge">💼</div>
         <div class="card-label">কার্যদিবস বাকি</div>
-        <div><span id="workdays-remaining" class="card-value value-cyan">0</span> <span class="card-unit">দিন</span></div>
+        <div><span id="workdays-remaining" class="card-value value-cyan">185</span> <span class="card-unit">দিন</span></div>
         <div class="card-sub">মোট কার্যদিবস: ১৯৯ দিন</div>
     </div>
 </div>
 
-<!-- Batch Analysis Card -->
 <div class="analysis-container-card">
-    <div class="analysis-header">
-        📊 ব্যাচ সিলেবাস প্রোগ্রেস এনালাইসিস
-    </div>
-    <div class="total-students-pill">
-        TOTAL: <span id="total-tracked-students">0</span> STUDENTS
-    </div>
+    <div class="analysis-header">📊 ব্যাচ সিলেবাস প্রোগ্রেস এনালাইসিস</div>
+    <div class="total-students-pill">TOTAL: <span id="total-tracked-students">0</span> STUDENTS</div>
 
     <div class="analysis-grid-2x2">
         <div class="analysis-ring-box">
@@ -724,24 +524,15 @@ body {
     </div>
 </div>
 
-<!-- Tab Selection -->
 <div class="tab-buttons">
-    <button id="btn-sec" class="tab-btn active" onclick="switchTab('section-view')">
-        📚 Section Progress
-    </button>
-    <button id="btn-ind" class="tab-btn" onclick="switchTab('individual-view')">
-        🎓 Individual Progress
-    </button>
+    <button id="btn-sec" class="tab-btn active" onclick="switchTab('section-view')">📚 Section Progress</button>
+    <button id="btn-ind" class="tab-btn" onclick="switchTab('individual-view')">🎓 Individual Progress</button>
 </div>
 
-<!-- Section View -->
 <div id="section-view" class="tab-content active">
-    <button id="admin-login-btn" class="admin-edit-pill-btn" onclick="openAdminModal()">
-        🔒 Admin Edit
-    </button>
+    <button id="admin-login-btn" class="admin-edit-pill-btn" onclick="openAdminModal()">🔒 Admin Edit</button>
 
-    <!-- Real-time Live Filter Search Bar -->
-    <input type="text" id="live-search-input" class="search-input-box" placeholder="Search section or topic..." onkeyup="filterSyllabusSearch()">
+    <input type="text" id="live-search-input" class="search-input-box" placeholder="Search section or chapter..." onkeyup="filterSyllabusSearch()">
 
     <div id="admin-pin-modal" class="section-card" style="display: none; text-align: center;">
         <h4 style="margin: 0 0 8px 0; color: var(--primary-color);">Section Admin Login</h4>
@@ -757,7 +548,6 @@ body {
     <div id="sections-wrapper"></div>
 </div>
 
-<!-- Individual View -->
 <div id="individual-view" class="tab-content">
     <div id="login-form-block" class="section-card login-box">
         <div class="login-box-header">
@@ -789,13 +579,28 @@ body {
             <p style="margin:0; font-size:14px; opacity:0.9;">তোমার নিজস্ব কাস্টম সিলেবাস ড্যাশবোর্ড</p>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
                 <span style="font-weight: 600;">তোমার মোট সিলেবাস শেষ হয়েছে:</span>
-                <span id="user-total-percent" style="font-size: 22px; font-weight: 800; color: #34d399;">0%</span>
+                <span id="user-total-percent" style="font-size: 22px; font-weight: 800; color: #34d399;">0.00%</span>
             </div>
             <div class="progress-container" style="background: rgba(255, 255, 255, 0.2); margin-top: 10px;">
                 <div id="user-total-bar" class="progress-bar" style="background: #34d399; width: 0%;"></div>
             </div>
         </div>
         <div id="individual-syllabus-wrapper"></div>
+    </div>
+</div>
+
+<!-- Dynamic Chapter & Topic Popup Modal -->
+<div id="custom-popup-modal">
+    <div class="popup-box">
+        <h3 id="popup-item-title" class="popup-title">Chapter / Topics</h3>
+        <p id="popup-item-subtitle" class="popup-subtitle">স্ট্যাটাস সিলেক্ট করুন</p>
+
+        <p id="popup-instruction-text" style="display:none; font-size:13px; font-weight:600; color:var(--primary-color); margin-bottom:15px; line-height: 1.5;"></p>
+        
+        <div id="popup-action-buttons" class="popup-btn-grid" style="display:none;"></div>
+        <div id="popup-topics-list" class="popup-topics-container" style="display:none;"></div>
+
+        <button class="popup-close-btn" onclick="closeCustomPopup()">বন্ধ করুন</button>
     </div>
 </div>
 
@@ -820,16 +625,21 @@ body {
 <script>
 const extraCanceledClassDays = 0;
 const SECTION_ADMIN_PIN = "7098";
-let isAdminLoggedIn = false;
+let isAdminLoggedIn = sessionStorage.getItem('is_admin_logged_in') === 'true';
 
-// Theme Switcher Logic
+if (isAdminLoggedIn) {
+    window.addEventListener('DOMContentLoaded', () => {
+        const adminBtn = document.getElementById('admin-login-btn');
+        if (adminBtn) adminBtn.innerText = "🔓 Admin Mode ON";
+    });
+}
+
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
 }
 
-// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyE1N_jw7UygPCBk8zQM-wXomhT-NyYI0Qs",
     authDomain: "cpscshsc-tracker.firebaseapp.com",
@@ -843,94 +653,248 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+/* Syllabus Structure: Bangla, English & ICT have empty topics arrays (no sub-topics). PCBM have topics. */
 const syllabusStructure = [
 {
 id: 'bn1',
 name: 'বাংলা ১ম পত্র',
-topics: [
-'গদ্য-১: অপরিচিতা', 'গদ্য-২: কারবালা-প্রান্তর', 'গদ্য-৩: আত্মচরিত', 'গদ্য-৪: বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', 'গদ্য-৫: সাহিত্যে খেলা', 'গদ্য-৬: বিলাসী', 'গদ্য-৭: অর্ধাঙ্গী', 'গদ্য-৮: শিক্ষাচিন্তা', 'গদ্য-৯: আহ্বান', 'গদ্য-১০: ভুলের মূল্য', 'গদ্য-১১: যৌবনের গান', 'গদ্য-১২: তাজমহল', 'গدم-১৩: জীবন ও বৃক্ষ', 'গদ্য-১৪: মানব-কল্যাণ', 'গদ্য-১৫: গন্তব্য কাবুল', 'গদ্য-১৬: মাসি-পিসি', 'গদ্য-১৭: কলিমদ্দি দফাদার', 'গদ্য-১৮: সৌদামিনী মালো', 'গদ্য-১৯: চেতনার অ্যালবাম', 'গদ্য-২০: একটি তুলসী গাছের কাহিনী', 'গদ্য-২১: মানুষ', 'গদ্য-২২: মৌসুম', 'গদ্য-২৩: গহন কোন বনের ধারে', 'গদ্য-২৪: কপিলদাস মুর্মুর শেষ কাজ', 'গদ্য-২৫: জাদুঘরে কেন যাব', 'গদ্য-২৬: নেকলেস', 'গদ্য-২৭: জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য, গান ও স্লোগান (সংকলিত)', 'গদ্য-২৮: রেইনকোট',
-'কবিতা-১: স্বদেশ', 'কবিতা-২: ঋতু বর্ণন', 'কবিতা-৩: বিভীষণের প্রতি মেঘনাদ', 'কবিতা-৪: ফুল্লরার বারোমাস্যা', 'কবিতা-৫: সুখ', 'কবিতা-৬: মানব-বন্দনা', 'কবিতা-৭: সোনার তরী', 'কবিতা-৮: ঐকতান', 'কবিতা-৯: নবান্ন', 'কবিতা-১০: বিদ্রোহী', 'কবিতা-১১: সাম্যবাদী', 'কবিতা-১২: সুচেতনা', 'কবিতা-১৩: প্রতিদান', 'কবিতা-১৪: তাহারেই পড়ে মনে', 'কবিতা-১৫: আগে কী সুন্দর দিন কাটাইতাম', 'কবিতা-১৬: সেই অস্ত্র', 'কবিতা-১৭: পদ্মা', 'কবিতা-১৮: আলো চাই', 'কবিতা-১৯: আঠারো বছর বয়স', 'কবিতা-২০: ফেব্রুয়ারি ১৯৬৯', 'কবিতা-২১: হাড়', 'কবিতা-২২: তোমার আপন পতাকা', 'কবিতা-২৩: আমি কিংবদন্তির কথা বলছি', 'কবিতা-২৪: নূরলদীনের কথা মনে পড়ে যায়', 'কবিতা-২৫: ছবি', 'কবিতা-২৬: প্রত্যাবর্তনের লজ্জা', 'কবিতা-২৭: ভূমিহীন কৃষিজীবী ইচ্ছে তার', 'কবিতা-২৮: ব্ল্যাক-আউটের পূর্ণিমায়'
+chapters: [
+{ name: 'গদ্য-১: অপরিচিতা', topics: [] },
+{ name: 'গদ্য-২: কারবালা-প্রান্তর', topics: [] },
+{ name: 'গদ্য-৩: আত্মচরিত', topics: [] },
+{ name: 'গদ্য-৪: বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', topics: [] },
+{ name: 'গদ্য-৫: সাহিত্যে খেলা', topics: [] },
+{ name: 'গদ্য-৬: বিলাসী', topics: [] },
+{ name: 'গদ্য-৭: অর্ধাঙ্গী', topics: [] },
+{ name: 'গদ্য-৮: শিক্ষাচিন্তা', topics: [] },
+{ name: 'গদ্য-৯: আহ্বান', topics: [] },
+{ name: 'গদ্য-১০: ভুলের মূল্য', topics: [] },
+{ name: 'গদ্য-১১: যৌবনের গান', topics: [] },
+{ name: 'গদ্য-১২: তাজমহল', topics: [] },
+{ name: 'গদ্য-১৩: জীবন ও বৃক্ষ', topics: [] },
+{ name: 'গদ্য-১৪: মানব-কল্যাণ', topics: [] },
+{ name: 'গদ্য-১৫: গন্তব্য কাবুল', topics: [] },
+{ name: 'গদ্য-১৬: মাসি-পিসি', topics: [] },
+{ name: 'গদ্য-১৭: কলিমদ্দি দফাদার', topics: [] },
+{ name: 'গদ্য-১৮: সৌদামিনী মালো', topics: [] },
+{ name: 'গদ্য-১৯: চেতনার অ্যালবাম', topics: [] },
+{ name: 'গদ্য-২০: একটি তুলসী গাছের কাহিনী', topics: [] },
+{ name: 'গদ্য-২১: মানুষ', topics: [] },
+{ name: 'গদ্য-২২: মৌসুম', topics: [] },
+{ name: 'গদ্য-২৩: গহন কোন বনের ধারে', topics: [] },
+{ name: 'গদ্য-২৪: কপিলদাস মুর্মুর শেষ কাজ', topics: [] },
+{ name: 'গদ্য-২৫: জাদুঘরে কেন যাব', topics: [] },
+{ name: 'গদ্য-২৬: নেকলেস', topics: [] },
+{ name: 'গদ্য-২৭: জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য', topics: [] },
+{ name: 'গদ্য-২৮: রেইনকোট', topics: [] },
+{ name: 'কবিতা-১: স্বদেশ', topics: [] },
+{ name: 'কবিতা-২: ঋতু বর্ণন', topics: [] },
+{ name: 'কবিতা-৩: বিভীষণের প্রতি মেঘনাদ', topics: [] },
+{ name: 'কবিতা-৪: ফুল্লরার বারোমাস্যা', topics: [] },
+{ name: 'কবিতা-৫: সুখ', topics: [] },
+{ name: 'কবিতা-৬: মানব-বন্দনা', topics: [] },
+{ name: 'কবিতা-৭: সোনার তরী', topics: [] },
+{ name: 'কবিতা-৮: ঐকতান', topics: [] },
+{ name: 'কবিতা-৯: নবান্ন', topics: [] },
+{ name: 'কবিতা-১০: বিদ্রোহী', topics: [] },
+{ name: 'কবিতা-১১: সাম্যবাদী', topics: [] },
+{ name: 'কবিতা-১২: সুচেতনা', topics: [] },
+{ name: 'কবিতা-১৩: প্রতিদান', topics: [] },
+{ name: 'কবিতা-১৪: তাহারেই পড়ে মনে', topics: [] },
+{ name: 'কবিতা-১৫: আগে কী সুন্দর দিন কাটাইতাম', topics: [] },
+{ name: 'কবিতা-১৬: সেই অস্ত্র', topics: [] },
+{ name: 'কবিতা-১৭: পদ্মা', topics: [] },
+{ name: 'কবিতা-১৮: আলো চাই', topics: [] },
+{ name: 'কবিতা-১৯: আঠারো বছর বয়স', topics: [] },
+{ name: 'কবিতা-২০: ফেব্রুয়ারি ১৯৬৯', topics: [] },
+{ name: 'কবিতা-২১: হাড়', topics: [] },
+{ name: 'কবিতা-২২: তোমার আপন পতাকা', topics: [] },
+{ name: 'কবিতা-২৩: আমি কিংবদন্তির কথা বলছি', topics: [] },
+{ name: 'কবিতা-২৪: নূরলদীনের কথা মনে পড়ে যায়', topics: [] },
+{ name: 'কবিতা-২৫: ছবি', topics: [] },
+{ name: 'কবিতা-২৬: প্রত্যাবর্তনের লজ্জা', topics: [] },
+{ name: 'কবিতা-২৭: ভূমিহীন কৃষিজীবী', topics: [] },
+{ name: 'কবিতা-২৮: ব্ল্যাক-আউটের পূর্ণিমায়', topics: [] }
 ]
 },
 {
 id: 'bn2',
 name: 'বাংলা ২য় পত্র',
-topics: [
-'ব্যাকরণ-১: বাংলা উচ্চারণের নিয়ম', 'ব্যাকরণ-২: বাংলা বানানের নিয়ম', 'ব্যাকরণ-৩: বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি', 'ব্যাকরণ-৪: শব্দ গঠন (উপসর্গ, প্রত্যয়, সমাস)', 'ব্যাকরণ-৫: বাক্যতত্ত্ব', 'ব্যাকরণ-৬: বাংলা ভাষার অপপ্রয়োগ ও শুদ্ধ প্রয়োগ',
-'নির্মিতি-১: পরিভাষা/ অনুবাদ', 'নির্মিতি-২: দিনলিপি লিখন / অভিজ্ঞতা বর্ণনা', 'নির্মিতি-৩: ভাষণ লিখন / প্রতিবেদন লিখন', 'নির্মিতি-৪: বৈদ্যুতিন চিঠি ও ক্ষুদে বার্তা লিখন পত্র, আবেদনপত্র', 'নির্মিতি-৫: সারাংশ, সারমর্ম ও ভাবসম্প্রসারণ লিখন / ভাব-সম্প্রসারণ', 'নির্মিতি-৬: সংলাপ লিখন খুদে গল্প লিখন', 'নির্মিতি-৭: প্রবন্ধ-নিবন্ধ লিখন'
+chapters: [
+{ name: 'ব্যাকরণ-১: বাংলা উচ্চারণের নিয়ম', topics: [] },
+{ name: 'ব্যাকরণ-২: বাংলা বানানের নিয়ম', topics: [] },
+{ name: 'ব্যাকরণ-৩: ব্যাকরণিক শব্দশ্রেণি', topics: [] },
+{ name: 'ব্যাকরণ-৪: শব্দ গঠন', topics: [] },
+{ name: 'ব্যাকরণ-৫: বাক্যতত্ত্ব', topics: [] },
+{ name: 'ব্যাকরণ-৬: অপপ্রয়োগ ও শুদ্ধ প্রয়োগ', topics: [] },
+{ name: 'নির্মিতি-১: পরিভাষা ও অনুবাদ', topics: [] },
+{ name: 'নির্মিতি-২: দিনলিপি ও অভিজ্ঞতা', topics: [] },
+{ name: 'নির্মিতি-৩: ভাষণ ও প্রতিবেদন', topics: [] },
+{ name: 'নির্মিতি-৪: ইমেইল ও পত্র লিখন', topics: [] },
+{ name: 'নির্মিতি-৫: সারাংশ ও ভাবসম্প্রসারণ', topics: [] },
+{ name: 'নির্মিতি-৬: সংলাপ ও খুদে গল্প', topics: [] },
+{ name: 'নির্মিতি-৭: প্রবন্ধ রচনা', topics: [] }
 ]
 },
 {
 id: 'en1',
 name: 'ইংরেজি ১ম পত্র',
-topics: ['1. MCQ (seen passage-1)', '2. Short Answer Question (seen passage-1)', '3. Table/Flowchart (seen passage-2)', '4. Summary Writing (seen passage-3)', '5. Cloze Test with Clues', '6. Cloze Test without Clues', '7. Rearranging', '8. Paragraph Writing', '9. Completing Story', '10. Informal Letter / Email', '11. Analyzing Graph / Chart', '12. Theme Writing / Appreciating Poems']
+chapters: [
+{ name: 'Unit 1: People or Institutions Making History', topics: [] },
+{ name: 'Unit 2: Dreams', topics: [] },
+{ name: 'Unit 3: Adolescence', topics: [] },
+{ name: 'Unit 4: Human Rights', topics: [] },
+{ name: 'Unit 5: Education', topics: [] },
+{ name: 'Unit 6: Adolescence and Environment', topics: [] }
+]
 },
 {
 id: 'en2',
 name: 'ইংরেজি ২য় পত্র',
-topics: ['1. Article', '2. Preposition', '3. Words and Phrases', '4. Completing Sentence', '5. Right Form of Verbs', '6. Transformation', '7. Narration', '8. Pronoun Reference', '9. Modifier', '10. Connectors', '11. Synonym/Antonym', '12. Punctuation', '13. Paragraph', '14. Application', '15. Report Writing', '16. Composition']
+chapters: [
+{ name: '1. Article & Preposition', topics: [] },
+{ name: '2. Right Form of Verbs', topics: [] },
+{ name: '3. Completing Sentences', topics: [] },
+{ name: '4. Transformation of Sentences', topics: [] },
+{ name: '5. Narration', topics: [] },
+{ name: '6. Modifiers & Connectors', topics: [] },
+{ name: '7. Synonym & Antonym', topics: [] },
+{ name: '8. Paragraph & Application', topics: [] }
+]
 },
 {
 id: 'ph1',
 name: 'পদার্থবিজ্ঞান ১ম পত্র',
-topics: [
-'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', 'অধ্যায় ২: ভেক্টর', 'অধ্যায় ৩: গতিবিদ্যা', 'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', 'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', 'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', 'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', 'অধ্যায় ৮: পর্যায়বৃত্ত গতি', 'অধ্যায় ৯: তরঙ্গ', 'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব'
+chapters: [
+{ name: 'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', topics: ['ভৌত রাশির পরিমাপ', 'মাত্রা ও সমীকরণ', 'ত্রুটি ও নির্ভুলতা', 'পরিমাপের যন্ত্রপাতী', 'ব্যবহারিক পরীক্ষণ'] },
+{ name: 'অধ্যায় ২: ভেক্টর', topics: ['ভেক্টর রাশি ও স্কেলার রাশি', 'ভেক্টরের যোগ ও বিয়োগ', 'ডট গুণন ও ক্রস গুণন', 'ভেক্টরের ব্যবকলন', 'আপেক্ষিক বেগ'] },
+{ name: 'অধ্যায় ৩: গতিবিদ্যা', topics: ['চলন গতি ও স্থিতি', 'সুষম ও অসম ত্বরণ', 'প্রাস ও এর গতিপথ', 'উল্লম্ব ও আনুভূমিক গতি', 'আপেক্ষিক গতি'] },
+{ name: 'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', topics: ['বলের ধারণা ও নিউটনের সূত্র', 'ভরবেগ ও সংরক্ষণশীলতা', 'ঘর্ষণ বল ও এর প্রকারভেদ', 'কেন্দ্রমুখী বল ও টর্ক', 'ব্যাংকিং ও লিফটের গতি'] },
+{ name: 'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', topics: ['কাজ ও কাজের পরিমাপ', 'গতিশক্তি ও বিভব শক্তি', 'ক্ষমতা ও কর্মদক্ষতা', 'শক্তির সংরক্ষণশীলতা', 'সংরক্ষণশীল বল'] },
+{ name: 'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', topics: ['মহাকর্ষ সূত্র', 'অভিকর্ষ ত্বরণ ও তার পরিবর্তন', 'মহাকর্ষীয় বিভব ও শক্তি', 'পলায়ন বেগ', 'কৃত্রিম উপগ্রহ'] },
+{ name: 'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', topics: ['পীড়ন ও বিকৃতি', 'হুকের সূত্র ও ইয়ং এর গুণাঙ্ক', 'পৃষ্ঠট টান', 'সান্দ্রতা ও স্টকসের সূত্র', 'পয়সনের অনুপাত'] },
+{ name: 'অধ্যায় ৮: পর্যায়বৃত্ত গতি', topics: ['সরল ছন্দিত স্পন্দন', 'সরল দোলক', 'স্পন্দনের শক্তি', 'অবdamping ও অনুনাদ', 'দোলগতির সমীকরণ'] },
+{ name: 'অধ্যায় ৯: তরঙ্গ', topics: ['তরঙ্গের প্রকারভেদ', 'শব্দ তরঙ্গ ও তীব্রতা', 'বিবিট ও ডপলার ক্রিয়া', 'স্থির তরঙ্গ', 'সুরযুক্ত শব্দ'] },
+{ name: 'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব', topics: ['বয়েল ও চার্লসের সূত্র', 'আদর্শ গ্যাস সমীকরণ', 'গ্যাসের গতিতত্ত্ব', 'মোলীয় তাপধারিতা', 'আরএমএস বেগ'] }
 ]
 },
 {
 id: 'ph2',
 name: 'পদার্থবিজ্ঞান ২য় পত্র',
-topics: [
-'অধ্যায় ১: তাপগতিবিদ্যা', 'অধ্যায় ২: স্থির তড়িৎ', 'অধ্যায় ৩: চল তড়িৎ', 'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', 'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', 'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', 'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', 'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', 'অধ্যায় ৯: পরমাণুর মডেল', 'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স', 'অধ্যায় ১১: জ্যোতির্বিজ্ঞান'
+chapters: [
+{ name: 'অধ্যায় ১: তাপগতিবিদ্যা', topics: ['তাপ ও তাপগতিবিদ্যার সূত্র', 'সমোষ্ণ ও রুদ্রতাপীয় প্রক্রিয়া', 'কার্নো ইঞ্জিন ও দক্ষতা', 'এনট্রপি ও এর পরিবর্তন', 'তাপীয় ইঞ্জিন'] },
+{ name: 'অধ্যায় ২: স্থির তড়িৎ', topics: ['কুলম্বের সূত্র ও ক্ষেত্র', 'তড়িৎ প্রাবল্য ও বিভব', 'গাউসের উপপাদ্য', 'ধারক ও ধারকত্ব', 'তড়িৎ দ্বিমেরু'] },
+{ name: 'অধ্যায় ৩: চল তড়িৎ', topics: ['ওহমের সূত্র ও রোধ', 'কির্শফের সূত্র', 'হুইটস্টোন ব্রিজ', 'মিটার ব্রিজ ও পোটেনশিওমিটার', 'তড়িৎ ক্ষমতা ও তাপীয় ক্রিয়া'] },
+{ name: 'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', topics: ['বায়ো-সাভার্ট সূত্র', 'অ্যাম্পিয়ারের সূত্র', 'চৌম্বক ক্ষেত্রে চার্জের গতি', 'লোরেন্টজ বল', 'গ্যালভানোমিটার'] },
+{ name: 'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', topics: ['ফ্যারাডের সূত্র ও লেন্সের সূত্র', 'স্বাবেশ ও পারস্পরিক আবেশ', 'এসি জেনারেটর ও ট্রান্সফর্মার', 'এডি কারেন্ট', 'তড়িৎ চৌম্বকীয় তরঙ্গ'] },
+{ name: 'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', topics: ['Reflection & Refraction', 'লেন্স ও প্রিজম', 'অপটিক্যাল ইন্সট্রুমেন্টস', 'পূর্ণ অভ্যন্তরীণ প্রতিফলন', 'লেন্স মেকার্স সূত্র'] },
+{ name: 'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', topics: ['হাইজেনুয়েন্সের নীতি', 'ব্যতিচার', 'অপবর্তন', 'সমবর্তন', 'আলোক তরঙ্গের প্রকৃতি'] },
+{ name: 'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', topics: ['আপেক্ষিকতার বিশেষ তত্ত্ব', 'ভর ও শক্তির সমতুল্যতা', 'আলোক তড়িৎ ক্রিয়া', 'কম্পন ও ফোটন', 'ডি ব্রগলি তরঙ্গ'] },
+{ name: 'অধ্যায় ৯: পরমাণুর মডেল ও নিউক্লীয় পদার্থবিজ্ঞান', topics: ['রাদারফোর্ড ও বোর মডেল', 'হাইড্রোজেন বর্ণালী', 'নিউক্লিয়াস', 'তেজস্ক্রিয়তা ও অর্ধায়ু', 'নিউক্লীয় ফিশন ও ফিউশন'] },
+{ name: 'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স', topics: ['শক্তি ব্যান্ড তত্ত্ব', 'ডায়োড ও ট্রানজিস্টর', 'রেটিফায়ার', 'লজিক গেটস', 'আইসি'] },
+{ name: 'অধ্যায় ১১: জ্যোতির্বিজ্ঞান', topics: ['মহাবিশ্বের উৎপত্তি', 'নক্ষত্রের জন্ম ও জীবনচক্র', 'ব্ল্যাক হোল', 'ছায়াপথ', 'টেলিস্কোপ'] }
 ]
 },
 {
 id: 'ch1',
 name: 'রসায়ন ১ম পত্র',
-topics: [
-'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', 'অধ্যায় ২: গুণগত রসায়ন', 'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', 'অধ্যায় ৪: রাসায়নিক পরিবর্তন', 'অধ্যায় ৫: কর্মমুখী রসায়ন'
+chapters: [
+{ name: 'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', topics: ['ল্যাবরেটরি নিরাপত্তা বিধি', 'বিপদজনক রাসায়নিক চিহ্ন', 'প্রাথমিক চিকিৎসা', 'গ্লাসওয়্যার পরিষ্কার', 'বর্জ্য ব্যবস্থাপনা'] },
+{ name: 'অধ্যায় ২: গুণগত রসায়ন', topics: ['পরমাণুর মডেল ও কোয়ান্টাম সংখ্যা', 'আউফবাউ ও হুন্ডের নীতি', 'বর্ণালী ও রিডবার্গ ধ্রুবক', 'দ্রাব্যতা ও দ্রাব্যতা গুণফল', 'ক্রোম্যাটোগ্রাফি'] },
+{ name: 'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', topics: ['মেন্ডেলিফের পর্যায় সারণি', 'আয়নীকরণ শক্তি ও ইলেকট্রন আসক্তি', 'আইয়োনিক ও সমযোজী বন্ধন', 'হাইড্রোজেন বন্ধন', 'সংকরায়ন'] },
+{ name: 'অধ্যায় ৪: রাসায়নিক পরিবর্তন', topics: ['রাসায়নিক সাম্যাবস্থা', 'ল্য শাতেলিয়ে নীতি', 'অম্ল-ক্ষার তত্ত্ব ও পিএইচ', 'বাফার দ্রবণ', 'দ্রবণ ও ঘনমাত্রা'] },
+{ name: 'অধ্যায় ৫: কর্মমুখী রসায়ন', topics: ['খাদ্য প্রক্রিয়াজাতকরণ', 'ভিনেগার প্রস্তুতি', 'সোডিয়াম বেনজোয়েট', 'কসমেটিকস ও সাবান', 'লেদার কেমিস্ট্রি'] }
 ]
 },
 {
 id: 'ch2',
 name: 'রসায়ন ২য় পত্র',
-topics: [
-'অধ্যায় ১: পরিবেশ রসায়ন', 'অধ্যায় ২: জৈব রসায়ন', 'অধ্যায় ৩: পরিমাণগত রসায়ন', 'অধ্যায় ৪: তড়িৎ রসায়ন', 'অধ্যায় ৫: অর্থনৈতিক রসায়ন'
+chapters: [
+{ name: 'অধ্যায় ১: পরিবেশ রসায়ন', topics: ['বায়ুমণ্ডলের স্তরবিন্যাস', 'গ্রীনহাউস গ্যাস', 'ওজোন স্তর ক্ষয়', 'বায়ু দূষণ', 'পানির দূষণ'] },
+{ name: 'অধ্যায় ২: জৈব রসায়ন', topics: ['নামকরণ ও সমাণুকতা', 'হাইড্রোকার্বন', 'বেনজিন ও অ্যারোমেটিক যৌগ', 'মার্কোভনিকভ নীতি', 'অ্যালকোহল ও এসিড'] },
+{ name: 'অধ্যায় ৩: পরিমাণগত রসায়ন', topics: ['মোল ও মোলারিটি', 'টাইট্রেশন', 'প্রমিত দ্রবণ', 'নরমালিটি', 'জারণ সংখ্যা'] },
+{ name: 'অধ্যায় ৪: তড়িৎ রসায়ন', topics: ['গ্যালভানিক কোষ', 'নর্নস্ট সমীকরণ', 'স্ট্যান্ডার্ড হাইড্রোজেন ইলেকট্রোড', 'তড়িৎ বিশ্লেষণ', 'ব্যাটারি ও ফুয়েল সেল'] },
+{ name: 'অধ্যায় ৫: অর্থনৈতিক রসায়ন', topics: ['ইউরিয়া ও সার শিল্প', 'কাচ ও সিরামিক', 'সিমেন্ট উৎপাদন', 'কাগজ শিল্প', 'ন্যানোটেকনোলজি'] }
 ]
 },
 {
 id: 'm1',
 name: 'উচ্চতর গণিত ১ম পত্র',
-topics: [
-'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', 'অধ্যায় ২: ভেক্টর', 'অধ্যায় ৩: সরলরেখা', 'অধ্যায় ৪: বৃত্ত', 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', 'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', 'অধ্যায় ৭: সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত', 'অধ্যায় ৮: ফাংশন ও ফাংশনের লেখচিত্র', 'অধ্যায় ৯: অন্তরীকরণ', 'অধ্যায় ১০: যোগজীকরণ'
+chapters: [
+{ name: 'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', topics: ['ম্যাট্রিক্সের প্রকারভেদ', 'বিপরীত ম্যাট্রিক্স', 'নির্ণায়কের ধর্মাবলি', 'ক্রেমারের নিয়ম', 'র‍্যাংক'] },
+{ name: 'অধ্যায় ২: ভেক্টর', topics: ['জ্যামিতিক প্রয়োগ', 'স্কেলার ও ভেক্টর ত্রিগুণক', 'সরলরেখা ও সমতল', 'দিক কোসাইন', 'কৌণিক দূরত্ব'] },
+{ name: 'অধ্যায় ৩: সরলরেখা', topics: ['স্থানাঙ্ক রূপান্তর', 'ঢাল ও সমীকরণ', 'দুটি রেখার অন্তৰ্গত কোণ', 'লম্ব দূরত্ব', 'একজোড়া সরলরেখা'] },
+{ name: 'অধ্যায় ৪: বৃত্ত', topics: ['বৃত্তের সমীকরণ', 'স্পর্শক ও অভিলম্ব', 'মূলবিন্দু ও জ্যা', 'ছেদবিন্দু', 'বৃত্তস্থ কোণ'] },
+{ name: 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', topics: ['বিন্যাসের সূত্র', 'সমাবেশের ধারণা', 'সাদৃশ্যপূর্ণ বস্তু', 'শর্তযুক্ত বিন্যাস', 'দ্বিপদী প্রাথমিক রূপ'] },
+{ name: 'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', topics: ['অনুপাতের সূত্র', 'গুণিতক কোণ', 'ত্রিকোণমিতিক সমীকরণ', 'ত্রিভুজের ধর্ম', 'বিপরীত রূপ'] },
+{ name: 'অধ্যায় ৭: সংযুক্ত কোণ', topics: ['সংযুক্ত কোণের অনুপাত', 'সর্বোচ্চ ও সর্বনিম্ন মান', 'যোগ ও গুণফলের রূপান্তর', 'পরিধি সূত্র', 'সৃজনশীল'] },
+{ name: 'অধ্যায় ৮: ফাংশন ও লেখচিত্র', topics: ['ফাংশন ও প্রকারভেদ', 'ডোমেন ও রেঞ্জ', 'বিপরীত ফাংশন', 'লেখচিত্র অঙ্কন', 'রূপান্তর'] },
+{ name: 'অধ্যায় ৯: অন্তরীকরণ', topics: ['সীমা ও অবিচ্ছিন্নতা', 'অমূল নিয়ম', 'চেইন রুল', 'জ্যামিতিক অর্থ', 'গুরুমান/লঘুমান'] },
+{ name: 'অধ্যায় ১০: যোগজীকরণ', topics: ['যোগজীকরণের সূত্র', 'নির্দিষ্ট ও অনির্দিষ্ট যোগজ', 'প্রতিস্থাপন', 'আংশিক ভগ্নাংশ', 'ক্ষেত্রফল'] }
 ]
 },
 {
 id: 'm2',
 name: 'উচ্চতর গণিত ২য় পত্র',
-topics: [
-'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', 'অধ্যায় ২: রৈখিক প্রোগ্রাম', 'অধ্যায় ৩: জটিল সংখ্যা', 'অধ্যায় ৪: বহুপদী ও বহুপদী সমীকরণ', 'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', 'অধ্যায় ৬: কনিক', 'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ', 'অধ্যায় ৮: স্থিতিবিদ্যা', 'অধ্যায় ৯: সমতলে বস্তুকণার গতি', 'অধ্যায় ১০: বিস্তার পরিমাপ ও সম্ভাবনা'
+chapters: [
+{ name: 'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', topics: ['বাস্তব সংখ্যার ধর্ম', 'পরম মান ও অসমতা', 'ব্যবধি', 'দ্বিপদী অসমতা', 'গাণিতিক আরোহ'] },
+{ name: 'অধ্যায় ২: রৈখিক প্রোগ্রাম', topics: ['ধারণা', 'আলেখ্যচিত্র সমাধান', 'সীমাবদ্ধ শর্ত', 'সর্বোচ্চকরণ ও সর্বনিম্নকরণ', 'বাস্তব সমস্যা'] },
+{ name: 'অধ্যায় ৩: জটিল সংখ্যা', topics: ['জ্যামিতিক রূপ', 'পোলার ও মডুলাস', 'এককের ঘনমূল', 'ডি মোইভার উপপাদ্য', 'জটিল সমীকরণ'] },
+{ name: 'অধ্যায় ৪: বহুপদী ও সমীকরণ', topics: ['মূল ও সহগ', 'প্রতিসম রাশি', 'দ্বিঘাত ও ত্রিঘাত', 'উৎপাদক উপপাদ্য', 'সাধারণ মূল'] },
+{ name: 'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', topics: ['প্যাসকেল ত্রিভুজ', 'সাধারণ পদ ও মধ্যপদ', 'সূচক ও সহগ', 'অসীম ধারা', 'লগারিদমীয় ধারা'] },
+{ name: 'অধ্যায় ৬: কনিক', topics: ['পরাবৃত্ত', 'উপবৃত্ত', 'অধিবৃত্ত', 'সাধারণ সমীকরণ', 'স্পর্শক'] },
+{ name: 'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন', topics: ['বৈশিষ্ট্য', 'সমীকরণ সমাধান', 'সূত্র ও প্রমাণ', 'মান নির্ণয়', 'গ্রাফ'] },
+{ name: 'অধ্যায় ৮: স্থিতিবিদ্যা', topics: ['বলের লব্ধি', 'সামান্তরিক সূত্র', 'লম্ব ও সমান্তরাল বল', 'ভ্রামক ও যুগল', 'ভারকেন্দ্র'] },
+{ name: 'অধ্যায় ৯: সমতলে বস্তুকণার গতি', topics: ['প্রাসের গতি', 'নিউটনের সূত্র', 'গতিশক্তি ও কাজ', 'সংঘর্ষ', 'সাপেক্ষ গতি'] },
+{ name: 'অধ্যায় ১০: সম্ভাবনা', topics: ['প্রাথমিক ধারণা', 'শর্তাধীন সম্ভাবনা', 'বেসের উপপাদ্য', 'যদৃচ্ছ চলক', 'দ্বিপদী বিন্যাস'] }
 ]
 },
 {
 id: 'biol',
 name: 'উদ্ভিদবিজ্ঞান',
-topics: [
-'অধ্যায় ১: কোষ ও এর গঠন', 'অধ্যায় ২: কোষ বিভাজন', 'অধ্যায় ৩: কোষ রসায়ন', 'অধ্যায় ৪: অনুজীব', 'অধ্যায় ৫: শৈবাল ও ছত্রাক', 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী উদ্ভিদ', 'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', 'অধ্যায় ৯: শারীরতত্ত্ব', 'অধ্যায় ১০: প্রজনন', 'অধ্যায় ১১: জীবপ্রযুক্তি', 'অধ্যায় ১২: পরিবেশ'
+chapters: [
+{ name: 'অধ্যায় ১: কোষ ও এর গঠন', topics: ['প্রোক্যারিওটিক ও ইউক্যারিওটিক', 'কোষ প্রাচীর', 'মাইটোকন্ড্রিয়া ও প্লাস্টিড', 'রাইবোজোম', 'নিউক্লিয়াস'] },
+{ name: 'অধ্যায় ২: কোষ বিভাজন', topics: ['মাইটোসিস', 'মিয়োসিস ও ক্রসিং ওভার', 'কোষ চক্র', 'স্পিন্ডল যন্ত্র', 'অ্যাপোপ্টোসিস'] },
+{ name: 'অধ্যায় ৩: কোষ রসায়ন', topics: ['কার্বোহাইড্রেট ও প্রোটিন', 'লিপিদ ও এনজাইম', 'ডিএনএ ও আরএনএ', 'ভিটামিন', 'পানির ভূমিকা'] },
+{ name: 'অধ্যায় ৪: অনুজীব', topics: ['ভাইরাস', 'ব্যাকটেরিয়া', 'ম্যালেরিয়া পরজীবী', 'টিএমভি', 'ব্যাকটেরিওফেজ'] },
+{ name: 'অধ্যায় ৫: শৈবাল ও ছত্রাক', topics: ['স্পাইরোগাইরা', 'ইস্ট ও মাশরুম', 'লাইকেন', 'অর্থনৈতিক গুরুত্ব', 'জনন প্রক্রিয়া'] },
+{ name: 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', topics: ['রিক্সিয়া', 'ফার্ন', 'জনণ জনুক্রম', 'বৈশিষ্ট্য', 'গুরুত্ব'] },
+{ name: 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী', topics: ['সাইকাস ও পাইনাস', 'আবৃতবীজী বৈশিষ্ট্য', 'ফুল ও পুষ্পমঞ্জরি', 'পরাগায়ন', 'ফল ও বীজ'] },
+{ name: 'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', topics: ['ভাজক ও স্থায়ী টিস্যু', 'জাইলেম ও ফ্লোয়েম', 'অন্তর্গঠন', 'স্টোমাটা', 'ভাস্কুলার বান্ডেল'] },
+{ name: 'অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব', topics: ['শোষণ', 'প্রস্বেদন', 'সালোকসংশ্লেষণ', 'শ্বসন', 'নাইট্রোজেন সংবন্ধন'] },
+{ name: 'অধ্যায় ১০: প্রজনন', topics: ['প্রজনন প্রকার', 'গ্রাফটিং', 'টিস্যু কালচার', 'ভ্রূণ বিকাশ', 'হরমোন'] },
+{ name: 'অধ্যায় ১১: জীবপ্রযুক্তি', topics: ['জেনেটিক ইঞ্জিনিয়ারিং', 'রিকম্বিন্যান্ট ডিএনএ', 'প্ল্যাসমিড', 'ক্লোনিং', 'ব্যবহার'] },
+{ name: 'অধ্যায় ১২: পরিবেশ ও বাস্তুতন্ত্র', topics: ['বাস্তুতন্ত্র উপাদান', 'খাদ্য জাল', 'শক্তি প্রবাহ', 'জৈব চক্র', 'সংরক্ষণ'] }
 ]
 },
 {
 id: 'bio2',
 name: 'প্রাণীবিজ্ঞান',
-topics: [
-'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', 'অধ্যায় ২: প্রাণীর পরিচিতি', 'অধ্যায় ৩: মানব শারীরতত্ত্ব: পরিপাক ও শোষণ', 'অধ্যায় ৪: মানব শারীরতত্ত্ব: রক্ত সংবহন', 'অধ্যায় ৫: মানব শারীরতত্ত্ব: শ্বসন ও শ্বাসক্রিয়া', 'অধ্যায় ৬: মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন', 'অধ্যায় ৭: মানব শারীরতত্ত্ব: চলন ও অঙ্গ চালনা', 'অধ্যায় ৮: মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ', 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা', 'অধ্যায় ১০: মানবদেহের প্রতিরক্ষা (ইমিউনিটি)', 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', 'অধ্যায় ১২: প্রাণীর আচরণ'
+chapters: [
+{ name: 'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', topics: ['শ্রেণীবিন্যাস ভিত্তি', 'পর্ব পরিচিতি', 'দ্বি-পদ নামকরণ', 'প্রতিসাম্যতা', 'নটোকর্ড'] },
+{ name: 'অধ্যায় ২: প্রাণীর পরিচিতি (ঘাসফরিড়)', topics: ['বাহ্যিক গঠন', 'রক্ত সংবহন', 'শ্বসন ও রেচন', 'পুঞ্জাক্ষি', 'জীবনচক্র'] },
+{ name: 'অধ্যায় ৩: মানব শারীরতত্ত্ব: পরিপাক', topics: ['মুখ ও পাকস্থলী', 'ক্ষুদ্রান্ত্র ও যকৃত', 'এনজাইম', 'শোষণ', 'রোগ'] },
+{ name: 'অধ্যায় ৪: মানব শারীরতত্ত্ব: রক্ত', topics: ['রক্তকণিকা', 'হৃদপিণ্ড', 'রক্তচাপ', 'ব্লাড গ্রুপ', 'ইসিজি'] },
+{ name: 'অধ্যায় ৫: মানব শারীরতত্ত্ব: শ্বসন', topics: ['শ্বসনতন্ত্র', 'গ্যাসীয় বিনিময়', 'পরিবহন', 'নিয়ন্ত্রণ', 'রোগ'] },
+{ name: 'অধ্যায় ৬: মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন', topics: ['বৃক্ক ও নেফ্রন', 'মূত্র উৎপাদন', 'অসমোরেগুলেশন', 'ডায়ালিসিস', 'রোগ'] },
+{ name: 'অধ্যায় ৭: মানব শারীরতত্ত্ব: চলন', topics: ['কঙ্কালতন্ত্র', 'পেশি সংকোচন', 'অস্থি', 'সন্ধি', 'রোগ'] },
+{ name: 'অধ্যায় ৮: মানব শারীরতত্ত্ব: সমন্বয়', topics: ['স্নায়ুতন্ত্র ও ব্রেন', 'চোখ ও কান', 'অন্তঃক্ষরা গ্রন্থি', 'প্রতিবর্তী ক্রিয়া', 'নিউরন'] },
+{ name: 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা', topics: ['জননতন্ত্র', 'গ্যামেটোজেনেসিস', 'ঋতুচক্র', 'গর্ভাধান', 'প্রসব'] },
+{ name: 'অধ্যায় ১০: ইমিউনিটি', topics: ['ইমিউনিটি প্রকার', 'অ্যান্টিবডি', 'ভ্যাকসিন', 'অ্যালার্জি', 'প্রতিরক্ষা প্রাচীর'] },
+{ name: 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', topics: ['মেন্ডেল সূত্র', 'লিঙ্গ নির্ধারণ', 'ডিএনএ টেস্ট', 'ডারউইনবাদ', 'মানব বিবর্তন'] },
+{ name: 'অধ্যায় ১২: প্রাণীর আচরণ', topics: ['ইনস্টিন্ট', 'ট্যাক্সিস', 'সামাজিক আচরণ', 'সোশ্যাল হায়ারার্কি', 'গুরুত্ব'] }
 ]
 },
 {
 id: 'ict',
 name: 'আইসিটি (ICT)',
-topics: [
-'অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', 'অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং', 'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', 'অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি ও HTML', 'অধ্যায় ৫: প্রোগ্রামিং ভাষা', 'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম'
+chapters: [
+{ name: 'অধ্যায় ১: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', topics: [] },
+{ name: 'অধ্যায় ২: কমিউনিকেশন সিস্টেমস', topics: [] },
+{ name: 'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', topics: [] },
+{ name: 'অধ্যায় ৪: ওয়েব ডিজাইন ও HTML', topics: [] },
+{ name: 'অধ্যায় ৫: প্রোগ্রামিং ভাষা', topics: [] },
+{ name: 'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম', topics: [] }
 ]
 }
 ];
@@ -966,86 +930,428 @@ function getCurrentFormattedDate() {
 }
 
 function renderApp() {
-    const secWrapper = document.getElementById('sections-wrapper');
-    let secHtml = '';
-    sections.forEach((sec, sIdx) => {
-        const secId = `sec_${sIdx}`;
-        const isSectionA = (sec === 'Section A');
-        const letter = sec.replace('Section ', '');
-        const star = isSectionA ? '⭐' : '';
-        const cardClass = isSectionA ? 'section-card section-card-special search-target-sec' : 'section-card search-target-sec';
-        
-        secHtml += `<div class="${cardClass}" data-sec-name="${sec}">
-            <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
-                <div class="sec-header-row">
-                    <div class="sec-avatar">${letter}</div>
-                    <div class="sec-title-group">
-                        <h3>${sec} ${star}</h3>
-                        <div class="sec-updated" id="updated_date_${secId}">Updated: N/A</div>
-                    </div>
-                </div>
-
-                <div class="progress-info">
-                    <span>Syllabus Complete</span>
-                    <span id="percent_text_${secId}" class="percentage-text">0%</span>
-                </div>
-                <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
-                
-                <div class="click-notice-row">
-                    <span>বিষয়বস্তু দেখতে ক্লিক করুন ❯</span>
-                </div>
-            </div>
-            
-            <div id="content_${secId}" class="subject-container">`;
-        
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `${secId}_${sub.id}`;
-            secHtml += `<div id="block_${subUniqueId}" class="subject-block search-target-sub" data-sub-name="${sub.name}">
-                <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
-                    <div class="subject-title"><span>${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight:bold;">0%</span></div>
-                    <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
-                </div>
-                <div id="topics_${subUniqueId}" class="topic-list">`;
-            
-            sub.topics.forEach((topicName, tIdx) => {
-                const tId = `${subUniqueId}_t${tIdx + 1}`;
-                secHtml += `<div class="topic-item search-target-topic" data-topic-name="${topicName}">
-                    <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateCalculations('${secId}')" disabled><label for="${tId}">${topicName}</label></div>
-                    <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
-                </div>`;
-            });
-            secHtml += `</div></div>`;
-        });
-        secHtml += `</div>
-        </div>`;
-    });
-    secWrapper.innerHTML = secHtml;
-
-    const indWrapper = document.getElementById('individual-syllabus-wrapper');
-    let indHtml = '';
-    syllabusStructure.forEach((sub) => {
-        const subUniqueId = `ind_${sub.id}`;
-        indHtml += `<div id="block_${subUniqueId}" class="section-card" style="margin-top: 20px;">
-            <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
-                <div class="subject-title"><span style="color:var(--primary-color);">${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight: bold;">0%</span></div>
-                <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
-            </div>
-            <div class="click-notice-row" style="margin-top: 8px;"><span>টপিক দেখতে ক্লিক করুন ❯</span></div>
-            <div id="topics_${subUniqueId}" class="topic-list">`;
-        
-        sub.topics.forEach((topicName, tIdx) => {
-            const tId = `${subUniqueId}_t${tIdx + 1}`;
-            indHtml += `<div class="topic-item">
-                <div class="topic-left"><input type="checkbox" id="${tId}" onchange="updateIndividualCalculations()"><label for="${tId}">${topicName}</label></div>
-                <span id="badge_${tId}" class="status-badge status-pending">Pending</span>
-            </div>`;
-        });
-        indHtml += `</div></div>`;
-    });
-    indWrapper.innerHTML = indHtml;
+    renderView('sections-wrapper', 'sec');
+    renderView('individual-syllabus-wrapper', 'ind');
 }
 
-// Live Search Filter Functionality
+function renderView(wrapperId, mode) {
+    const wrapper = document.getElementById(wrapperId);
+    let html = '';
+    
+    if (mode === 'sec') {
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            const isSectionA = (sec === 'Section A');
+            const letter = sec.replace('Section ', '');
+            const star = isSectionA ? '⭐' : '';
+            const cardClass = isSectionA ? 'section-card section-card-special search-target-sec' : 'section-card search-target-sec';
+            
+            html += `<div class="${cardClass}" data-sec-name="${sec}">
+                <div onclick="toggleDropdown('content_${secId}')" style="cursor:pointer;">
+                    <div class="sec-header-row">
+                        <div class="sec-avatar">${letter}</div>
+                        <div class="sec-title-group">
+                            <h3>${sec} ${star}</h3>
+                            <div class="sec-updated" id="updated_date_${secId}">Updated: N/A</div>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Syllabus Complete</span>
+                        <span id="percent_text_${secId}" class="percentage-text">0.00%</span>
+                    </div>
+                    <div class="progress-container"><div id="progress_bar_${secId}" class="progress-bar"></div></div>
+                    <div class="click-notice-row"><span>বিষয়বস্তু দেখতে ক্লিক করুন ❯</span></div>
+                </div>
+                <div id="content_${secId}" class="subject-container">`;
+            
+            syllabusStructure.forEach((sub, subIdx) => {
+                const subUniqueId = `${secId}_sub_${subIdx}`;
+                html += `<div id="block_${subUniqueId}" class="subject-block search-target-sub" data-sub-name="${sub.name}">
+                    <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
+                        <div class="subject-title"><span>${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight:bold;">0.00%</span></div>
+                        <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+                        <div class="click-notice-row" style="margin-top: 6px; font-size: 11px;"><span>অধ্যায় বা টপিক দেখতে ক্লিক করুন ❯</span></div>
+                    </div>
+                    <div id="topics_${subUniqueId}" class="topic-list" style="display:none; margin-top:10px;">`;
+                
+                sub.chapters.forEach((chap, chapIdx) => {
+                    const chapUniqueId = `${subUniqueId}_chap_${chapIdx}`;
+                    const isNoTopicSub = (chap.topics.length === 0);
+                    const hintText = isNoTopicSub ? "স্ট্যাটাস আপডেট করতে ক্লিক করুন ❯" : "স্ট্যাটাস পরিবর্তন বা টপিক দেখতে ক্লিক করুন ❯";
+
+                    html += `<div class="chapter-item search-target-chapter" data-chap-name="${chap.name}">
+                        <div class="chapter-left" onclick="openChapterPopup('${mode}', '${secId}', ${subIdx}, ${chapIdx})">
+                            <div class="chapter-name-row">
+                                <span>📖</span>
+                                <span>${chap.name}</span>
+                            </div>
+                            <span class="topic-click-hint">${hintText}</span>
+                        </div>
+                        <span id="badge_${chapUniqueId}" class="status-badge status-pending" onclick="openChapterPopup('${mode}', '${secId}', ${subIdx}, ${chapIdx})">Pending</span>
+                    </div>`;
+                });
+                html += `</div></div>`;
+            });
+            html += `</div></div>`;
+        });
+    } else {
+        syllabusStructure.forEach((sub, subIdx) => {
+            const subUniqueId = `ind_sub_${subIdx}`;
+            html += `<div id="block_${subUniqueId}" class="section-card" style="margin-top: 20px;">
+                <div class="subject-clickable-header" onclick="toggleSubjectDropdown(event, 'topics_${subUniqueId}', 'block_${subUniqueId}')">
+                    <div class="subject-title"><span style="color:var(--primary-color);">${sub.name}</span><span id="sub_percent_${subUniqueId}" style="color:#10b981; font-weight: bold;">0.00%</span></div>
+                    <div class="progress-container" style="margin:5px 0 0 0; height: 6px;"><div id="sub_bar_${subUniqueId}" class="progress-bar"></div></div>
+                    <div class="click-notice-row" style="margin-top: 6px; font-size: 11px;"><span>অধ্যায় বা টপিক দেখতে ক্লিক করুন ❯</span></div>
+                </div>
+                <div id="topics_${subUniqueId}" class="topic-list" style="display:none; margin-top:10px;">`;
+            
+            sub.chapters.forEach((chap, chapIdx) => {
+                const chapUniqueId = `${subUniqueId}_chap_${chapIdx}`;
+                const isNoTopicSub = (chap.topics.length === 0);
+                const hintText = isNoTopicSub ? "স্ট্যাটাস আপডেট করতে ক্লিক করুন ❯" : "স্ট্যাটাস পরিবর্তন বা টপিক দেখতে ক্লিক করুন ❯";
+
+                html += `<div class="chapter-item">
+                    <div class="chapter-left" onclick="openChapterPopup('${mode}', null, ${subIdx}, ${chapIdx})">
+                        <div class="chapter-name-row">
+                            <span>📖</span>
+                            <span>${chap.name}</span>
+                        </div>
+                        <span class="topic-click-hint">${hintText}</span>
+                    </div>
+                    <span id="badge_${chapUniqueId}" class="status-badge status-pending" onclick="openChapterPopup('${mode}', null, ${subIdx}, ${chapIdx})">Pending</span>
+                </div>`;
+            });
+            html += `</div></div>`;
+        });
+    }
+    wrapper.innerHTML = html;
+}
+
+/* Open Chapter Popup with dynamic status options & instruction text for non-topic chapters */
+let activePopupTarget = null;
+
+function openChapterPopup(mode, secId, subIdx, chapIdx) {
+    if (mode === 'sec' && !isAdminLoggedIn) {
+        alert("সেকশন প্রোগ্রেস এডিট করতে প্রথমে 'Admin Edit' এ ক্লিক করে পিন দিয়ে লগইন করুন!");
+        return;
+    }
+    if (mode === 'ind' && !localStorage.getItem('active_student_roll')) {
+        alert("প্রথমে ব্যক্তিগত প্রোগ্রেস প্যানেলে রোল ও পিন দিয়ে লগইন করুন!");
+        return;
+    }
+
+    activePopupTarget = { mode, secId, subIdx, chapIdx };
+    const sub = syllabusStructure[subIdx];
+    const chap = sub.chapters[chapIdx];
+    const prefix = mode === 'sec' ? `${secId}_sub_${subIdx}` : `ind_sub_${subIdx}`;
+    const chapUniqueKey = `${prefix}_chap_${chapIdx}`;
+
+    if (!window.appDataStates) window.appDataStates = {};
+    const currentStatus = window.appDataStates[chapUniqueKey] || 'pending';
+
+    document.getElementById('popup-item-title').innerText = chap.name;
+    document.getElementById('popup-item-subtitle').innerText = `${sub.name} • চ্যাপ্টার স্ট্যাটাস`;
+
+    const btnContainer = document.getElementById('popup-action-buttons');
+    btnContainer.style.display = 'grid';
+    
+    let btn1Text = '', btn1Status = '', btn2Text = '', btn2Status = '';
+    let btn1Color = '', btn2Color = '';
+
+    if (currentStatus === 'pending') {
+        btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
+        btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
+    } else if (currentStatus === 'in-progress') {
+        btn1Text = 'Pending'; btn1Status = 'pending'; btn1Color = '#64748b';
+        btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
+    } else {
+        btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
+        btn2Text = 'Pending'; btn2Status = 'pending'; btn2Color = '#64748b';
+    }
+
+    btnContainer.innerHTML = `
+        <button class="popup-action-btn" style="background:${btn1Color};" onclick="setChapterStatus('${btn1Status}')">${btn1Text}</button>
+        <button class="popup-action-btn" style="background:${btn2Color};" onclick="setChapterStatus('${btn2Status}')">${btn2Text}</button>
+    `;
+
+    const topicsContainer = document.getElementById('popup-topics-list');
+    const instructionEl = document.getElementById('popup-instruction-text');
+
+    if (chap.topics.length === 0) {
+        instructionEl.style.display = 'block';
+        instructionEl.innerText = "এই চ্যাপ্টারটি আপনার চলমান থাকলে In Progress এ এবং পড়া শেষ হলে Covered এ ক্লিক করুন।";
+        topicsContainer.style.display = 'none';
+    } else {
+        instructionEl.style.display = 'none';
+        topicsContainer.style.display = 'block';
+        let topicsHtml = '';
+
+        chap.topics.forEach((topicName, tIdx) => {
+            const tUniqueKey = `${prefix}_chap_${chapIdx}_topic_${tIdx}`;
+            const tStatus = window.appDataStates[tUniqueKey] || 'pending';
+
+            let tBadgeText = 'Pending';
+            let tBadgeClass = 'status-pending';
+            if (tStatus === 'covered') { tBadgeText = 'Covered'; tBadgeClass = 'status-covered'; }
+            else if (tStatus === 'in-progress') { tBadgeText = 'In Progress <span class="spinner-yellow"></span>'; tBadgeClass = 'status-progress'; }
+
+            topicsHtml += `<div class="popup-topic-row">
+                <span>🔹 ${topicName}</span>
+                <span class="status-badge ${tBadgeClass}" onclick="toggleTopicStatusInPopup(${tIdx})">${tBadgeText}</span>
+            </div>`;
+        });
+        topicsContainer.innerHTML = topicsHtml;
+    }
+
+    document.getElementById('custom-popup-modal').style.display = 'flex';
+}
+
+function setChapterStatus(status) {
+    const { mode, secId, subIdx, chapIdx } = activePopupTarget;
+    const prefix = mode === 'sec' ? `${secId}_sub_${subIdx}` : `ind_sub_${subIdx}`;
+    const chapUniqueKey = `${prefix}_chap_${chapIdx}`;
+
+    if (!window.appDataStates) window.appDataStates = {};
+    window.appDataStates[chapUniqueKey] = status;
+
+    const sub = syllabusStructure[subIdx];
+    const chap = sub.chapters[chapIdx];
+    chap.topics.forEach((_, tIdx) => {
+        const tUniqueKey = `${prefix}_chap_${chapIdx}_topic_${tIdx}`;
+        window.appDataStates[tUniqueKey] = (status === 'covered') ? 'covered' : (status === 'in-progress' ? 'in-progress' : 'pending');
+    });
+
+    closeCustomPopup();
+    if (mode === 'sec') {
+        if (!isAdminLoggedIn) {
+            alert("দয়া করে সেকশন আপডেট করতে প্রথমে Admin Edit থেকে পিন দিয়ে লগইন করুন!");
+            return;
+        }
+        calculateAndUpdateSection(secId);
+    } else {
+        calculateAndUpdateIndividual();
+    }
+}
+
+function toggleTopicStatusInPopup(tIdx) {
+    const { mode, secId, subIdx, chapIdx } = activePopupTarget;
+    const prefix = mode === 'sec' ? `${secId}_sub_${subIdx}` : `ind_sub_${subIdx}`;
+    const tUniqueKey = `${prefix}_chap_${chapIdx}_topic_${tIdx}`;
+
+    if (!window.appDataStates) window.appDataStates = {};
+    const current = window.appDataStates[tUniqueKey] || 'pending';
+
+    let next = 'covered';
+    if (current === 'pending') next = 'covered';
+    else if (current === 'covered') next = 'in-progress';
+    else next = 'pending';
+
+    window.appDataStates[tUniqueKey] = next;
+
+    const sub = syllabusStructure[subIdx];
+    const chap = sub.chapters[chapIdx];
+    let coveredCount = 0;
+    let progressCount = 0;
+
+    chap.topics.forEach((_, idx) => {
+        const k = `${prefix}_chap_${chapIdx}_topic_${idx}`;
+        const st = window.appDataStates[k] || 'pending';
+        if (st === 'covered') coveredCount++;
+        else if (st === 'in-progress' || st === 'covered') progressCount++;
+    });
+
+    const chapUniqueKey = `${prefix}_chap_${chapIdx}`;
+    if (coveredCount === chap.topics.length) {
+        window.appDataStates[chapUniqueKey] = 'covered';
+    } else if (coveredCount > 0 || progressCount > 0) {
+        window.appDataStates[chapUniqueKey] = 'in-progress';
+    } else {
+        window.appDataStates[chapUniqueKey] = 'pending';
+    }
+
+    openChapterPopup(mode, secId, subIdx, chapIdx);
+
+    if (mode === 'sec') calculateAndUpdateSection(secId);
+    else calculateAndUpdateIndividual();
+}
+
+function closeCustomPopup() {
+    document.getElementById('custom-popup-modal').style.display = 'none';
+}
+
+function calculateAndUpdateSection(secId) {
+    let totalItems = 0;
+    let coveredItems = 0;
+    let statesMap = {};
+
+    syllabusStructure.forEach((sub, subIdx) => {
+        const subUniqueId = `${secId}_sub_${subIdx}`;
+        let subTotal = 0;
+        let subCovered = 0;
+
+        sub.chapters.forEach((chap, chapIdx) => {
+            const chapUniqueKey = `${subUniqueId}_chap_${chapIdx}`;
+            const chapStatus = window.appDataStates && window.appDataStates[chapUniqueKey] ? window.appDataStates[chapUniqueKey] : 'pending';
+            statesMap[chapUniqueKey] = chapStatus;
+
+            if (chap.topics.length === 0) {
+                totalItems++;
+                subTotal++;
+                if (chapStatus === 'covered') {
+                    coveredItems++;
+                    subCovered++;
+                }
+            } else {
+                chap.topics.forEach((_, tIdx) => {
+                    const tUniqueKey = `${subUniqueId}_chap_${chapIdx}_topic_${tIdx}`;
+                    const tStatus = window.appDataStates && window.appDataStates[tUniqueKey] ? window.appDataStates[tUniqueKey] : 'pending';
+                    statesMap[tUniqueKey] = tStatus;
+
+                    totalItems++;
+                    subTotal++;
+                    if (tStatus === 'covered') {
+                        coveredItems++;
+                        subCovered++;
+                    }
+                });
+            }
+
+            const badgeEl = document.getElementById(`badge_${chapUniqueKey}`);
+            if (badgeEl) {
+                if (chapStatus === 'covered') { badgeEl.innerText = 'Covered'; badgeEl.className = 'status-badge status-covered'; }
+                else if (chapStatus === 'in-progress') { badgeEl.innerHTML = 'In Progress <span class="spinner-yellow"></span>'; badgeEl.className = 'status-badge status-progress'; }
+                else { badgeEl.innerText = 'Pending'; badgeEl.className = 'status-badge status-pending'; }
+            }
+        });
+
+        const subPercent = subTotal > 0 ? ((subCovered / subTotal) * 100).toFixed(2) : '0.00';
+        const subPerEl = document.getElementById(`sub_percent_${subUniqueId}`);
+        const subBarEl = document.getElementById(`sub_bar_${subUniqueId}`);
+        if(subPerEl) subPerEl.innerText = subPercent + '%';
+        if(subBarEl) subBarEl.style.width = subPercent + '%';
+    });
+
+    const totalPercent = totalItems > 0 ? ((coveredItems / totalItems) * 100).toFixed(2) : '0.00';
+    
+    const percentEl = document.getElementById(`percent_text_${secId}`);
+    const barEl = document.getElementById(`progress_bar_${secId}`);
+    if(percentEl) percentEl.innerText = totalPercent + '%';
+    if(barEl) barEl.style.width = totalPercent + '%';
+
+    if (isAdminLoggedIn) {
+        const currentDateStr = getCurrentFormattedDate();
+        const updatedDateEl = document.getElementById(`updated_date_${secId}`);
+        if(updatedDateEl) updatedDateEl.innerText = `Updated: ${currentDateStr}`;
+
+        db.ref('section_progress/' + secId).set({
+            percent: parseFloat(totalPercent),
+            states: statesMap,
+            lastUpdated: currentDateStr
+        }).then(() => {
+            console.log("Firebase Section Progress Saved for " + secId);
+        }).catch(err => {
+            alert("Firebase Save Failed: " + err.message);
+        });
+    }
+}
+
+function calculateAndUpdateIndividual() {
+    const activeRoll = localStorage.getItem('active_student_roll');
+    if (!activeRoll) return;
+
+    let totalItems = 0;
+    let coveredItems = 0;
+    let statesMap = {};
+
+    syllabusStructure.forEach((sub, subIdx) => {
+        const subUniqueId = `ind_sub_${subIdx}`;
+        let subTotal = 0;
+        let subCovered = 0;
+
+        sub.chapters.forEach((chap, chapIdx) => {
+            const chapUniqueKey = `${subUniqueId}_chap_${chapIdx}`;
+            const chapStatus = window.appDataStates && window.appDataStates[chapUniqueKey] ? window.appDataStates[chapUniqueKey] : 'pending';
+            statesMap[chapUniqueKey] = chapStatus;
+
+            if (chap.topics.length === 0) {
+                totalItems++;
+                subTotal++;
+                if (chapStatus === 'covered') {
+                    coveredItems++;
+                    subCovered++;
+                }
+            } else {
+                chap.topics.forEach((_, tIdx) => {
+                    const tUniqueKey = `${subUniqueId}_chap_${chapIdx}_topic_${tIdx}`;
+                    const tStatus = window.appDataStates && window.appDataStates[tUniqueKey] ? window.appDataStates[tUniqueKey] : 'pending';
+                    statesMap[tUniqueKey] = tStatus;
+
+                    totalItems++;
+                    subTotal++;
+                    if (tStatus === 'covered') {
+                        coveredItems++;
+                        subCovered++;
+                    }
+                });
+            }
+
+            const badgeEl = document.getElementById(`badge_${chapUniqueKey}`);
+            if (badgeEl) {
+                if (chapStatus === 'covered') { badgeEl.innerText = 'Covered'; badgeEl.className = 'status-badge status-covered'; }
+                else if (chapStatus === 'in-progress') { badgeEl.innerHTML = 'In Progress <span class="spinner-yellow"></span>'; badgeEl.className = 'status-badge status-progress'; }
+                else { badgeEl.innerText = 'Pending'; badgeEl.className = 'status-badge status-pending'; }
+            }
+        });
+
+        const subPercent = subTotal > 0 ? ((subCovered / subTotal) * 100).toFixed(2) : '0.00';
+        const subPerEl = document.getElementById(`sub_percent_${subUniqueId}`);
+        const subBarEl = document.getElementById(`sub_bar_${subUniqueId}`);
+        if(subPerEl) subPerEl.innerText = subPercent + '%';
+        if(subBarEl) subBarEl.style.width = subPercent + '%';
+    });
+
+    const totalPercent = totalItems > 0 ? ((coveredItems / totalItems) * 100).toFixed(2) : '0.00';
+    document.getElementById('user-total-percent').innerText = totalPercent + '%';
+    document.getElementById('user-total-bar').style.width = totalPercent + '%';
+
+    db.ref('students/' + activeRoll).update({
+        percent: parseFloat(totalPercent),
+        states: statesMap,
+        pin: localStorage.getItem(`pin_secure_roll_${activeRoll}`)
+    });
+}
+
+function loadSectionProgressFromDatabase() {
+    db.ref('section_progress').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if(!data) return;
+
+        if (!window.appDataStates) window.appDataStates = {};
+
+        sections.forEach((sec, sIdx) => {
+            const secId = `sec_${sIdx}`;
+            if (data[secId]) {
+                if (data[secId].lastUpdated) {
+                    const dateEl = document.getElementById(`updated_date_${secId}`);
+                    if(dateEl) dateEl.innerText = `Updated: ${data[secId].lastUpdated}`;
+                }
+
+                if (data[secId].states) {
+                    Object.keys(data[secId].states).forEach(k => {
+                        window.appDataStates[k] = data[secId].states[k];
+                    });
+                }
+
+                const percentVal = data[secId].percent !== undefined ? parseFloat(data[secId].percent).toFixed(2) : '0.00';
+                const percentEl = document.getElementById(`percent_text_${secId}`);
+                const barEl = document.getElementById(`progress_bar_${secId}`);
+                if(percentEl) percentEl.innerText = percentVal + '%';
+                if(barEl) barEl.style.width = percentVal + '%';
+            }
+        });
+    });
+}
+
 function filterSyllabusSearch() {
     const query = document.getElementById('live-search-input').value.toLowerCase().trim();
     const secCards = document.querySelectorAll('.search-target-sec');
@@ -1053,10 +1359,8 @@ function filterSyllabusSearch() {
     if (query === '') {
         secCards.forEach(card => {
             card.style.display = 'block';
-            const subBlocks = card.querySelectorAll('.search-target-sub');
-            subBlocks.forEach(sub => sub.style.display = 'block');
-            const topicItems = card.querySelectorAll('.search-target-topic');
-            topicItems.forEach(t => t.style.display = 'flex');
+            card.querySelectorAll('.search-target-sub').forEach(sub => sub.style.display = 'block');
+            card.querySelectorAll('.search-target-chapter').forEach(c => c.style.display = 'flex');
         });
         return;
     }
@@ -1065,19 +1369,17 @@ function filterSyllabusSearch() {
         const secName = card.getAttribute('data-sec-name').toLowerCase();
         let secHasMatch = secName.includes(query);
 
-        const subBlocks = card.querySelectorAll('.search-target-sub');
-        subBlocks.forEach(sub => {
+        card.querySelectorAll('.search-target-sub').forEach(sub => {
             const subName = sub.getAttribute('data-sub-name').toLowerCase();
             let subHasMatch = subName.includes(query);
 
-            const topicItems = sub.querySelectorAll('.search-target-topic');
-            topicItems.forEach(t => {
-                const topicName = t.getAttribute('data-topic-name').toLowerCase();
-                if (topicName.includes(query)) {
-                    t.style.display = 'flex';
+            sub.querySelectorAll('.search-target-chapter').forEach(chap => {
+                const chapName = chap.getAttribute('data-chap-name').toLowerCase();
+                if (chapName.includes(query)) {
+                    chap.style.display = 'flex';
                     subHasMatch = true;
                 } else {
-                    t.style.display = 'none';
+                    chap.style.display = 'none';
                 }
             });
 
@@ -1091,8 +1393,8 @@ function filterSyllabusSearch() {
 
         if (secHasMatch) {
             card.style.display = 'block';
-            const secId = card.querySelector('.subject-container');
-            if (secId) secId.style.display = 'block';
+            const container = card.querySelector('.subject-container');
+            if (container) container.style.display = 'block';
         } else {
             card.style.display = 'none';
         }
@@ -1118,11 +1420,11 @@ function toggleSubjectDropdown(e, id, blockId) {
 }
 
 function openAdminModal() {
-    if(isAdminLoggedIn) {
+    if (isAdminLoggedIn) {
         if (confirm("আপনি কি সেকশন এডমিন মোড থেকে বের হতে চান?")) {
             isAdminLoggedIn = false;
+            sessionStorage.removeItem('is_admin_logged_in');
             document.getElementById('admin-login-btn').innerText = "🔒 Admin Edit";
-            disableSectionCheckboxes();
         }
     } else {
         document.getElementById('admin-pin-modal').style.display = 'block';
@@ -1136,178 +1438,15 @@ function closeAdminModal() {
 
 function verifyAdminPin() {
     const inputPin = document.getElementById('admin-pin-input').value.trim();
-    if(inputPin === SECTION_ADMIN_PIN) {
+    if (inputPin === SECTION_ADMIN_PIN) {
         isAdminLoggedIn = true;
+        sessionStorage.setItem('is_admin_logged_in', 'true');
         closeAdminModal();
         document.getElementById('admin-login-btn').innerText = "🔓 Admin Mode ON";
-        enableSectionCheckboxes();
-        alert("এডমিন লগইন সফল হয়েছে! এখন সেকশনের টপিকগুলো এডিট করতে পারবেন।");
+        alert("এডমিন লগইন সফল হয়েছে! এখন সেকশনের চ্যাপ্টার ও টপিকগুলো এডিট করতে পারবেন।");
     } else {
         document.getElementById('admin-pin-error').style.display = 'block';
     }
-}
-
-function enableSectionCheckboxes() {
-    sections.forEach((sec, sIdx) => {
-        const secId = `sec_${sIdx}`;
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `${secId}_${sub.id}`;
-            sub.topics.forEach((_, tIdx) => {
-                const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
-                if(cb) cb.disabled = false;
-            });
-        });
-    });
-}
-
-function disableSectionCheckboxes() {
-    sections.forEach((sec, sIdx) => {
-        const secId = `sec_${sIdx}`;
-        syllabusStructure.forEach((sub) => {
-            const subUniqueId = `${secId}_${sub.id}`;
-            sub.topics.forEach((_, tIdx) => {
-                const cb = document.getElementById(`${subUniqueId}_t${tIdx + 1}`);
-                if(cb) cb.disabled = true;
-            });
-        });
-    });
-}
-
-function updateCalculations(secId) {
-    let totalItemsInSection = 0;
-    let totalCheckedInSection = 0;
-    let sectionTopicsMap = {};
-    
-    syllabusStructure.forEach((sub) => {
-        const subUniqueId = `${secId}_${sub.id}`;
-        let subChecked = 0;
-        sub.topics.forEach((_, tIdx) => {
-            const tId = `${subUniqueId}_t${tIdx + 1}`;
-            const cb = document.getElementById(tId);
-            const badge = document.getElementById(`badge_${tId}`);
-            if (cb && cb.checked) {
-                subChecked++;
-                if (badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
-                sectionTopicsMap[tId] = true;
-            } else {
-                if (badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
-                sectionTopicsMap[tId] = false;
-            }
-        });
-        const subPercent = Math.round((subChecked / sub.topics.length) * 100);
-        document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
-        document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-        totalItemsInSection += sub.topics.length;
-        totalCheckedInSection += subChecked;
-    });
-    
-    const secPercent = Math.round((totalCheckedInSection / totalItemsInSection) * 100);
-    document.getElementById(`percent_text_${secId}`).innerText = secPercent + '%';
-    document.getElementById(`progress_bar_${secId}`).style.width = secPercent + '%';
-    
-    if (isAdminLoggedIn) {
-        const currentDateStr = getCurrentFormattedDate();
-        document.getElementById(`updated_date_${secId}`).innerText = `Updated: ${currentDateStr}`;
-        db.ref('section_progress/' + secId).update({
-            percent: secPercent,
-            topics: sectionTopicsMap,
-            lastUpdated: currentDateStr
-        });
-    }
-}
-
-function loadSectionProgressFromDatabase() {
-    db.ref('section_progress').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if(!data) return;
-        sections.forEach((sec, sIdx) => {
-            const secId = `sec_${sIdx}`;
-            if (data[secId]) {
-                if (data[secId].lastUpdated) {
-                    document.getElementById(`updated_date_${secId}`).innerText = `Updated: ${data[secId].lastUpdated}`;
-                }
-                if(data[secId].topics) {
-                    syllabusStructure.forEach((sub) => {
-                        const subUniqueId = `${secId}_${sub.id}`;
-                        sub.topics.forEach((_, tIdx) => {
-                            const tId = `${subUniqueId}_t${tIdx + 1}`;
-                            const cb = document.getElementById(tId);
-                            if(cb && !isAdminLoggedIn) {
-                                cb.checked = (data[secId].topics[tId] === true);
-                            }
-                        });
-                    });
-                    updateCalculations(secId);
-                }
-            }
-        });
-    });
-}
-
-function resetIndividualUI() {
-    syllabusStructure.forEach((sub) => {
-        const subUniqueId = `ind_${sub.id}`;
-        const topicsEl = document.getElementById(`topics_${subUniqueId}`);
-        const blockEl = document.getElementById(`block_${subUniqueId}`);
-        if (topicsEl) topicsEl.style.display = 'none';
-        if (blockEl) blockEl.classList.remove('open-sub');
-        
-        sub.topics.forEach((_, tIdx) => {
-            const tId = `${subUniqueId}_t${tIdx + 1}`;
-            const cb = document.getElementById(tId);
-            const badge = document.getElementById(`badge_${tId}`);
-            if (cb) cb.checked = false;
-            if (badge) {
-                badge.innerText = 'Pending';
-                badge.className = 'status-badge status-pending';
-            }
-        });
-        document.getElementById(`sub_percent_${subUniqueId}`).innerText = '0%';
-        document.getElementById(`sub_bar_${subUniqueId}`).style.width = '0%';
-    });
-    document.getElementById('user-total-percent').innerText = '0%';
-    document.getElementById('user-total-bar').style.width = '0%';
-}
-
-function updateIndividualCalculations() {
-    const activeRoll = localStorage.getItem('active_student_roll');
-    if(!activeRoll) return;
-    let totalItems = 0;
-    let totalChecked = 0;
-    let checkedTopicsMap = {};
-    
-    syllabusStructure.forEach((sub) => {
-        const subUniqueId = `ind_${sub.id}`;
-        let subChecked = 0;
-        sub.topics.forEach((_, tIdx) => {
-            const tId = `${subUniqueId}_t${tIdx + 1}`;
-            const cb = document.getElementById(tId);
-            const badge = document.getElementById(`badge_${tId}`);
-            if (cb && cb.checked) {
-                subChecked++;
-                if(badge) { badge.innerText = 'Covered'; badge.className = 'status-badge status-covered'; }
-                checkedTopicsMap[tId] = true;
-            } else {
-                if(badge) { badge.innerText = 'Pending'; badge.className = 'status-badge status-pending'; }
-                checkedTopicsMap[tId] = false;
-            }
-        });
-        const subPercent = Math.round((subChecked / sub.topics.length) * 100);
-        document.getElementById(`sub_percent_${subUniqueId}`).innerText = subPercent + '%';
-        document.getElementById(`sub_bar_${subUniqueId}`).style.width = subPercent + '%';
-        totalItems += sub.topics.length;
-        totalChecked += subChecked;
-    });
-    
-    const totalPercent = Math.round((totalChecked / totalItems) * 100);
-    document.getElementById('user-total-percent').innerText = totalPercent + '%';
-    document.getElementById('user-total-bar').style.width = totalPercent + '%';
-    
-    db.ref('students/' + activeRoll).update({
-        percent: totalPercent,
-        topics: checkedTopicsMap,
-        pin: localStorage.getItem(`pin_secure_roll_${activeRoll}`)
-    });
 }
 
 function registerAndLogin() {
@@ -1325,20 +1464,14 @@ function registerAndLogin() {
             document.getElementById('pin-error-msg').style.display = 'block';
             pinInput.style.borderColor = '#ef4444';
             pinInput.value = '';
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
-            }
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
             return;
         }
         pinInput.style.borderColor = 'var(--input-border)';
         document.getElementById('pin-error-msg').style.display = 'none';
         
         if(!data) {
-            db.ref('students/' + roll).set({
-                pin: pin,
-                percent: 0,
-                topics: {}
-            });
+            db.ref('students/' + roll).set({ pin: pin, percent: 0, states: {} });
         }
         localStorage.setItem(`pin_secure_roll_${roll}`, pin);
         localStorage.setItem('active_student_roll', roll);
@@ -1352,31 +1485,30 @@ function checkLoginStatus() {
         document.getElementById('login-form-block').style.display = 'none';
         document.getElementById('profile-block').style.display = 'block';
         document.getElementById('welcome-text').innerText = `রোল নম্বর: ${activeRoll}`;
-        resetIndividualUI();
+        
+        window.appDataStates = {};
+        
         db.ref('students/' + activeRoll).once('value').then((snapshot) => {
             const data = snapshot.val();
-            if(data && data.topics) {
-                syllabusStructure.forEach((sub) => {
-                    const subUniqueId = `ind_${sub.id}`;
-                    sub.topics.forEach((_, tIdx) => {
-                        const tId = `${subUniqueId}_t${tIdx + 1}`;
-                        const cb = document.getElementById(tId);
-                        if(cb) cb.checked = (data.topics[tId] === true);
-                    });
-                });
-                updateIndividualCalculations();
+            if(data && data.states) {
+                window.appDataStates = data.states;
             }
+            calculateAndUpdateIndividual();
         });
     } else {
         document.getElementById('login-form-block').style.display = 'block';
         document.getElementById('profile-block').style.display = 'none';
-        resetIndividualUI();
     }
 }
 
 function logoutStudent() {
     localStorage.removeItem('active_student_roll');
-    resetIndividualUI();
+    window.appDataStates = {};
+    document.getElementById('user-total-percent').innerText = '0.00%';
+    document.getElementById('user-total-bar').style.width = '0%';
+    document.getElementById('stud-roll').value = '';
+    document.getElementById('stud-pin').value = '';
+    renderApp();
     checkLoginStatus();
 }
 
@@ -1387,10 +1519,10 @@ function updateBatchAnalysisBox() {
         Object.keys(data).forEach(roll => {
             const p = data[roll].percent || 0;
             if(p >= 0 && p <= 20) r1++;
-            else if(p >= 21 && p <= 40) r2++;
-            else if(p >= 41 && p <= 60) r3++;
-            else if(p >= 61 && p <= 80) r4++;
-            else if(p >= 81 && p <= 100) r5++;
+            else if(p > 20 && p <= 40) r2++;
+            else if(p > 40 && p <= 60) r3++;
+            else if(p > 60 && p <= 80) r4++;
+            else if(p > 80 && p <= 100) r5++;
             count++;
         });
         document.getElementById('total-tracked-students').innerText = count;
@@ -1400,23 +1532,6 @@ function updateBatchAnalysisBox() {
         document.getElementById('range-4').innerText = r4;
         document.getElementById('range-5').innerText = r5;
     });
-}
-
-function isDateInRanges(date, ranges) {
-    return ranges.some(range => date >= range.start && date <= range.end);
-}
-
-function isGovtHoliday(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const dateStr = `${year}-${month}-${day}`;
-    const holidays = [
-        "2026-12-16", "2026-12-25", "2027-02-21", "2027-03-17", "2027-03-26", "2027-04-14",
-        "2027-05-01", "2027-03-20", "2027-03-21", "2027-03-22", "2027-05-27", "2027-05-28",
-        "2027-05-29", "2027-07-16", "2027-08-15", "2027-10-09", "2027-12-16", "2027-12-25", "2028-01-01"
-    ];
-    return holidays.includes(dateStr);
 }
 
 function calculateDays() {
@@ -1429,31 +1544,9 @@ function calculateDays() {
     document.getElementById('days-passed').innerText = (daysPassed > 0 ? daysPassed : 0);
     document.getElementById('days-remaining').innerText = (daysRemaining > 0 ? daysRemaining : 0);
     
-    const lockedExamRanges = [
-        { start: new Date(2026, 11, 1), end: new Date(2026, 11, 15) },
-        { start: new Date(2027, 3, 25), end: new Date(2027, 4, 6) },
-        { start: new Date(2027, 7, 15), end: new Date(2027, 7, 31) },
-        { start: new Date(2028, 0, 2), end: new Date(2028, 0, 27) }
-    ];
-    const totalTargetClassDays = 199;
-    let rawClassDaysPassed = 0;
-    let currentLoopDate = new Date(startDate);
-    
-    while (currentLoopDate <= today) {
-        const dayOfWeek = currentLoopDate.getDay();
-        if (dayOfWeek !== 5 && dayOfWeek !== 6 && !isDateInRanges(currentLoopDate, lockedExamRanges) && !isGovtHoliday(currentLoopDate)) {
-            rawClassDaysPassed++;
-        }
-        currentLoopDate.setDate(currentLoopDate.getDate() + 1);
-    }
-    let actualClassDaysPassed = rawClassDaysPassed - extraCanceledClassDays;
-    if (actualClassDaysPassed < 0) actualClassDaysPassed = 0;
-    if (today >= new Date(2028, 0, 2)) actualClassDaysPassed = totalTargetClassDays;
-    if (actualClassDaysPassed > totalTargetClassDays) actualClassDaysPassed = totalTargetClassDays;
-    let classDaysRemaining = totalTargetClassDays - actualClassDaysPassed;
-    
-    document.getElementById('workdays-passed').innerText = actualClassDaysPassed;
-    document.getElementById('workdays-remaining').innerText = classDaysRemaining < 0 ? 0 : classDaysRemaining;
+    // Updated workdays passed to 14 and remaining to 185
+    document.getElementById('workdays-passed').innerText = 14;
+    document.getElementById('workdays-remaining').innerText = 185;
 }
 
 function handleVisitCounter() {
@@ -1475,7 +1568,6 @@ window.onload = function() {
     loadSectionProgressFromDatabase();
 };
 
-/* Smooth Slow Radial Logo Particle Animation */
 function initLogoParticles() {
     const canvas = document.getElementById('logo-canvas');
     if (!canvas) return;
@@ -1491,13 +1583,13 @@ function initLogoParticles() {
             this.angle = Math.random() * Math.PI * 2;
             this.x = centerX + Math.cos(this.angle) * radius;
             this.y = centerY + Math.sin(this.angle) * radius;
-            this.speed = 0.08 + Math.random() * 0.15; // Slower speed
+            this.speed = 0.08 + Math.random() * 0.15;
             this.vx = Math.cos(this.angle) * this.speed;
             this.vy = Math.sin(this.angle) * this.speed;
             this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.size = 1 + Math.random() * 1.8; // Smaller size
+            this.size = 1 + Math.random() * 1.8;
             this.alpha = 1;
-            this.decay = 0.005 + Math.random() * 0.007; // Slower fade out
+            this.decay = 0.005 + Math.random() * 0.007;
         }
         update() {
             this.x += this.vx;
@@ -1519,7 +1611,7 @@ function initLogoParticles() {
     
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (particles.length < 18 && Math.random() < 0.4) { // Fewer particles, less dense
+        if (particles.length < 18 && Math.random() < 0.4) {
             particles.push(new Particle());
         }
         for (let i = particles.length - 1; i >= 0; i--) {
