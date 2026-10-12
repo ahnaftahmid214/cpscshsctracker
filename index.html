@@ -1324,29 +1324,40 @@ function calculateAndUpdateIndividual() {
 function loadSectionProgressFromDatabase() {
     db.ref('section_progress').on('value', (snapshot) => {
         const data = snapshot.val();
-        if(!data) return;
+        if (!data) return;
 
         if (!window.appDataStates) window.appDataStates = {};
 
         sections.forEach((sec, sIdx) => {
             const secId = `sec_${sIdx}`;
             if (data[secId]) {
+                // Update Last Updated Date text
                 if (data[secId].lastUpdated) {
                     const dateEl = document.getElementById(`updated_date_${secId}`);
-                    if(dateEl) dateEl.innerText = `Updated: ${data[secId].lastUpdated}`;
+                    if (dateEl) dateEl.innerText = `Updated: ${data[secId].lastUpdated}`;
                 }
 
+                // Merge saved states (chapters & topics status) from Firebase
                 if (data[secId].states) {
                     Object.keys(data[secId].states).forEach(k => {
                         window.appDataStates[k] = data[secId].states[k];
                     });
                 }
 
+                // Render UI for subjects & individual chapters badges without writing back to DB
+                let tempAdminFlag = isAdminLoggedIn;
+                isAdminLoggedIn = false; // Prevent unwanted re-save to DB during initial load
+                
+                calculateAndUpdateSection(secId);
+                
+                isAdminLoggedIn = tempAdminFlag; // Restore original admin session state
+
+                // Force overall percent text & progress bar UI update
                 const percentVal = data[secId].percent !== undefined ? parseFloat(data[secId].percent).toFixed(2) : '0.00';
                 const percentEl = document.getElementById(`percent_text_${secId}`);
                 const barEl = document.getElementById(`progress_bar_${secId}`);
-                if(percentEl) percentEl.innerText = percentVal + '%';
-                if(barEl) barEl.style.width = percentVal + '%';
+                if (percentEl) percentEl.innerText = percentVal + '%';
+                if (barEl) barEl.style.width = percentVal + '%';
             }
         });
     });
