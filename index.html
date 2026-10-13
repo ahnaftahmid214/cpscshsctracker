@@ -441,7 +441,7 @@ body {
 <!-- Top Header Row -->
 <div class="top-header-row">
     <div class="live-tracker-pill"><span class="green-dot"></span> Live Tracker</div>
-    <button class="theme-toggle-btn" onclick="toggleTheme()">🎨 Theme</button>
+    <button class="theme-toggle-btn" onclick="toggleTheme()">🎨 Dark/Light</button>
 </div>
 
 <div class="logo-container">
@@ -463,7 +463,7 @@ body {
 <div class="card-grid-2">
     <div class="sunset-card">
         <div class="card-icon-badge">📅</div>
-        <div class="card-label">আজ পর্যন্ত পার হয়েছে</div>
+        <div class="card-label">অতিবাহিত হয়েছে</div>
         <div><span id="days-passed" class="card-value value-pink">0</span> <span class="card-unit">দিন</span></div>
         <div class="card-sub">ক্লাস শুরু: ২৫ শে সেপ্টেম্বর ২০২৫</div>
     </div>
@@ -740,9 +740,9 @@ chapters: [
 id: 'en1',
 name: 'ইংরেজি ১ম পত্র',
 chapters: [
-{ name: 'Unit 1: People or Institutions Making History', topics: [] },
-{ name: 'Unit 2: Dreams', topics: [] },
-{ name: 'Unit 3: Adolescence', topics: [] },
+{ name: 'EFT-1 (Unit 1-4)', topics: [] },
+{ name: 'EFT-2 (Unit 5-8)', topics: [] },
+{ name: 'EFT-3 (Unit 9-12)', topics: [] },
 { name: 'Unit 4: Human Rights', topics: [] },
 { name: 'Unit 5: Education', topics: [] },
 { name: 'Unit 6: Adolescence and Environment', topics: [] }
@@ -821,11 +821,11 @@ chapters: [
 id: 'm1',
 name: 'উচ্চতর গণিত ১ম পত্র',
 chapters: [
-{ name: 'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', topics: ['ম্যাট্রিক্সের প্রকারভেদ', 'বিপরীত ম্যাট্রিক্স', 'নির্ণায়কের ধর্মাবলি', 'ক্রেমারের নিয়ম', 'র‍্যাংক'] },
-{ name: 'অধ্যায় ২: ভেক্টর', topics: ['জ্যামিতিক প্রয়োগ', 'স্কেলার ও ভেক্টর ত্রিগুণক', 'সরলরেখা ও সমতল', 'দিক কোসাইন', 'কৌণিক দূরত্ব'] },
-{ name: 'অধ্যায় ৩: সরলরেখা', topics: ['স্থানাঙ্ক রূপান্তর', 'ঢাল ও সমীকরণ', 'দুটি রেখার অন্তৰ্গত কোণ', 'লম্ব দূরত্ব', 'একজোড়া সরলরেখা'] },
-{ name: 'অধ্যায় ৪: বৃত্ত', topics: ['বৃত্তের সমীকরণ', 'স্পর্শক ও অভিলম্ব', 'মূলবিন্দু ও জ্যা', 'ছেদবিন্দু', 'বৃত্তস্থ কোণ'] },
-{ name: 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', topics: ['বিন্যাসের সূত্র', 'সমাবেশের ধারণা', 'সাদৃশ্যপূর্ণ বস্তু', 'শর্তযুক্ত বিন্যাস', 'দ্বিপদী প্রাথমিক রূপ'] },
+{ name: 'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', topics: ['প্রশ্নমালা ১.১', 'প্রশ্নমালা ১.২'] },
+{ name: 'অধ্যায় ২: ভেক্টর', topics: ['প্রশ্নমালা ২.১', 'প্রশ্নমালা ২.২'] },
+{ name: 'অধ্যায় ৩: সরলরেখা', topics: ['প্রশ্নমালা ৩.১', ' প্রশ্নমালা ৩.২','প্রশ্নমালা ৩.৩','প্রশ্নমালা ৩.৪','প্রশ্নমালা ৩.৫','প্রশ্নমালা ৩.৬', 'প্রশ্নমালা ৩.৭'] },
+{ name: 'অধ্যায় ৪: বৃত্ত', topics: ['প্রশ্নমালা ৪.১','প্রশ্নমালা ৪.২'] },
+{ name: 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', topics: ['প্রশ্নমালা ৫.১', 'প্রশ্নমালা ৫.২'] },
 { name: 'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', topics: ['অনুপাতের সূত্র', 'গুণিতক কোণ', 'ত্রিকোণমিতিক সমীকরণ', 'ত্রিভুজের ধর্ম', 'বিপরীত রূপ'] },
 { name: 'অধ্যায় ৭: সংযুক্ত কোণ', topics: ['সংযুক্ত কোণের অনুপাত', 'সর্বোচ্চ ও সর্বনিম্ন মান', 'যোগ ও গুণফলের রূপান্তর', 'পরিধি সূত্র', 'সৃজনশীল'] },
 { name: 'অধ্যায় ৮: ফাংশন ও লেখচিত্র', topics: ['ফাংশন ও প্রকারভেদ', 'ডোমেন ও রেঞ্জ', 'বিপরীত ফাংশন', 'লেখচিত্র অঙ্কন', 'রূপান্তর'] },
@@ -1031,10 +1031,6 @@ function renderView(wrapperId, mode) {
 let activePopupTarget = null;
 
 function openChapterPopup(mode, secId, subIdx, chapIdx) {
-    if (mode === 'sec' && !isAdminLoggedIn) {
-        alert("সেকশন প্রোগ্রেস এডিট করতে প্রথমে 'Admin Edit' এ ক্লিক করে পিন দিয়ে লগইন করুন!");
-        return;
-    }
     if (mode === 'ind' && !localStorage.getItem('active_student_roll')) {
         alert("প্রথমে ব্যক্তিগত প্রোগ্রেস প্যানেলে রোল ও পিন দিয়ে লগইন করুন!");
         return;
@@ -1053,33 +1049,43 @@ function openChapterPopup(mode, secId, subIdx, chapIdx) {
     document.getElementById('popup-item-subtitle').innerText = `${sub.name} • চ্যাপ্টার স্ট্যাটাস`;
 
     const btnContainer = document.getElementById('popup-action-buttons');
-    btnContainer.style.display = 'grid';
     
-    let btn1Text = '', btn1Status = '', btn2Text = '', btn2Status = '';
-    let btn1Color = '', btn2Color = '';
-
-    if (currentStatus === 'pending') {
-        btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
-        btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
-    } else if (currentStatus === 'in-progress') {
-        btn1Text = 'Pending'; btn1Status = 'pending'; btn1Color = '#64748b';
-        btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
+    // Section mode-e admin logged in na thakle action buttons hide thakbe (read-only mode)
+    if (mode === 'sec' && !isAdminLoggedIn) {
+        btnContainer.style.display = 'none';
     } else {
-        btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
-        btn2Text = 'Pending'; btn2Status = 'pending'; btn2Color = '#64748b';
-    }
+        btnContainer.style.display = 'grid';
+        
+        let btn1Text = '', btn1Status = '', btn2Text = '', btn2Status = '';
+        let btn1Color = '', btn2Color = '';
 
-    btnContainer.innerHTML = `
-        <button class="popup-action-btn" style="background:${btn1Color};" onclick="setChapterStatus('${btn1Status}')">${btn1Text}</button>
-        <button class="popup-action-btn" style="background:${btn2Color};" onclick="setChapterStatus('${btn2Status}')">${btn2Text}</button>
-    `;
+        if (currentStatus === 'pending') {
+            btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
+            btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
+        } else if (currentStatus === 'in-progress') {
+            btn1Text = 'Pending'; btn1Status = 'pending'; btn1Color = '#64748b';
+            btn2Text = 'Covered'; btn2Status = 'covered'; btn2Color = '#10b981';
+        } else {
+            btn1Text = 'In Progress'; btn1Status = 'in-progress'; btn1Color = '#f59e0b';
+            btn2Text = 'Pending'; btn2Status = 'pending'; btn2Color = '#64748b';
+        }
+
+        btnContainer.innerHTML = `
+            <button class="popup-action-btn" style="background:${btn1Color};" onclick="setChapterStatus('${btn1Status}')">${btn1Text}</button>
+            <button class="popup-action-btn" style="background:${btn2Color};" onclick="setChapterStatus('${btn2Status}')">${btn2Text}</button>
+        `;
+    }
 
     const topicsContainer = document.getElementById('popup-topics-list');
     const instructionEl = document.getElementById('popup-instruction-text');
 
     if (chap.topics.length === 0) {
         instructionEl.style.display = 'block';
-        instructionEl.innerText = "এই চ্যাপ্টারটি আপনার চলমান থাকলে In Progress এ এবং পড়া শেষ হলে Covered এ ক্লিক করুন।";
+        if (mode === 'sec' && !isAdminLoggedIn) {
+            instructionEl.innerText = "এই চ্যাপ্টারটির বর্তমান স্ট্যাটাস উপরে ও ব্যাজে দেখতে পারছেন। (Edit করতে Admin Login প্রয়োজন)";
+        } else {
+            instructionEl.innerText = "এই চ্যাপ্টারটি আপনার চলমান থাকলে In Progress এ এবং পড়া শেষ হলে Covered এ ক্লিক করুন।";
+        }
         topicsContainer.style.display = 'none';
     } else {
         instructionEl.style.display = 'none';
@@ -1095,9 +1101,13 @@ function openChapterPopup(mode, secId, subIdx, chapIdx) {
             if (tStatus === 'covered') { tBadgeText = 'Covered'; tBadgeClass = 'status-covered'; }
             else if (tStatus === 'in-progress') { tBadgeText = 'In Progress <span class="spinner-yellow"></span>'; tBadgeClass = 'status-progress'; }
 
+            // Section view-e non-admin er jonno cursor regular hobe, status change trigger hobe na
+            const clickAttr = (mode === 'sec' && !isAdminLoggedIn) ? '' : `onclick="toggleTopicStatusInPopup(${tIdx})"`;
+            const cursorStyle = (mode === 'sec' && !isAdminLoggedIn) ? 'cursor:default;' : '';
+
             topicsHtml += `<div class="popup-topic-row">
                 <span>🔹 ${topicName}</span>
-                <span class="status-badge ${tBadgeClass}" onclick="toggleTopicStatusInPopup(${tIdx})">${tBadgeText}</span>
+                <span class="status-badge ${tBadgeClass}" style="${cursorStyle}" ${clickAttr}>${tBadgeText}</span>
             </div>`;
         });
         topicsContainer.innerHTML = topicsHtml;
@@ -1105,6 +1115,7 @@ function openChapterPopup(mode, secId, subIdx, chapIdx) {
 
     document.getElementById('custom-popup-modal').style.display = 'flex';
 }
+
 
 function setChapterStatus(status) {
     const { mode, secId, subIdx, chapIdx } = activePopupTarget;
@@ -1135,6 +1146,12 @@ function setChapterStatus(status) {
 
 function toggleTopicStatusInPopup(tIdx) {
     const { mode, secId, subIdx, chapIdx } = activePopupTarget;
+    
+    // Section mode-e admin na thakle topic status edit kora jabe na
+    if (mode === 'sec' && !isAdminLoggedIn) {
+        return;
+    }
+
     const prefix = mode === 'sec' ? `${secId}_sub_${subIdx}` : `ind_sub_${subIdx}`;
     const tUniqueKey = `${prefix}_chap_${chapIdx}_topic_${tIdx}`;
 
