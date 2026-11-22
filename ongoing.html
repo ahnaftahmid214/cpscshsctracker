@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Ongoing Class & Teacher Alerts | CPSCS HSC 2028</title>
+<style>
+/* === ৫টি সেকশনের ৫ রকম কালার (Light Mode) === */
+:root[data-theme="light"] {
+    --bg-gradient: linear-gradient(180deg, #eef2ff 0%, #e0e7ff 50%, #f1f5f9 100%);
+    --card-bg: #ffffff;
+    --card-border: #cbd5e1;
+    --card-shadow: 0 10px 25px rgba(99, 102, 241, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --primary-btn: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    --primary-color: #4f46e5;
+    --pill-bg: #e0e7ff;
+    --pill-text: #3730a3;
+    --sub-card-bg: #f8fafc;
+    --sub-card-border: #cbd5e1;
+}
+:root[data-theme="dark"] {
+    --bg-gradient: radial-gradient(circle at 50% 0%, #2c1052 0%, #16062f 45%, #080212 100%);
+    --card-bg: rgba(45, 20, 75, 0.55);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --primary-btn: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --primary-color: #a855f7;
+    --pill-bg: rgba(124, 58, 237, 0.25);
+    --pill-text: #e9d5ff;
+    --sub-card-bg: rgba(20, 8, 35, 0.55);
+    --sub-card-border: rgba(255, 255, 255, 0.12);
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    margin: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container { width: 100%; max-width: 550px; padding-bottom: 40px; }
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    color: var(--text-main);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hero-card {
+    background: var(--card-bg);
+    border: 1px solid var(--sub-card-border);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+}
+
+.hero-card h2 {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.hero-card p {
+    margin: 0 0 14px 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.action-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.primary-pill-btn {
+    background: var(--primary-btn);
+    color: #fff;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.secondary-pill-btn {
+    background: var(--sub-card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--sub-card-border);
+    padding: 9px 14px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid var(--sub-card-border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    outline: none;
+    box-shadow: var(--card-shadow);
+}
+
+.notif-status-bar {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 10px;
+    padding: 7px 12px;
+    border-radius: 10px;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    display: inline-block;
+}
+
+/* Section Card */
+.section-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+:root[data-theme="light"] .section-card-special {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #d97706;
+}
+:root[data-theme="dark"] .section-card-special {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.16) 0%, rgba(217, 119, 6, 0.08) 100%);
+    border: 2px solid #d97706;
+}
+
+.sec-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.sec-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sec-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--sub-card-border);
+}
+
+.sec-title h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.sec-meta { font-size: 11.5px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+
+.sec-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-label-mini {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* iOS Style Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #94a3b8;
+    transition: 0.3s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Subject Rows */
+.subjects-list {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--sub-card-border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subject-item {
+    background: var(--sub-card-bg);
+    border: 1px solid var(--sub-card-border);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.subject-item.has-ongoing {
+    border-left: 4px solid #f59e0b;
+}
+
+.sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.sub-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.ongoing-list {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ongoing-chip {
+    background: rgba(245, 158, 11, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--text-main);
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.45;
+}
+
+.ongoing-chip strong { color: #d97706; }
+:root[data-theme="dark"] .ongoing-chip strong { color: #fbbf24; }
+
+.topic-pill {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.16);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    margin: 4px 4px 0 0;
+}
+:root[data-theme="dark"] .topic-pill { color: #34d399; }
+
+.no-ongoing-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.spinner-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f59e0b;
+    margin-right: 5px;
+    animation: blink 1.2s infinite;
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-bar">
+        <a href="index.html" class="nav-btn">⬅ হোম পেজ</a>
+        <button class="nav-btn" onclick="toggleTheme()">🌓 Dark/Light</button>
+    </div>
+
+    <div class="hero-card">
+        <h2>🔔 চলমান ক্লাস ও টিচার নোটিফিকেশন</h2>
+        <p>কোন সেকশনে কোন বিষয়ের কোন অধ্যায় ও টপিক এখন পড়ানো হচ্ছে তা লাইভ দেখুন। আপনার বিষয়ের বা সেকশনের <b>টগল ON</b> করে রাখলে ফোনের নোটিফিকেশন বারে চলমান পড়া সবসময় শো করবে।</p>
+        <div class="action-row">
+            <button class="primary-pill-btn" onclick="syncAllActiveNotifications(true)">🔄 নোটিফিকেশন রিফ্রেশ / রিস্টোর</button>
+            <button class="secondary-pill-btn" onclick="turnOffAllNotifications()">🔕 সব বন্ধ করুন</button>
+        </div>
+        <div id="notif-status-bar" class="notif-status-bar">নোটিফিকেশন স্ট্যাটাস চেক করা হচ্ছে...</div>
+    </div>
+
+    <!-- টিচার নিজের সাবজেক্ট সহজে ফিল্টার করার জন্য -->
+    <select id="subject-filter" class="filter-select" onchange="renderOngoingSections()">
+        <option value="all">📚 সব সাবজেক্ট দেখুন (ফিল্টার করুন)</option>
+    </select>
+
+    <div id="ongoing-wrapper">
+        <div class="hero-card" style="font-size:13px; color:var(--text-muted);">Firebase থেকে লাইভ ডাটা লোড হচ্ছে...</div>
+    </div>
+</div>
+
+<script>
+// Theme Toggle
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
+
+// Firebase Config (তোমার index.html-এর apiKey-টির সাথে মিলিয়ে নিও)
+const firebaseConfig = {
+    apiKey: "AIzaSyE1N_jw7UygPCBk8zQM-wXomhT-NyYI0Qs",
+    authDomain: "cpscshsc-tracker.firebaseapp.com",
+    databaseURL: "https://cpscshsc-tracker-default-rtdb.firebaseio.com",
+    projectId: "cpscshsc-tracker",
+    storageBucket: "cpscshsc-tracker.firebasestorage.app",
+    messagingSenderId: "357179472512",
+    appId: "1:357179472512:web:fcbbb11b79bf537b0ef927",
+    measurementId: "G-6DCKON97KH"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const sections = ['Section A', 'Section B', 'Section C', 'Section D', 'Section E'];
+
+// Exact Syllabus Structure (index.html এর সাথে ১০০% মিল থাকতে হবে)
+const syllabusStructure = [
+    {
+        id: 'bn1', name: 'বাংলা ১ম পত্র',
+        chapters: [
+            { name: 'গদ্য-১: অপরিচিতা', topics: [] }, { name: 'গদ্য-২: কারবালা-প্রান্তর', topics: [] },
+            { name: 'গদ্য-৩: আত্মচরিত', topics: [] }, { name: 'গদ্য-৪: বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন', topics: [] },
+            { name: 'গদ্য-৫: সাহিত্যে খেলা', topics: [] }, { name: 'গদ্য-৬: বিলাসী', topics: [] },
+            { name: 'গদ্য-৭: অর্ধাঙ্গী', topics: [] }, { name: 'গদ্য-৮: শিক্ষাচিন্তা', topics: [] },
+            { name: 'গদ্য-৯: আহ্বান', topics: [] }, { name: 'গদ্য-১০: ভুলের মূল্য', topics: [] },
+            { name: 'গদ্য-১১: যৌবনের গান', topics: [] }, { name: 'গদ্য-১২: তাজমহল', topics: [] },
+            { name: 'গদ্য-১৩: জীবন ও বৃক্ষ', topics: [] }, { name: 'গদ্য-১৪: মানব-কল্যাণ', topics: [] },
+            { name: 'গদ্য-১৫: গন্তব্য কাবুল', topics: [] }, { name: 'গদ্য-১৬: মাসি-পিসি', topics: [] },
+            { name: 'গদ্য-১৭: কলিমদ্দি দফাদার', topics: [] }, { name: 'গদ্য-১৮: সৌদামিনী মালো', topics: [] },
+            { name: 'গদ্য-১৯: চেতনার অ্যালবাম', topics: [] }, { name: 'গদ্য-২০: একটি তুলসী গাছের কাহিনী', topics: [] },
+            { name: 'গদ্য-২১: মানুষ', topics: [] }, { name: 'গদ্য-২২: মৌসুম', topics: [] },
+            { name: 'গদ্য-২৩: গহন কোন বনের ধারে', topics: [] }, { name: 'গদ্য-২৪: কপিলদাস মুর্মুর শেষ কাজ', topics: [] },
+            { name: 'গদ্য-২৫: জাদুঘরে কেন যাব', topics: [] }, { name: 'গদ্য-২৬: নেকলেস', topics: [] },
+            { name: 'গদ্য-২৭: জুলাই অভ্যুত্থানের গ্রাফিতিতে সাহিত্য', topics: [] }, { name: 'গদ্য-২৮: রেইনকোট', topics: [] },
+            { name: 'কবিতা-১: স্বদেশ', topics: [] }, { name: 'কবিতা-২: ঋতু বর্ণন', topics: [] },
+            { name: 'কবিতা-৩: বিভীষণের প্রতি মেঘনাদ', topics: [] }, { name: 'কবিতা-৪: ফুল্লরার বারোমাস্যা', topics: [] },
+            { name: 'কবিতা-৫: সুখ', topics: [] }, { name: 'কবিতা-৬: মানব-বন্দনা', topics: [] },
+            { name: 'কবিতা-৭: সোনার তরী', topics: [] }, { name: 'কবিতা-৮: ঐকতান', topics: [] },
+            { name: 'কবিতা-৯: নবান্ন', topics: [] }, { name: 'কবিতা-১০: বিদ্রোহী', topics: [] },
+            { name: 'কবিতা-১১: সাম্যবাদী', topics: [] }, { name: 'কবিতা-১২: সুচেতনা', topics: [] },
+            { name: 'কবিতা-১৩: প্রতিদান', topics: [] }, { name: 'কবিতা-১৪: তাহারেই পড়ে মনে', topics: [] },
+            { name: 'কবিতা-১৫: আগে কী সুন্দর দিন কাটাইতাম', topics: [] }, { name: 'কবিতা-১৬: সেই অস্ত্র', topics: [] },
+            { name: 'কবিতা-১৭: পদ্মা', topics: [] }, { name: 'কবিতা-১৮: আলো চাই', topics: [] },
+            { name: 'কবিতা-১৯: আঠারো বছর বয়স', topics: [] }, { name: 'কবিতা-২০: ফেব্রুয়ারি ১৯৬৯', topics: [] },
+            { name: 'কবিতা-২১: হাড়', topics: [] }, { name: 'কবিতা-২২: তোমার আপন পতাকা', topics: [] },
+            { name: 'কবিতা-২৩: আমি কিংবদন্তির কথা বলছি', topics: [] }, { name: 'কবিতা-২৪: নূরলদীনের কথা মনে পড়ে যায়', topics: [] },
+            { name: 'কবিতা-২৫: ছবি', topics: [] }, { name: 'কবিতা-২৬: প্রত্যাবর্তনের লজ্জা', topics: [] },
+            { name: 'কবিতা-২৭: ভূমিহীন কৃষিজীবী', topics: [] }, { name: 'কবিতা-২৮: ব্ল্যাক-আউটের পূর্ণিমায়', topics: [] }
+        ]
+    },
+    {
+        id: 'bn2', name: 'বাংলা ২য় পত্র',
+        chapters: [
+            { name: 'ব্যাকরণ-১: বাংলা উচ্চারণের নিয়ম', topics: [] }, { name: 'ব্যাকরণ-২: বাংলা বানানের নিয়ম', topics: [] },
+            { name: 'ব্যাকরণ-৩: ব্যাকরণিক শব্দশ্রেণি', topics: [] }, { name: 'ব্যাকরণ-৪: শব্দ গঠন', topics: [] },
+            { name: 'ব্যাকরণ-৫: বাক্যতত্ত্ব', topics: [] }, { name: 'ব্যাকরণ-৬: অপপ্রয়োগ ও শুদ্ধ প্রয়োগ', topics: [] },
+            { name: 'নির্মিতি-১: পরিভাষা ও অনুবাদ', topics: [] }, { name: 'নির্মিতি-২: দিনলিপি ও অভিজ্ঞতা', topics: [] },
+            { name: 'নির্মিতি-৩: ভাষণ ও প্রতিবেদন', topics: [] }, { name: 'নির্মিতি-৪: ইমেইল ও পত্র লিখন', topics: [] },
+            { name: 'নির্মিতি-৫: সারাংশ ও ভাবসম্প্রসারণ', topics: [] }, { name: 'নির্মিতি-৬: সংলাপ ও খুদে গল্প', topics: [] },
+            { name: 'নির্মিতি-৭: প্রবন্ধ রচনা', topics: [] }
+        ]
+    },
+    {
+        id: 'en1', name: 'ইংরেজি ১ম পত্র',
+        chapters: [
+            { name: 'EFT-1 (Unit 1-4)', topics: [] }, { name: 'EFT-2 (Unit 5-8)', topics: [] },
+            { name: 'EFT-3 (Unit 9-12)', topics: [] }, { name: 'Unit 4: Human Rights', topics: [] },
+            { name: 'Unit 5: Education', topics: [] }, { name: 'Unit 6: Adolescence and Environment', topics: [] }
+        ]
+    },
+    {
+        id: 'en2', name: 'ইংরেজি ২য় পত্র',
+        chapters: [
+            { name: '1. Article & Preposition', topics: [] }, { name: '2. Right Form of Verbs', topics: [] },
+            { name: '3. Completing Sentences', topics: [] }, { name: '4. Transformation of Sentences', topics: [] },
+            { name: '5. Narration', topics: [] }, { name: '6. Modifiers & Connectors', topics: [] },
+            { name: '7. Synonym & Antonym', topics: [] }, { name: '8. Paragraph & Application', topics: [] }
+        ]
+    },
+    {
+        id: 'ph1', name: 'পদার্থবিজ্ঞান ১ম পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: ভৌতজগৎ ও পরিমাপ', topics: ['ভৌত রাশির পরিমাপ', 'মাত্রা ও সমীকরণ', 'ত্রুটি ও নির্ভুলতা', 'পরিমাপের যন্ত্রপাতী', 'ব্যবহারিক পরীক্ষণ'] },
+            { name: 'অধ্যায় ২: ভেক্টর', topics: ['ভেক্টর রাশি ও স্কেলার রাশি', 'ভেক্টরের যোগ ও বিয়োগ', 'ডট গুণন ও ক্রস গুণন', 'ভেক্টরের ব্যবকলন', 'আপেক্ষিক বেগ'] },
+            { name: 'অধ্যায় ৩: গতিবিদ্যা', topics: ['চলন গতি ও স্থিতি', 'সুষম ও অসম ত্বরণ', 'প্রাস ও এর গতিপথ', 'উল্লম্ব ও আনুভূমিক গতি', 'আপেক্ষিক গতি'] },
+            { name: 'অধ্যায় ৪: নিউটনীয় বলবিদ্যা', topics: ['বলের ধারণা ও নিউটনের সূত্র', 'ভরবেগ ও সংরক্ষণশীলতা', 'ঘর্ষণ বল ও এর প্রকারভেদ', 'কেন্দ্রমুখী বল ও টর্ক', 'ব্যাংকিং ও লিফটের গতি'] },
+            { name: 'অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা', topics: ['কাজ ও কাজের পরিমাপ', 'গতিশক্তি ও বিভব শক্তি', 'ক্ষমতা ও কর্মদক্ষতা', 'শক্তির সংরক্ষণশীলতা', 'সংরক্ষণশীল বল'] },
+            { name: 'অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ', topics: ['মহাকর্ষ সূত্র', 'অভিকর্ষ ত্বরণ ও তার পরিবর্তন', 'মহাকর্ষীয় বিভব ও শক্তি', 'পলায়ন বেগ', 'কৃত্রিম উপগ্রহ'] },
+            { name: 'অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম', topics: ['পীড়ন ও বিকৃতি', 'হুকের সূত্র ও ইয়ং এর গুণাঙ্ক', 'পৃষ্ঠটান', 'সান্দ্রতা ও স্টকসের সূত্র', 'পয়সনের অনুপাত'] },
+            { name: 'অধ্যায় ৮: পর্যায়বৃত্ত গতি', topics: ['সরল ছন্দিত স্পন্দন', 'সরল দোলক', 'স্পন্দনের শক্তি', 'অবdamping ও অনুনাদ', 'দোলগতির সমীকরণ'] },
+            { name: 'অধ্যায় ৯: তরঙ্গ', topics: ['তরঙ্গের প্রকারভেদ', 'শব্দ তরঙ্গ ও তীব্রতা', 'বিট ও ডপলার ক্রিয়া', 'স্থির তরঙ্গ', 'সুরযুক্ত শব্দ'] },
+            { name: 'অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব', topics: ['বয়েল ও চার্লসের সূত্র', 'আদর্শ গ্যাস সমীকরণ', 'গ্যাসের গতিতত্ত্ব', 'মোলীয় তাপধারিতা', 'আরএমএস বেগ'] }
+        ]
+    },
+    {
+        id: 'ph2', name: 'পদার্থবিজ্ঞান ২য় পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: তাপগতিবিদ্যা', topics: ['তাপ ও তাপগতিবিদ্যার সূত্র', 'সমোষ্ণ ও রুদ্রতাপীয় প্রক্রিয়া', 'কার্নো ইঞ্জিন ও দক্ষতা', 'এনট্রপি ও এর পরিবর্তন', 'তাপীয় ইঞ্জিন'] },
+            { name: 'অধ্যায় ২: স্থির তড়িৎ', topics: ['কুলম্বের সূত্র ও ক্ষেত্র', 'তড়িৎ প্রাবল্য ও বিভব', 'গাউসের উপপাদ্য', 'ধারক ও ধারকত্ব', 'তড়িৎ দ্বিমেরু'] },
+            { name: 'অধ্যায় ৩: চল তড়িৎ', topics: ['ওহমের সূত্র ও রোধ', 'কির্শফের সূত্র', 'হুইটস্টোন ব্রিজ', 'মিটার ব্রিজ ও পোটেনশিওমিটার', 'তড়িৎ ক্ষমতা ও তাপীয় ক্রিয়া'] },
+            { name: 'অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া', topics: ['বায়ো-সাভার্ট সূত্র', 'অ্যাম্পিয়ারের সূত্র', 'চৌম্বক ক্ষেত্রে চার্জের গতি', 'লোরেন্টজ বল', 'গ্যালভানোমিটার'] },
+            { name: 'অধ্যায় ৫: তাড়িতচৌম্বক আবেশ', topics: ['ফ্যারাডের সূত্র ও লেন্সের সূত্র', 'স্বাবেশ ও পারস্পরিক আবেশ', 'এসি জেনারেটর ও ট্রান্সফর্মার', 'এডি কারেন্ট', 'তড়িৎ চৌম্বকীয় তরঙ্গ'] },
+            { name: 'অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান', topics: ['Reflection & Refraction', 'লেন্স ও প্রিজম', 'অপটিক্যাল ইন্সট্রুমেন্টস', 'পূর্ণ অভ্যন্তরীণ প্রতিফলন', 'লেন্স মেকার্স সূত্র'] },
+            { name: 'অধ্যায় ৭: ভৌত আলোকবিজ্ঞান', topics: ['হাইজেন্সের নীতি', 'ব্যতিচার', 'অপবর্তন', 'সমবর্তন', 'আলোক তরঙ্গের প্রকৃতি'] },
+            { name: 'অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা', topics: ['আপেক্ষিকতার বিশেষ তত্ত্ব', 'ভর ও শক্তির সমতুল্যতা', 'আলোক তড়িৎ ক্রিয়া', 'কম্পটন ও ফোটন', 'ডি ব্রগলি তরঙ্গ'] },
+            { name: 'অধ্যায় ৯: পরমাণুর মডেল ও নিউক্লীয় পদার্থবিজ্ঞান', topics: ['রাদারফোর্ড ও বোর মডেল', 'হাইড্রোজেন বর্ণালী', 'নিউক্লিয়াস', 'তেজস্ক্রিয়তা ও অর্ধায়ু', 'নিউক্লীয় ফিশন ও ফিউশন'] },
+            { name: 'অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স', topics: ['শক্তি ব্যান্ড তত্ত্ব', 'ডায়োড ও ট্রানজিস্টর', 'রেক্টিফায়ার', 'লজিক গেটস', 'আইসি'] },
+            { name: 'অধ্যায় ১১: জ্যোতির্বিজ্ঞান', topics: ['মহাবিশ্বের উৎপত্তি', 'নক্ষত্রের জন্ম ও জীবনচক্র', 'ব্ল্যাক হোল', 'ছায়াপথ', 'টেলিস্কোপ'] }
+        ]
+    },
+    {
+        id: 'ch1', name: 'রসায়ন ১ম পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার', topics: ['ল্যাবরেটরি নিরাপত্তা বিধি', 'বিপদজনক রাসায়নিক চিহ্ন', 'প্রাথমিক চিকিৎসা', 'গ্লাসওয়্যার পরিষ্কার', 'বর্জ্য ব্যবস্থাপনা'] },
+            { name: 'অধ্যায় ২: গুণগত রসায়ন', topics: ['পরমাণুর মডেল ও কোয়ান্টাম সংখ্যা', 'আউফবাউ ও হুন্ডের নীতি', 'বর্ণালী ও রিডবার্গ ধ্রুবক', 'দ্রাব্যতা ও দ্রাব্যতা গুণফল', 'ক্রোম্যাটোগ্রাফি'] },
+            { name: 'অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন', topics: ['মেন্ডেলিফের পর্যায় সারণি', 'আয়নীকরণ শক্তি ও ইলেকট্রন আসক্তি', 'আয়নিক ও সমযোজী বন্ধন', 'হাইড্রোজেন বন্ধন', 'সংকরায়ন'] },
+            { name: 'অধ্যায় ৪: রাসায়নিক পরিবর্তন', topics: ['রাসায়নিক সাম্যাবস্থা', 'ল্য শাতেলিয়ে নীতি', 'অম্ল-ক্ষার তত্ত্ব ও পিএইচ', 'বাফার দ্রবণ', 'দ্রবণ ও ঘনমাত্রা'] },
+            { name: 'অধ্যায় ৫: কর্মমুখী রসায়ন', topics: ['খাদ্য প্রক্রিয়াজাতকরণ', 'ভিনেগার প্রস্তুতি', 'সোডিয়াম বেনজোয়েট', 'কসমেটিকস ও সাবান', 'লেদার কেমিস্ট্রি'] }
+        ]
+    },
+    {
+        id: 'ch2', name: 'রসায়ন ২য় পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: পরিবেশ রসায়ন', topics: ['বায়ুমণ্ডলের স্তরবিন্যাস', 'গ্রীনহাউস গ্যাস', 'ওজোন স্তর ক্ষয়', 'বায়ু দূষণ', 'পানির দূষণ'] },
+            { name: 'অধ্যায় ২: জৈব রসায়ন', topics: ['নামকরণ ও সমাণুকতা', 'হাইড্রোকার্বন', 'বেনজিন ও অ্যারোমেটিক যৌগ', 'মার্কোভনিকভ নীতি', 'অ্যালকোহল ও এসিড'] },
+            { name: 'অধ্যায় ৩: পরিমাণগত রসায়ন', topics: ['মোল ও মোলারিটি', 'টাইট্রেশন', 'প্রমিত দ্রবণ', 'নরমালিটি', 'জারণ সংখ্যা'] },
+            { name: 'অধ্যায় ৪: তড়িৎ রসায়ন', topics: ['গ্যালভানিক কোষ', 'নর্নস্ট সমীকরণ', 'স্ট্যান্ডার্ড হাইড্রোজেন ইলেকট্রোড', 'তড়িৎ বিশ্লেষণ', 'ব্যাটারি ও ফুয়েল সেল'] },
+            { name: 'অধ্যায় ৫: অর্থনৈতিক রসায়ন', topics: ['ইউরিয়া ও সার শিল্প', 'কাচ ও সিরামিক', 'সিমেন্ট উৎপাদন', 'কাগজ শিল্প', 'ন্যানোটেকনোলজি'] }
+        ]
+    },
+    {
+        id: 'm1', name: 'উচ্চতর গণিত ১ম পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক', topics: ['প্রশ্নমালা ১.১', 'প্রশ্নমালা ১.২'] },
+            { name: 'অধ্যায় ২: ভেক্টর', topics: ['প্রশ্নমালা ২.১', 'প্রশ্নমালা ২.২'] },
+            { name: 'অধ্যায় ৩: সরলরেখা', topics: ['প্রশ্নমালা ৩.১', 'প্রশ্নমালা ৩.২', 'প্রশ্নমালা ৩.৩', 'প্রশ্নমালা ৩.৪', 'প্রশ্নমালা ৩.৫', 'প্রশ্নমালা ৩.৬', 'প্রশ্নমালা ৩.৭'] },
+            { name: 'অধ্যায় ৪: বৃত্ত', topics: ['প্রশ্নমালা ৪.১', 'প্রশ্নমালা ৪.২'] },
+            { name: 'অধ্যায় ৫: বিন্যাস ও সমাবেশ', topics: ['প্রশ্নমালা ৫.১', 'প্রশ্নমালা ৫.২'] },
+            { name: 'অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত', topics: ['অনুপাতের সূত্র', 'গুণিতক কোণ', 'ত্রিকোণমিতিক সমীকরণ', 'ত্রিভুজের ধর্ম', 'বিপরীত রূপ'] },
+            { name: 'অধ্যায় ৭: সংযুক্ত কোণ', topics: ['সংযুক্ত কোণের অনুপাত', 'সর্বোচ্চ ও সর্বনিম্ন মান', 'যোগ ও গুণফলের রূপান্তর', 'পরিধি সূত্র', 'সৃজনশীল'] },
+            { name: 'অধ্যায় ৮: ফাংশন ও লেখচিত্র', topics: ['ফাংশন ও প্রকারভেদ', 'ডোমেন ও রেঞ্জ', 'বিপরীত ফাংশন', 'লেখচিত্র অঙ্কন', 'রূপান্তর'] },
+            { name: 'অধ্যায় ৯: অন্তরীকরণ', topics: ['সীমা ও অবিচ্ছিন্নতা', 'মূল নিয়ম', 'চেইন রুল', 'জ্যামিতিক অর্থ', 'গুরুমান/লঘুমান'] },
+            { name: 'অধ্যায় ১০: যোগজীকরণ', topics: ['যোগজীকরণের সূত্র', 'নির্দিষ্ট ও অনির্দিষ্ট যোগজ', 'প্রতিস্থাপন', 'আংশিক ভগ্নাংশ', 'ক্ষেত্রফল'] }
+        ]
+    },
+    {
+        id: 'm2', name: 'উচ্চতর গণিত ২য় পত্র',
+        chapters: [
+            { name: 'অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা', topics: ['বাস্তব সংখ্যার ধর্ম', 'পরম মান ও অসমতা', 'ব্যবধি', 'দ্বিপদী অসমতা', 'গাণিতিক আরোহ'] },
+            { name: 'অধ্যায় ২: রৈখিক প্রোগ্রাম', topics: ['ধারণা', 'আলেখ্যচিত্র সমাধান', 'সীমাবদ্ধ শর্ত', 'সর্বোচ্চকরণ ও সর্বনিম্নকরণ', 'বাস্তব সমস্যা'] },
+            { name: 'অধ্যায় ৩: জটিল সংখ্যা', topics: ['জ্যামিতিক রূপ', 'পোলার ও মডুলাস', 'এককের ঘনমূল', 'ডি মোইভার উপপাদ্য', 'জটিল সমীকরণ'] },
+            { name: 'অধ্যায় ৪: বহুপদী ও সমীকরণ', topics: ['মূল ও সহগ', 'প্রতিসম রাশি', 'দ্বিঘাত ও ত্রিঘাত', 'উৎপাদক উপপাদ্য', 'সাধারণ মূল'] },
+            { name: 'অধ্যায় ৫: দ্বিপদী বিস্তৃতি', topics: ['প্যাসকেল ত্রিভুজ', 'সাধারণ পদ ও মধ্যপদ', 'সূচক ও সহগ', 'অসীম ধারা', 'লগারিদমীয় ধারা'] },
+            { name: 'অধ্যায় ৬: কনিক', topics: ['পরাবৃত্ত', 'উপবৃত্ত', 'অধিবৃত্ত', 'সাধারণ সমীকরণ', 'স্পর্শক'] },
+            { name: 'অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন', topics: ['বৈশিষ্ট্য', 'সমীকরণ সমাধান', 'সূত্র ও প্রমাণ', 'মান নির্ণয়', 'গ্রাফ'] },
+            { name: 'অধ্যায় ৮: স্থিতিবিদ্যা', topics: ['বলের লব্ধি', 'সামান্তরিক সূত্র', 'লম্ব ও সমান্তরাল বল', 'ভ্রামক ও যুগল', 'ভারকেন্দ্র'] },
+            { name: 'অধ্যায় ৯: সমতলে বস্তুকণার গতি', topics: ['প্রাসের গতি', 'নিউটনের সূত্র', 'গতিশক্তি ও কাজ', 'সংঘর্ষ', 'সাপেক্ষ গতি'] },
+            { name: 'অধ্যায় ১০: সম্ভাবনা', topics: ['প্রাথমিক ধারণা', 'শর্তাধীন সম্ভাবনা', 'বেসের উপপাদ্য', 'যদৃচ্ছ চলক', 'দ্বিপদী বিন্যাস'] }
+        ]
+    },
+    {
+        id: 'bio1', name: 'উদ্ভিদবিজ্ঞান',
+        chapters: [
+            { name: 'অধ্যায় ১: কোষ ও এর গঠন', topics: ['প্রোক্যারিওটিক ও ইউক্যারিওটিক', 'কোষ প্রাচীর', 'মাইটোকন্ড্রিয়া ও প্লাস্টিড', 'রাইবোজোম', 'নিউক্লিয়াস'] },
+            { name: 'অধ্যায় ২: কোষ বিভাজন', topics: ['মাইটোসিস', 'মিয়োসিস ও ক্রসিং ওভার', 'কোষ চক্র', 'স্পিন্ডল যন্ত্র', 'অ্যাপোপ্টোসিস'] },
+            { name: 'অধ্যায় ৩: কোষ রসায়ন', topics: ['কার্বোহাইড্রেট ও প্রোটিন', 'লিপিদ ও এনজাইম', 'ডিএনএ ও আরএনএ', 'ভিটামিন', 'পানির ভূমিকা'] },
+            { name: 'অধ্যায় ৪: অণুজীব', topics: ['ভাইরাস', 'ব্যাকটেরিয়া', 'ম্যালেরিয়া পরজীবী', 'টিএমভি', 'ব্যাকটেরিওফেজ'] },
+            { name: 'অধ্যায় ৫: শৈবাল ও ছত্রাক', topics: ['স্পাইরোগাইরা', 'ইস্ট ও মাশরুম', 'লাইকেন', 'অর্থনৈতিক গুরুত্ব', 'জনন প্রক্রিয়া'] },
+            { name: 'অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা', topics: ['রিক্সিয়া', 'ফার্ন', 'জনুক্রম', 'বৈশিষ্ট্য', 'গুরুত্ব'] },
+            { name: 'অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী', topics: ['সাইকাস ও পাইনাস', 'আবৃতবীজী বৈশিষ্ট্য', 'ফুল ও পুষ্পমঞ্জরি', 'পরাগায়ন', 'ফল ও বীজ'] },
+            { name: 'অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র', topics: ['ভাজক ও স্থায়ী টিস্যু', 'জাইলেম ও ফ্লোয়েম', 'অন্তর্গঠন', 'স্টোমাটা', 'ভাস্কুলার বান্ডেল'] },
+            { name: 'অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব', topics: ['শোষণ', 'প্রস্বেদন', 'সালোকসংশ্লেষণ', 'শ্বসন', 'নাইট্রোজেন সংবন্ধন'] },
+            { name: 'অধ্যায় ১০: প্রজনন', topics: ['প্রজনন প্রকার', 'গ্রাফটিং', 'টিস্যু কালচার', 'ভ্রূণ বিকাশ', 'হরমোন'] },
+            { name: 'অধ্যায় ১১: জীবপ্রযুক্তি', topics: ['জেনেটিক ইঞ্জিনিয়ারিং', 'রিকম্বিন্যান্ট ডিএনএ', 'প্ল্যাসমিড', 'ক্লোনিং', 'ব্যবহার'] },
+            { name: 'অধ্যায় ১২: পরিবেশ ও বাস্তুতন্ত্র', topics: ['বাস্তুতন্ত্র উপাদান', 'খাদ্য জাল', 'শক্তি প্রবাহ', 'জৈব চক্র', 'সংরক্ষণ'] }
+        ]
+    },
+    {
+        id: 'bio2', name: 'প্রাণীবিজ্ঞান',
+        chapters: [
+            { name: 'অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণীবিন্যাস', topics: ['শ্রেণীবিন্যাস ভিত্তি', 'পর্ব পরিচিতি', 'দ্বি-পদ নামকরণ', 'প্রতিসাম্যতা', 'নটোকর্ড'] },
+            { name: 'অধ্যায় ২: প্রাণীর পরিচিতি (ঘাসফড়িং)', topics: ['বাহ্যিক গঠন', 'রক্ত সংবহন', 'শ্বসন ও রেচন', 'পুঞ্জাক্ষি', 'জীবনচক্র'] },
+            { name: 'অধ্যায় ৩: মানব শারীরতত্ত্ব: পরিপাক', topics: ['মুখ ও পাকস্থলী', 'ক্ষুদ্রান্ত্র ও যকৃত', 'এনজাইম', 'শোষণ', 'রোগ'] },
+            { name: 'অধ্যায় ৪: মানব শারীরতত্ত্ব: রক্ত', topics: ['রক্তকণিকা', 'হৃদপিণ্ড', 'রক্তচাপ', 'ব্লাড গ্রুপ', 'ইসিজি'] },
+            { name: 'অধ্যায় ৫: মানব শারীরতত্ত্ব: শ্বসন', topics: ['শ্বসনতন্ত্র', 'গ্যাসীয় বিনিময়', 'পরিবহন', 'নিয়ন্ত্রণ', 'রোগ'] },
+            { name: 'অধ্যায় ৬: মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন', topics: ['বৃক্ক ও নেফ্রন', 'মূত্র উৎপাদন', 'অসমোরেগুলেশন', 'ডায়ালিসিস', 'রোগ'] },
+            { name: 'অধ্যায় ৭: মানব শারীরতত্ত্ব: চলন', topics: ['কঙ্কালতন্ত্র', 'পেশি সংকোচন', 'অস্থি', 'সন্ধি', 'রোগ'] },
+            { name: 'অধ্যায় ৮: মানব শারীরতত্ত্ব: সমন্বয়', topics: ['স্নায়ুতন্ত্র ও ব্রেন', 'চোখ ও কান', 'অন্তঃক্ষরা গ্রন্থি', 'প্রতিবর্তী ক্রিয়া', 'নিউরন'] },
+            { name: 'অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা', topics: ['জননতন্ত্র', 'গ্যামেটোজেনেসিস', 'ঋতুচক্র', 'গর্ভাধান', 'প্রসব'] },
+            { name: 'অধ্যায় ১০: ইমিউনিটি', topics: ['ইমিউনিটি প্রকার', 'অ্যান্টিবডি', 'ভ্যাকসিন', 'অ্যালার্জি', 'প্রতিরক্ষা প্রাচীর'] },
+            { name: 'অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন', topics: ['মেন্ডেল সূত্র', 'লিঙ্গ নির্ধারণ', 'ডিএনএ টেস্ট', 'ডারউইনবাদ', 'মানব বিবর্তন'] },
+            { name: 'অধ্যায় ১২: প্রাণীর আচরণ', topics: ['ইনস্টিন্ট', 'ট্যাক্সিস', 'সামাজিক আচরণ', 'সোশ্যাল হায়ারার্কি', 'গুরুত্ব'] }
+        ]
+    },
+    {
+        id: 'ict', name: 'আইসিটি (ICT)',
+        chapters: [
+            { name: 'অধ্যায় ১: বিশ্ব ও বাংলাদেশ প্রেক্ষিত', topics: [] },
+            { name: 'অধ্যায় ২: কমিউনিকেশন সিস্টেমস', topics: [] },
+            { name: 'অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস', topics: [] },
+            { name: 'অধ্যায় ৪: ওয়েব ডিজাইন ও HTML', topics: [] },
+            { name: 'অধ্যায় ৫: প্রোগ্রামিং ভাষা', topics: [] },
+            { name: 'অধ্যায় ৬: ডাটাবেজ ম্যানেজমেন্ট সিস্টেম', topics: [] }
+        ]
+    }
+];
+
+let liveSectionData = {};
+let swRegistration = null;
+const PREF_STORAGE_KEY = 'cpscs_teacher_notif_prefs';
+
+function getSavedPrefs() {
+    try {
+        return JSON.parse(localStorage.getItem(PREF_STORAGE_KEY) || '{}');
+    } catch { return {}; }
+}
+
+function savePrefs(prefs) {
+    localStorage.setItem(PREF_STORAGE_KEY, JSON.stringify(prefs));
+}
+
+// Service Worker রেজিস্টার করা
+async function initServiceWorker() {
+    const statusEl = document.getElementById('notif-status-bar');
+    if (!('serviceWorker' in navigator) || !('Notification' in window)) {
+        statusEl.innerText = '⚠️ এই ব্রাউজারে নোটিফিকেশন সাপোর্ট করে না';
+        return;
+    }
+    try {
+        swRegistration = await navigator.serviceWorker.register('sw.js');
+        updatePermissionStatusUI();
+    } catch (err) {
+        statusEl.innerText = '⚠️ Service Worker লোড হয়নি (HTTPS / Live Site প্রয়োজন)';
+    }
+}
+
+function updatePermissionStatusUI() {
+    const statusEl = document.getElementById('notif-status-bar');
+    const prefs = getSavedPrefs();
+    const activeCount = Object.values(prefs).filter(Boolean).length;
+
+    if (Notification.permission === 'granted') {
+        statusEl.innerText = `✅ নোটিফিকেশন চালু আছে (${activeCount}টি সাবজেক্ট টগল ON)`;
+    } else if (Notification.permission === 'denied') {
+        statusEl.innerText = '❌ নোটিফিকেশন ব্লক করা আছে — ব্রাউজার সেটিংস থেকে Allow করুন';
+    } else {
+        statusEl.innerText = '🔔 যেকোনো টগল ON করলে নোটিফিকেশন পারমিশন চাইবে';
+    }
+}
+
+
+let isAskingPermission = false;
+
+async function ensureNotificationPermission() {
+    if (!('Notification' in window)) {
+        alert('দুঃখিত, আপনার ব্রাউজার নোটিফিকেশন সাপোর্ট করে না।');
+        return false;
+    }
+    if (Notification.permission === 'granted') return true;
+    if (Notification.permission === 'denied') {
+        alert('নোটিফিকেশন ব্লক করা আছে! অনুগ্রহ করে ব্রাউজারের Site Settings থেকে Notifications Allow করুন।');
+        return false;
+    }
+    if (isAskingPermission) return false; // একবার পারমিশন চাইলে দ্বিতীয়বার আটকাবে
+
+    isAskingPermission = true;
+    try {
+        const result = await Notification.requestPermission();
+        updatePermissionStatusUI();
+        return result === 'granted';
+    } finally {
+        isAskingPermission = false;
+    }
+}
+
+// নির্দিষ্ট সেকশন ও সাবজেক্টের চলমান (In Progress) অধ্যায় ও টপিক বের করা
+function getOngoingDetails(sIdx, subIdx) {
+    const secId = `sec_${sIdx}`;
+    const states = (liveSectionData[secId] && liveSectionData[secId].states) ? liveSectionData[secId].states : {};
+    const sub = syllabusStructure[subIdx];
+    const ongoingChapters = [];
+
+    sub.chapters.forEach((chap, chapIdx) => {
+        const chapKey = `${secId}_sub_${subIdx}_chap_${chapIdx}`;
+        const chapStatus = states[chapKey] || 'pending';
+
+        const ongoingTopics = [];
+        chap.topics.forEach((tName, tIdx) => {
+            const tKey = `${chapKey}_topic_${tIdx}`;
+            if (states[tKey] === 'in-progress') {
+                ongoingTopics.push(tName);
+            }
+        });
+
+        if (chapStatus === 'in-progress' || ongoingTopics.length > 0) {
+            ongoingChapters.push({
+                chapterName: chap.name,
+                topics: ongoingTopics
+            });
+        }
+    });
+
+    return ongoingChapters;
+}
+
+// ফোনের নোটিফিকেশন বারে মেসেজ পাঠানো বা আপডেট করা
+async function pushSubjectNotification(sIdx, subIdx) {
+    if (Notification.permission !== 'granted') return;
+    if (!swRegistration) {
+        swRegistration = await navigator.serviceWorker.ready;
+    }
+
+    const secName = sections[sIdx];
+    const subName = syllabusStructure[subIdx].name;
+    const ongoing = getOngoingDetails(sIdx, subIdx);
+    const tag = `cpscs_ongoing_sec_${sIdx}_sub_${subIdx}`;
+
+    let bodyText = '';
+    if (ongoing.length === 0) {
+        bodyText = 'বর্তমানে এই বিষয়ে কোনো অধ্যায় "In Progress" হিসেবে মার্ক করা নেই।';
+    } else {
+        bodyText = ongoing.map(item => {
+            if (item.topics.length > 0) {
+                return `${item.chapterName} ➝ ${item.topics.join(', ')}`;
+            }
+            return `${item.chapterName} (চলমান)`;
+        }).join(' | ');
+    }
+
+    await swRegistration.showNotification(`${secName} • ${subName}`, {
+        body: bodyText,
+        icon: 'cpscslogo.png',
+        badge: 'cpscslogo.png',
+        tag: tag,
+        renotify: true,
+        requireInteraction: true, // নিজে থেকে গায়েব হবে না
+        silent: false
+    });
+}
+
+// নির্দিষ্ট নোটিফিকেশন বন্ধ করা
+async function closeSubjectNotification(sIdx, subIdx) {
+    if (!swRegistration) return;
+    const tag = `cpscs_ongoing_sec_${sIdx}_sub_${subIdx}`;
+    const notifications = await swRegistration.getNotifications({ tag });
+    notifications.forEach(n => n.close());
+}
+
+// সাবজেক্ট টগল হ্যান্ডলার
+async function toggleSubjectAlert(sIdx, subIdx, isChecked) {
+    const key = `sec_${sIdx}_sub_${subIdx}`;
+    const prefs = getSavedPrefs();
+
+    if (isChecked) {
+        const granted = await ensureNotificationPermission();
+        if (!granted) {
+            renderOngoingSections();
+            return;
+        }
+        prefs[key] = true;
+        savePrefs(prefs);
+        await pushSubjectNotification(sIdx, subIdx);
+    } else {
+        delete prefs[key];
+        savePrefs(prefs);
+        await closeSubjectNotification(sIdx, subIdx);
+    }
+    updatePermissionStatusUI();
+    renderOngoingSections();
+}
+
+// পুরো সেকশনের মাস্টার টগল হ্যান্ডলার
+async function toggleSectionMasterAlert(e, sIdx, isChecked) {
+    e.stopPropagation();
+    const prefs = getSavedPrefs();
+    const filterVal = document.getElementById('subject-filter').value;
+
+    if (isChecked) {
+        const granted = await ensureNotificationPermission();
+        if (!granted) {
+            renderOngoingSections();
+            return;
+        }
+        syllabusStructure.forEach((_, subIdx) => {
+            if (filterVal === 'all' || Number(filterVal) === subIdx) {
+                prefs[`sec_${sIdx}_sub_${subIdx}`] = true;
+            }
+        });
+        savePrefs(prefs);
+        // পারমিশন আগেই নেওয়া হয়েছে, তাই skipPrompt = true
+        await syncAllActiveNotifications(false, true);
+    } else {
+        for (let subIdx = 0; subIdx < syllabusStructure.length; subIdx++) {
+            if (filterVal === 'all' || Number(filterVal) === subIdx) {
+                delete prefs[`sec_${sIdx}_sub_${subIdx}`];
+                await closeSubjectNotification(sIdx, subIdx);
+            }
+        }
+        savePrefs(prefs);
+    }
+    updatePermissionStatusUI();
+    renderOngoingSections();
+}
+
+async function syncAllActiveNotifications(showFeedback = false, skipPrompt = false) {
+    const prefs = getSavedPrefs();
+    const activeKeys = Object.keys(prefs).filter(k => prefs[k]);
+
+    if (activeKeys.length === 0) {
+        if (showFeedback) alert('আপনি এখনো কোনো সেকশন বা সাবজেক্টের টগল ON করেননি!');
+        return;
+    }
+
+    if (skipPrompt) {
+        if (Notification.permission !== 'granted') return;
+    } else {
+        const granted = await ensureNotificationPermission();
+        if (!granted) return;
+    }
+
+    for (const key of activeKeys) {
+        const match = key.match(/^sec_(\d+)_sub_(\d+)$/);
+        if (match) {
+            await pushSubjectNotification(Number(match[1]), Number(match[2]));
+        }
+    }
+    updatePermissionStatusUI();
+    if (showFeedback) {
+        alert(`✅ ${activeKeys.length}টি নোটিফিকেশন আপনার নোটিফিকেশন বারে আপডেট করা হয়েছে!`);
+    }
+}
+
+
+async function turnOffAllNotifications() {
+    const prefs = getSavedPrefs();
+    for (const key of Object.keys(prefs)) {
+        const match = key.match(/^sec_(\d+)_sub_(\d+)$/);
+        if (match) await closeSubjectNotification(Number(match[1]), Number(match[2]));
+    }
+    localStorage.removeItem(PREF_STORAGE_KEY);
+    updatePermissionStatusUI();
+    renderOngoingSections();
+}
+
+// ফিল্টার ড্রপডাউন পপুলেট করা
+function initSubjectFilter() {
+    const select = document.getElementById('subject-filter');
+    syllabusStructure.forEach((sub, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.innerText = sub.name;
+        select.appendChild(opt);
+    });
+}
+
+// মেইন UI রেন্ডার করা
+function renderOngoingSections() {
+    const wrapper = document.getElementById('ongoing-wrapper');
+    const filterVal = document.getElementById('subject-filter').value;
+    const prefs = getSavedPrefs();
+    let html = '';
+
+    sections.forEach((secName, sIdx) => {
+        const secId = `sec_${sIdx}`;
+        const letter = secName.replace('Section ', '');
+        const isSectionA = (secName === 'Section A');
+const cardClass = isSectionA ? 'section-card section-card-special' : 'section-card';
+        const lastUpdated = (liveSectionData[secId] && liveSectionData[secId].lastUpdated) ? liveSectionData[secId].lastUpdated : 'N/A';
+        let ongoingSubCount = 0;
+        let visibleSubCount = 0;
+        let checkedSubCount = 0;
+        let subjectsHtml = '';
+
+        syllabusStructure.forEach((sub, subIdx) => {
+            if (filterVal !== 'all' && Number(filterVal) !== subIdx) return;
+            visibleSubCount++;
+
+            const prefKey = `sec_${sIdx}_sub_${subIdx}`;
+            const isChecked = !!prefs[prefKey];
+            if (isChecked) checkedSubCount++;
+
+            const ongoingList = getOngoingDetails(sIdx, subIdx);
+            if (ongoingList.length > 0) ongoingSubCount++;
+
+            let ongoingHtml = '';
+            if (ongoingList.length > 0) {
+                ongoingHtml = '<div class="ongoing-list">';
+                ongoingList.forEach(item => {
+                    let topicsHtml = '';
+                    if (item.topics.length > 0) {
+                        topicsHtml = '<div>' + item.topics.map(t => `<span class="topic-pill">🔹 ${t}</span>`).join('') + '</div>';
+                    }
+                    ongoingHtml += `<div class="ongoing-chip">
+                        <span class="spinner-dot"></span><strong>${item.chapterName}</strong>
+                        ${topicsHtml}
+                    </div>`;
+                });
+                ongoingHtml += '</div>';
+            } else {
+                ongoingHtml = `<div class="no-ongoing-text">বর্তমানে কোনো অধ্যায় চলমান (In Progress) নেই</div>`;
+            }
+
+            subjectsHtml += `
+                <div class="subject-item ${ongoingList.length > 0 ? 'has-ongoing' : ''}">
+                    <div class="sub-header">
+                        <div class="sub-name">${sub.name}</div>
+                        <label class="switch" title="এই সাবজেক্টের নোটিফিকেশন চালু/বন্ধ করুন">
+                            <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleSubjectAlert(${sIdx}, ${subIdx}, this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    ${ongoingHtml}
+                </div>
+            `;
+        });
+
+        const isMasterChecked = (visibleSubCount > 0 && checkedSubCount === visibleSubCount);
+
+        html += `
+            <div class="${cardClass}">
+                <div class="sec-top">
+                    <div class="sec-left">
+                        <div class="sec-avatar">${letter}</div>
+                        <div class="sec-title">
+                            <h3>${secName} ${isSectionA ? '⭐' : ''}</h3>
+                            <div class="sec-meta">চলমান বিষয়: ${ongoingSubCount}টি • Updated: ${lastUpdated}</div>
+                        </div>
+                    </div>
+                    <div class="sec-right">
+                        <span class="toggle-label-mini">সব Alert</span>
+                        <label class="switch" title="${secName}-এর সব নোটিফিকেশন চালু/বন্ধ করুন">
+                            <input type="checkbox" ${isMasterChecked ? 'checked' : ''} onchange="toggleSectionMasterAlert(event, ${sIdx}, this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="subjects-list">
+                    ${subjectsHtml}
+                </div>
+            </div>
+        `;
+    });
+
+    wrapper.innerHTML = html;
+}
+
+// Firebase লাইভ লিসেনার
+function startLiveSync() {
+    db.ref('section_progress').on('value', (snapshot) => {
+        liveSectionData = snapshot.val() || {};
+        renderOngoingSections();
+        // ব্যাকগ্রাউন্ড সিঙ্কে কখনো নতুন করে পারমিশন চাইবে না
+        syncAllActiveNotifications(false, true);
+    });
+}
+
+window.addEventListener('load', async () => {
+    initSubjectFilter();
+    await initServiceWorker();
+    startLiveSync();
+});
+</script>
+</body>
+</html>
