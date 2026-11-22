@@ -34,7 +34,7 @@ self.addEventListener('notificationclose', (event) => {
                 icon: n.icon,
                 tag: n.tag,
                 renotify: false,
-                silent: true,
+                silent: false,
                 requireInteraction: true,
                 data: n.data
             })
