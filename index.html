@@ -635,9 +635,10 @@ body {
 .top-nav-links {
     display: flex;
     align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: -8px 0 16px 0;
 }
 .top-nav-pill {
     background: var(--card-bg);
@@ -672,16 +673,17 @@ body {
 <div class="container">
 
 <!-- Top Header Row -->
+<!-- প্রথম লাইন: বামে Live Tracker, ডানে Dark/Light -->
 <div class="top-header-row">
     <div class="live-tracker-pill"><span class="green-dot"></span> Live Tracker</div>
-
-    <div class="top-nav-links">
-        <a href="routine.html" class="top-nav-pill">📅 Routine</a>
-        <a href="notice.html" class="top-nav-pill">📢 Notice</a>
-        <a href="ongoing.html" class="top-nav-pill">🔔 Live Class</a>
-    </div>
-
     <button class="theme-toggle-btn" onclick="toggleTheme()">Dark/Light</button>
+</div>
+
+<!-- দ্বিতীয় লাইন: ৩টি নতুন ফিচার -->
+<div class="top-nav-links">
+    <a href="routine.html" class="top-nav-pill">📅 Routine</a>
+    <a href="notice.html" class="top-nav-pill">📢 Notice</a>
+    <a href="ongoing.html" class="top-nav-pill">🔔 Live Class</a>
 </div>
 
 <div class="logo-container">
