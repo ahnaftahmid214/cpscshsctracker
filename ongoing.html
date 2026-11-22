@@ -710,15 +710,15 @@ async function pushSubjectNotification(sIdx, subIdx) {
         }).join(' | ');
     }
 
-    await swRegistration.showNotification(`${secName} • ${subName}`, {
-        body: bodyText,
-        icon: 'cpscslogo.png',
-        badge: 'cpscslogo.png',
-        tag: tag,
-        renotify: true,
-        requireInteraction: true, // নিজে থেকে গায়েব হবে না
-        silent: false
-    });
+        await swRegistration.showNotification(`${secName} • ${subName}`, {
+                body: bodyText,
+                icon: 'cpscslogo.png',
+                tag: tag,
+                renotify: true,
+                requireInteraction: true,
+                silent: false,
+                data: { sticky: true }
+            });
 }
 
 // নির্দিষ্ট নোটিফিকেশন বন্ধ করা
