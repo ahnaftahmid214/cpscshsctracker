@@ -22,3 +22,22 @@ self.addEventListener('notificationclick', (event) => {
         })
     );
 });
+
+
+// ইউজার ভুলে হাত দিয়ে নোটিফিকেশন মুছে দিলে আবার ফিরিয়ে আনবে
+self.addEventListener('notificationclose', (event) => {
+    const n = event.notification;
+    if (n.data && n.data.sticky) {
+        event.waitUntil(
+            self.registration.showNotification(n.title, {
+                body: n.body,
+                icon: n.icon,
+                tag: n.tag,
+                renotify: false,
+                silent: true,
+                requireInteraction: true,
+                data: n.data
+            })
+        );
+    }
+});
